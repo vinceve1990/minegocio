@@ -1,0 +1,91 @@
+			
+/* Fancy Dark Table */	
+.greenTable .numeric {
+	/* text */
+	text-align: right;
+	}
+
+.greenTable td, .greenTable th {
+	border: 1px solid #000000;
+	padding: 5px;
+}
+
+.greenTable thead tr th {
+	padding: 10px 5px 10px 5px;
+	}
+
+.greenTable {
+	/*border-collapse: separate;*/
+	
+	/* text */
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	}
+
+.greenTable tbody tr td {
+	/* appearance */
+	background-color: #e5f9dd;
+	background-image: -moz-linear-gradient(
+		top,
+		rgba(255,255,255,0.0) 0%,
+		rgba(255,255,255,0.02) 100%);
+	
+	background-image: -webkit-gradient(
+		linear, left top, left bottom,
+		color-stop(0%,rgba(255,255,255,0.0)),
+		color-stop(100%,rgba(255,255,255,0.02)));
+	border-bottom-color: #2f2f2f;
+	border-right-color: #2f2f2f;
+
+	/* size */
+	padding: 1px 1px 1px 1px;
+
+	/* text */
+	color: #000000;
+	font-size: 11px;
+	font-weight: bold;
+	/*text-shadow: 0 -1px 1px #000000;*/
+	}
+
+.greenTable tbody tr.odd td {
+	/* appearance */
+	background-color: #ccff99;
+	background-image: -moz-linear-gradient(
+		top,
+		rgba(255,255,255,0.0) 0%,
+		rgba(255,255,255,0.02) 100%);
+	
+	background-image: -webkit-gradient(
+		linear, left top, left bottom,
+		color-stop(0%,rgba(255,255,255,0.0)),
+		color-stop(100%,rgba(255,255,255,0.02)));
+	border-right-color: #2f2f2f;
+	}
+
+.greenTable thead tr th,
+.greenTable tfoot tr td {
+	/* appearance */
+	background-color: #103501;
+	background-image: -moz-linear-gradient(
+		top,
+		rgba(255,255,255,0.05) 0%,
+		rgba(255,255,255,0.0) 100%);
+	
+	background-image: -webkit-gradient(
+		linear, left top, left bottom,
+		color-stop(0%,rgba(255,255,255,0.05)),
+		color-stop(100%,rgba(255,255,255,0.0)));
+		
+	/* text */
+	color: #ffffff;
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px #000;
+	}
+	
+.greenTable .fht-head {
+	-webkit-box-shadow: 0 -1px 0 #3f3f3f;
+	-moz-box-shadow: 0 -1px 0 #3f3f3f;
+	box-shadow: 0 -1px 0 #3f3f3f;
+	z-index: 1;
+	position: relative;
+	}

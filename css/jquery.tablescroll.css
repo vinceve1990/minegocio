@@ -1,0 +1,63 @@
+
+.tablescroll td, .tablescroll th {
+    border: 1px solid #778899;
+    padding: 5px;
+}
+.tablescroll {
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+.tablescroll tbody tr td {
+    background-color: #EEF2F9;
+    background-image: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 51%, rgba(255, 255, 255, 0) 100%);
+    color: #262C31;
+    font-size: 11px;
+}
+.tablescroll tbody tr.odd td {
+    background-color: #D6E0EF;
+    background-image: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 51%, rgba(255, 255, 255, 0) 100%);
+}
+.tablescroll thead tr th, .tablescroll tfoot tr td, .tablescroll_foot tr {
+    background-color: #8CA9CF;
+    background-image: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 51%, rgba(255, 255, 255, 0) 100%);
+    color: #121517;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 1px 1px #E8EBEE;
+}
+
+/*
+
+.tablescroll
+{ font: 12px normal Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif; background-color:#fff; }
+
+.tablescroll td, 
+.tablescroll_wrapper,
+.tablescroll_head,
+.tablescroll_foot
+{ border:1px solid #ccc; }
+
+.tablescroll td
+{ padding:3px 5px; }
+
+.tablescroll_wrapper
+{ border-left:0; }
+
+.tablescroll_head
+{ font-size:11px; font-weight:bold; background-color:#eee; border-left:0; border-top:0; margin-bottom:3px; }
+
+.tablescroll thead td
+{ border-right:0; border-bottom:0; }
+
+.tablescroll tbody td
+{ border-right:0; border-bottom:0; }
+
+.tablescroll tbody tr.first td
+{ border-top:0; }
+
+.tablescroll_foot
+{ font-weight:bold; background-color:#eee; border-left:0; border-top:0; margin-top:3px; }
+
+.tablescroll tfoot td
+{ border-right:0; border-bottom:0; }
+
+*/

@@ -1,0 +1,36 @@
+
+#zonaDrop{ 
+     border-radius: 5px; 
+     color: white; 
+     height: 100%; 
+     position: absolute; 
+     width: 100%; 
+     background: transparent; 
+     z-index: -1; 
+     margin-top: -15px;
+}
+
+#archivo input[type=file],#arch_excel2 input[type=file],#arch_excel3 input[type=file] { 
+     height: 170px; 
+     background: transparent;
+     opacity: 0;  
+     width:93%;
+}
+
+#archivo input[type=button],#arch_excel2 input[type=button],#arch_excel3 input[type=button] { 
+     cursor:pointer; 
+     font-size:12px; 
+     margin-top:-5px; 
+     padding-bottom:8px; 
+     padding-top:8px; 
+     width:100%;
+}
+
+#archivo { 
+     width:100%; 
+     margin:0 auto; 
+     height:auto; 
+     text-align:center; 
+     margin-bottom:20px; 
+     margin-top: 2px;
+}

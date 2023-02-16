@@ -1,0 +1,58 @@
+.ui-jqgrid .ui-jqgrid-htable th div {
+	height:auto;
+	overflow:hidden;
+	padding-right:4px;
+	padding-top:2px;
+	position:relative;
+	vertical-align:text-top;
+	white-space:normal !important;
+}
+
+.ui-jqgrid tr.jqgrow td {
+    height:35px;
+}
+.ui-button .ui-icon.my-image { 
+    background-image: url("../icono.png"); 
+    width: 16; 
+    height: 16;  
+} 
+
+.ui-button.ui-state-hover .ui-icon.my-image { 
+    background-image: url("../icono.png"); 
+    width: 16; 
+    height: 16;  
+} 
+.ui-jqgrid .ui-jqgrid-pager .ui-pg-div  span.ui-icon {float:left;margin:0 2px;}
+.ui-jqgrid .ui-pg-input { height:18px;font-size:.8em; margin: 0;}
+
+.ui-jqgrid .ui-pg-selbox {font-size:.8em; line-height:18px; display:block; height:30px; margin: 0;}
+
+/*.ui-jqgrid .ui-pg-button  { height:50px !important;}*/
+
+.ui-jqgrid .ui-jqgrid-toppager {
+    border-left: 0 none !important;
+    border-right: 0 none !important; 
+    border-top: 0 none !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    position: relative; 
+    height: 50px !important;
+    white-space: nowrap;
+    overflow: hidden;
+}
+/*.ui-jqgrid tr.jqgrow td {
+    word-wrap: break-word; 
+    white-space: pre-wrap; 
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    overflow: hidden;
+    height: auto;
+    vertical-align: middle;
+    padding-top: 3px;
+    padding-bottom: 3px
+}
+
+.
+
+*/
