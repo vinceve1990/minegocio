@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 100425 (10.4.25-MariaDB)
  Source Host           : localhost:3306
- Source Schema         : minegocio_config
+ Source Schema         : minegocio_basedatos
 
  Target Server Type    : MySQL
  Target Server Version : 100425 (10.4.25-MariaDB)
  File Encoding         : 65001
 
- Date: 24/12/2022 12:10:49
+ Date: 20/02/2023 22:43:27
 */
 
 SET NAMES utf8mb4;
@@ -317,12 +317,12 @@ CREATE TABLE `catalogo_roles`  (
   `nombre_rol` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `status` bit(1) NULL DEFAULT b'1',
   PRIMARY KEY (`id_roles_PK`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of catalogo_roles
 -- ----------------------------
-INSERT INTO `catalogo_roles` VALUES (1, 'Admin', b'1');
+INSERT INTO `catalogo_roles` VALUES (1, 'admin', b'1');
 INSERT INTO `catalogo_roles` VALUES (2, 'Presidente', b'1');
 INSERT INTO `catalogo_roles` VALUES (3, 'Almacenista', b'1');
 INSERT INTO `catalogo_roles` VALUES (4, 'Jefe De Area', b'1');
@@ -332,12 +332,30 @@ INSERT INTO `catalogo_roles` VALUES (7, 'Abogado', b'1');
 INSERT INTO `catalogo_roles` VALUES (8, 'Supervisor', b'1');
 
 -- ----------------------------
+-- Table structure for negocios_tipo
+-- ----------------------------
+DROP TABLE IF EXISTS `negocios_tipo`;
+CREATE TABLE `negocios_tipo`  (
+  `id_tipo_negocio_PK` bigint NOT NULL AUTO_INCREMENT,
+  `id_usuario_FK` bigint NOT NULL,
+  `nombre_negocio` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tipo_negocio` int NOT NULL DEFAULT 0,
+  `status_negocio` bit(1) NOT NULL DEFAULT b'1' COMMENT '0=inactivo; 1=Activo',
+  PRIMARY KEY (`id_tipo_negocio_PK`) USING BTREE,
+  INDEX `usuarios`(`id_usuario_FK` ASC) USING BTREE,
+  CONSTRAINT `usuarios` FOREIGN KEY (`id_usuario_FK`) REFERENCES `usuariosnegocio` (`id_usuario_negocio_PK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of negocios_tipo
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for personalnegocio
 -- ----------------------------
 DROP TABLE IF EXISTS `personalnegocio`;
 CREATE TABLE `personalnegocio`  (
   `id_persona_negocio_PK` bigint NOT NULL AUTO_INCREMENT,
-  `id_tipo_negocio_FK` bigint NULL DEFAULT NULL,
   `nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `apellidos` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `sexo` int NULL DEFAULT 0 COMMENT '0=no aplica, 1=hombre, 2=mujer',
@@ -345,16 +363,33 @@ CREATE TABLE `personalnegocio`  (
   `telefono` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `correo` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `status_per` bit(1) NOT NULL DEFAULT b'1' COMMENT '0=inactivo; 1=Activo',
-  PRIMARY KEY (`id_persona_negocio_PK`) USING BTREE,
-  INDEX `personanegocio`(`id_tipo_negocio_FK` ASC) USING BTREE,
-  CONSTRAINT `personanegocio` FOREIGN KEY (`id_tipo_negocio_FK`) REFERENCES `negocios_tipo` (`id_tipo_negocio_PK`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+  PRIMARY KEY (`id_persona_negocio_PK`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of personalnegocio
 -- ----------------------------
-INSERT INTO `personalnegocio` VALUES (1, 1, 'EFRAIN', 'CERVANTES VITE', 0, '', '7711169098', 'efraceve@gmail.com', b'1');
-INSERT INTO `personalnegocio` VALUES (2, 2, 'KEREN', 'RAMIREZ CRUZ', 0, '', '7711857982', 'GIRL85_AMO@HOTMAIL.COM', b'1');
+
+-- ----------------------------
+-- Table structure for rolesnegocio
+-- ----------------------------
+DROP TABLE IF EXISTS `rolesnegocio`;
+CREATE TABLE `rolesnegocio`  (
+  `id_roles_negocio_PK` bigint NOT NULL AUTO_INCREMENT,
+  `id_usuario_negocio_FK` bigint NULL DEFAULT NULL,
+  `id_roles_FK` bigint NULL DEFAULT NULL,
+  `nombreRol` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'nombre del rol',
+  `status_rol` bit(1) NULL DEFAULT b'1',
+  PRIMARY KEY (`id_roles_negocio_PK`) USING BTREE,
+  INDEX `usuario`(`id_usuario_negocio_FK` ASC) USING BTREE,
+  INDEX `idrol`(`id_roles_FK` ASC) USING BTREE,
+  CONSTRAINT `idrol` FOREIGN KEY (`id_roles_FK`) REFERENCES `catalogo_roles` (`id_roles_PK`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `rolusuarios` FOREIGN KEY (`id_usuario_negocio_FK`) REFERENCES `usuariosnegocio` (`id_usuario_negocio_PK`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of rolesnegocio
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for unidades_medida
@@ -369,6 +404,26 @@ CREATE TABLE `unidades_medida`  (
 
 -- ----------------------------
 -- Records of unidades_medida
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for usuariosnegocio
+-- ----------------------------
+DROP TABLE IF EXISTS `usuariosnegocio`;
+CREATE TABLE `usuariosnegocio`  (
+  `id_usuario_negocio_PK` bigint NOT NULL AUTO_INCREMENT,
+  `id_persona_negocio_FK` bigint NOT NULL,
+  `usuario` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `passwd` varbinary(300) NOT NULL,
+  `ruta_img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `status_usuario` bit(1) NOT NULL DEFAULT b'1' COMMENT '0=inactivo; 1=Activo',
+  PRIMARY KEY (`id_usuario_negocio_PK`) USING BTREE,
+  INDEX `persona`(`id_persona_negocio_FK` ASC) USING BTREE,
+  CONSTRAINT `usuariosnegocio_ibfk_1` FOREIGN KEY (`id_persona_negocio_FK`) REFERENCES `personalnegocio` (`id_persona_negocio_PK`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of usuariosnegocio
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;

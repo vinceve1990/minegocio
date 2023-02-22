@@ -90,6 +90,20 @@
 			}
 			break;
 
+		case 'Edicion':
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$response = $classPerfil->actualizarUsuario($param);
+			} else {
+				$responce->val = $validacionesDatosIngreso->result;
+				$responce->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+
+			break;
+
 		case 'bajaPersonal':
 			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
 

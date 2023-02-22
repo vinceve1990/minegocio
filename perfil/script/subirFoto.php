@@ -3,7 +3,7 @@
 	require_once "../minegocio/configConexion/config.php";
 	require_once '../minegocio/perfil/class/classSubirFoto.php';
 
-	$id_usuarioNew = ""; 
+	$id_usuarioNew = "";
 
 	foreach ($_POST as $key => $value) {
 	 	$$key = $value;

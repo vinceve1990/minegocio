@@ -111,7 +111,7 @@ $(document).ready(function() {
 		Dat.nombre 		   = "string:"+$("#nombre").val();
 		Dat.apellidos 	   = "string:"+$("#apellidos").val();
 		Dat.telefono 	   = "telefono:"+$("#telefono").val();
-		Dat.correo 		   = "emails:"+$("#email").val();
+		Dat.email 		   = "emails:"+$("#email").val();
 		Dat.curp  		   = "string:"+$("#CURP").val();
 		Dat.usuario 	   = "string:"+$("#usuario").val();
 		Dat.passwd		   = "pass:"+$("#password").val();
@@ -121,7 +121,7 @@ $(document).ready(function() {
 		Dat.sexo = "integer:"+valorActivo;
 
 		$.post('/minegocio/perfil/inforPerfil', {Dat : Dat, accion:'actualizar'}, function(data) {
-			if(data.usuario != 0) {
+			if(data.val == 0) {
 				DialogProcesando('close');
 				window.open("/minegocio/paneles/dashboards/perfil","_self");
 			} else {

@@ -10,6 +10,7 @@
 	/*Fin Saneo de datos*/
 
 	$classPerfil = new classPerfil();
+	$responce = new stdClass();
 
 	$classPerfil->Autenticar();
 
@@ -21,7 +22,8 @@
 		case 'actualizar':
 			//Validar datos
 			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$_POST['Dat']);
-
+			//echo "<pre>";
+			//print_r($validacionesDatosIngreso);
 			if ($validacionesDatosIngreso->result == 0) {
 				$param = $validacionesDatosIngreso->paramValidado;
 

@@ -11,6 +11,7 @@
 
 		function __construct($param) {
 		    $this->param = $param;
+		    $this->result = 0;
 
 		    $paramValidado = new stdClass();
 

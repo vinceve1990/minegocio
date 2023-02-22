@@ -1,10 +1,9 @@
-<?php  
+<?php
 	/**
-	 * 
+	 *
 	 */
 	class perfil extends controlador
 	{
-		
 		public function __construct()
 		{
 			parent::__construct();

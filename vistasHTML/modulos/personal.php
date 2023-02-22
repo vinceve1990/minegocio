@@ -18,6 +18,7 @@
           <div class="row">
             <div>
               <input id="id_persona" class="form-control g-color-black" type="hidden">
+              <input id="id_usuario" class="form-control g-color-black" type="hidden">
             </div>
 
             <div class="col-xs-12 col-sm-4 mb-4">

@@ -62,7 +62,11 @@ EOT;
 			$classValidacionesUsuario = new classValidacionesUsuario();
 			$param->nuevo = "";
 			/*param = solo necesita es nombre de usuario ($param->usuario)*/
-			$userExiste = $classValidacionesUsuario->validaExisteUsuario($param);
+			if(isset($param->usuario)) {
+				$userExiste = $classValidacionesUsuario->validaExisteUsuario($param);
+			} else {
+				$userExiste = 0;
+			}
 
 			if($userExiste > 0) {
 				$this->val++;
@@ -77,7 +81,7 @@ EOT;
 
 				//Actualizar personalnegocio
 				$upPN = <<<EOT
-				UPDATE personalnegocio SET nombre = '$param->nombre', apellidos = '$param->apellidos', curp = '$param->curp', telefono = '$param->telefono', correo = '$param->correo', sexo = '$param->sexo' WHERE id_persona_negocio_PK = $param->id_persona_PK
+				UPDATE personalnegocio SET nombre = '$param->nombre', apellidos = '$param->apellidos', curp = '$param->curp', telefono = '$param->telefono', correo = '$param->email', sexo = '$param->sexo' WHERE id_persona_negocio_PK = $param->id_persona_PK
 EOT;
 				$RupPN = parent::queryUdate($upPN);
 
@@ -95,33 +99,33 @@ EOT;
 					$Epass = ", passwd = AES_ENCRYPT('$param->passwd', '$this->pass')";
 				}
 
-				$upUN = <<<EOT
-				UPDATE usuariosnegocio SET usuario = '$param->usuario' $Epass WHERE id_usuario_negocio_PK = $param->id_usuario_PK
+				if(isset($param->usuario)) {
+					$upUN = <<<EOT
+					UPDATE usuariosnegocio SET usuario = '$param->usuario' $Epass WHERE id_usuario_negocio_PK = $param->id_usuario_PK
 EOT;
-				$RupUN = parent::queryUdate($upUN);
-				//$this->sqlConnect->query($upUN);
+					$RupUN = parent::queryUdate($upUN);
 
-				if ($RupUN === "error") {
-					$this->val++;
-					$this->mensaje .= "AL ACTUALIZAR <br>";
-					$this->errorClass .= "actualizarUsuario() - usuariosnegocio//";
-				}
+					if ($RupUN === "error") {
+						$this->val++;
+						$this->mensaje .= "AL ACTUALIZAR <br>";
+						$this->errorClass .= "actualizarUsuario() - usuariosnegocio//";
+					}
 
-				//Nombre Comerial
-				$upNT = <<<EOT
-				UPDATE negocios_tipo SET nombre_negocio = '$param->nombre_negocio' WHERE id_usuario_FK = $param->id_usuario_PK
-EOT;
-				$RupNT = parent::queryUdate($upNT);
+					//Nombre Comerial
+					$upNT = <<<EOT
+					UPDATE negocios_tipo SET nombre_negocio = '$param->nombre_negocio' WHERE id_usuario_FK = $param->id_usuario_PK
+	EOT;
+					$RupNT = parent::queryUdate($upNT);
 
-				if ($RupNT === "error") {
-					$this->val++;
-					$this->mensaje .= "AL ACTUALIZAR <br>";
-					$this->errorClass .= "actualizarUsuario() - negocios_tipo//";
+					if ($RupNT === "error") {
+						$this->val++;
+						$this->mensaje .= "AL ACTUALIZAR <br>";
+						$this->errorClass .= "actualizarUsuario() - negocios_tipo//";
+					}
 				}
 
 				if($this->val == 0) {
 					parent::queryCommit();
-					$_SESSION['nombreUser'] = $param->nombre.' '.$param->apellidos;
 				} else {
 					parent::queryRollback();
 				}

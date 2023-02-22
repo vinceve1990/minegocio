@@ -47,7 +47,7 @@ EOT;
 					sexo = 1,
 					'Masculino',
 				IF
-				( sexo = 1, 'Femenino', 'Indefinido' )) AS sexo,
+				( sexo = 2, 'Femenino', 'Indefinido' )) AS sexo,
 				nombreRol AS rol,
 				id_usuario_negocio_PK,
 			IF
@@ -135,16 +135,14 @@ EOT;
 		{
 			$responce = new stdClass();
 
-			$this->sqlConnect = parent::conexionInterna($sqlConnect);
-
-			$this->sqlConnect->query("BEGIN");
+			parent::queryBegin();
 
 			$upU = <<<EOT
 			UPDATE usuariosnegocio SET status_usuario = 1 WHERE id_usuario_negocio_PK = $param->id_usuario_negocio_PK
 EOT;
-			$this->sqlConnect->query($upU);
+			$resUN = parent::queryUdate($upU);
 
-			if ($this->sqlConnect->affected_rows < 1) {
+			if ($resUN === "error") {
 				$this->val++;
 				$this->mensaje .= "AL ACTIVAR USUARIO <br>";
 				$this->errorClass .= "activarPersonal() - usuariosnegocio//";
@@ -153,18 +151,18 @@ EOT;
 			$upP = <<<EOT
 			UPDATE personalnegocio SET status_per = 1 WHERE id_persona_negocio_PK = $param->id_persona_negocio_PK
 EOT;
-			$this->sqlConnect->query($upP);
+			$resPN = parent::queryUdate($upP);
 
-			if ($this->sqlConnect->affected_rows < 1) {
+			if ($resPN === "error") {
 				$this->val++;
 				$this->mensaje .= "AL ACTIVAR PERSONA <br>";
 				$this->errorClass .= "activarPersonal() - personalnegocio//";
 			}
 
 			if($this->val == 0) {
-				$this->sqlConnect->query("COMMIT");
+				parent::queryCommit();
 			} else {
-				$this->sqlConnect->query("ROLLBACK");
+				parent::queryRollback();
 			}
 
 			$responce->val = $this->val;
@@ -178,10 +176,10 @@ EOT;
 		{
 			$responce = new stdClass();
 
-			$this->sqlConnect = parent::conexionInterna($sqlConnect);
-
 			$sql = <<<EOT
 			SELECT
+				a.id_persona_negocio_PK,
+				b.id_usuario_negocio_PK,
 				a.nombre,
 				a.apellidos,
 				a.curp,
@@ -196,8 +194,7 @@ EOT;
 			AND a.id_persona_negocio_PK = b.id_persona_negocio_FK
 			AND b.id_usuario_negocio_PK = c.id_usuario_negocio_FK
 EOT;
-			$this->sqlConnect = parent::conexionInterna($sqlConnect);
-        	$query = $this->sqlConnect->query($sql);
+        	$query = parent::querySelect($sql);
 
         	$row = $query->fetch_object();
 

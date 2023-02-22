@@ -1,8 +1,7 @@
 $(document).ready(function() {
-	
-	/*$('body').on("keydown", function(e) { 
+	/*$('body').on("keydown", function(e) {
 		//console.log(e.which);
-		e.ctrlKey && 
+		e.ctrlKey &&
 		if (e.shiftKey && e.which === 88) {
 			$("#btn_alta").click();
 		}
@@ -168,7 +167,10 @@ function DialogAlta(tipo) {
 
         			var valorActivo = 0;
 					var Dat = new Object();
-
+					if(tipo == "Edicion") {
+						Dat.id_persona_PK  = "integer:"+$("#id_persona").val();
+					}
+					Dat.nombre 		   = "string:"+$("#nombre").val();
 					Dat.nombre 		   = "string:"+$("#nombre").val();
 					Dat.apellidos 	   = "string:"+$("#apellidos").val();
 					Dat.telefono 	   = "telefono:"+$("#telefono").val();
@@ -177,12 +179,8 @@ function DialogAlta(tipo) {
 					Dat.rol  		   = "integer:"+$("#roles").val();
 					Dat.rolText 	   = "string:"+$('select[name="roles"] option:selected').text();
 					Dat.sexo = 0;
-					if(document.querySelector('input[name="optradio"]:checked') == true) {
-						var valorActivo = document.querySelector('input[name="optradio"]:checked').value;
-						Dat.sexo = "integer:"+valorActivo;
-					} else {
-						Dat.sexo = "integer:"+0;
-					}
+					var valorActivo = document.querySelector('input[name="optradio"]:checked').value;
+					Dat.sexo = "integer:"+valorActivo;
 
 					let files = $("#btn_file")[0].files;
 
@@ -192,7 +190,11 @@ function DialogAlta(tipo) {
 
 					$.post('/minegocio/personal/server', {accion: tipo, Dat : Dat}, function(data) {
 						if(data.val == 0 && files.length != 0) {
-							formData.append('id_usuarioNew', data.id_usuarioN);
+							if(tipo == "Edicion") {
+								formData.append('id_usuarioNew', $("#id_usuario").val());
+							} else {
+								formData.append('id_usuarioNew', data.id_usuarioN);
+							}
 
 							$.ajax({
 								url: '/minegocio/perfil/subirFoto',
@@ -216,6 +218,7 @@ function DialogAlta(tipo) {
 											cargaGrid();
 
 									}else {
+										DialogProcesando('close');
 										Swal.fire({
 											icon: 'error',
 											title: 'La Imagen no se pudo subir'
@@ -223,12 +226,21 @@ function DialogAlta(tipo) {
 									}
 								},
 								error: function() {
+									DialogProcesando('close');
 									Swal.fire({
 										icon: 'error',
 										title: 'NO HA ADJUNTADO'
 									});
 								}
 							});
+						} else if(data.val == 0 && files.length == 0) {
+							DialogProcesando('close');
+
+							Swal.fire("REGISTRO EXITOSO");
+
+							$("#dialogPersonal").dialog('close');
+
+							cargaGrid();
 						} else {
 							DialogProcesando('close');
 							Swal.fire({
@@ -269,7 +281,8 @@ function editarPersonal(dat) {
 	DialogAlta('Edicion');
 
 	$.post('/minegocio/personal/server', {accion: 'informacionPersona', Dat : dat}, function(data) {
-
+		$("#id_usuario").val(data.id_usuario_negocio_PK);
+		$("#id_persona").val(data.id_persona_negocio_PK);
 		$("#nombre").val(data.nombre);
 		$("#apellidos").val(data.apellidos);
 		$("#telefono").val(data.telefono);
