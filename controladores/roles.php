@@ -10,9 +10,20 @@
 			parent::__construct();
 		}
 
+		public function roles($paramRuta)
+		{
+
+			$this->Views->getViews($this, "roles", $paramRuta);
+		}
+
 		public function catalogoRoles()
 		{
 			$this->ClassPost->getPost('script', "catalogoRoles", 'roles');
+		}
+
+		public function inforModulos()
+		{
+			$this->ClassPost->getPost('script', "inforModulos", 'roles');
 		}
 	}
 ?>

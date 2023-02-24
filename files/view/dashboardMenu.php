@@ -1,7 +1,9 @@
 <?php
+	error_reporting(0);
 	require_once "../minegocio/configConexion/conexion.php";
 
 	$ConectarH = new ConectarH();
+
 	$ConectarH->Autenticar(); 
 
 	if(empty($_SESSION['id_persona_PK'])) {
@@ -64,7 +66,7 @@
 				<!--Nombre Negocio-->
 				<div class="col-auto d-flex g-pt-5 g-pt-0--sm g-pl-10 g-pl-20--sm">
 					<div class="g-pos-rel g-px-10--lg">
-						<span class="media-body align-self-center" id="miPerfil"><h4><?php echo $_SESSION['nombre_negocio'] ?></h4></span>
+						<span class="media-body align-self-center" id="miPerfil"><h4><?php echo $_SESSION['nombre_negocio']; ?></h4></span>
 					</div>
 				</div>
 				<!-- Top User -->
@@ -77,7 +79,7 @@
 								<img class="g-width-30 g-width-40--md g-height-30 g-height-40--md rounded-circle g-mr-10--sm" src="/minegocio/admin-template/assets/img-temp/130x130/img1.jpg" alt="Image description">
 							</span>
 							<span class="g-pos-rel g-top-2">
-								<span class="g-hidden-sm-down"><?php echo $_SESSION['nombreUser'] ?></span>
+								<span class="g-hidden-sm-down"><?php echo $_SESSION['nombreUser']; ?></span>
 								<i class="hs-admin-angle-down g-pos-rel g-top-2 g-ml-10"></i>
 							</span>
 						</a>

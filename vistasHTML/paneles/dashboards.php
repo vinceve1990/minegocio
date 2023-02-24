@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../../<?php echo $paramRuta; ?>/js/<?php echo $paramRuta; ?>.js"></script>
 
 <main class="container-fluid px-0 g-pt-65">
-	<div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+	<div class="row no-gutters g-pos-rel g-overflow-x-hidden" style="height: 93vh;">
 		<!-- Sidebar Nav -->
 		<div id="sideNav" class="col-auto u-sidebar-navigation-v1 u-sidebar-navigation--dark">
 			<ul id="sideNavMenu" class="u-sidebar-navigation-v1-menu u-side-nav--top-level-menu g-min-height-90vh mb-0">

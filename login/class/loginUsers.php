@@ -89,6 +89,7 @@ EOT;
 						ini_set("session.cookie_lifetime","0");
 						ini_set("session.gc_maxlifetime","0");
 
+
 						parent::Autenticar();
 
 						$_SESSION['usuario']       		   = $row->usuario;
