@@ -1,4 +1,4 @@
-<?php  
+<?php
 	$response = new stdClass();
 
 	$response->modulo[0] = array("nombre" => "PROVEEDORES", "descripcion" => "Catalogo de Proveedores", "icono" => "fa-truck-field", "color" => "00FFFF");
