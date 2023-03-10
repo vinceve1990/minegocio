@@ -52668,34 +52668,34 @@ input:checked + .g-bg-gray-light-v8--sibling-checked {
 }
 
 .g-bg-lightblue-v3 {
-  background-color: #1cc9e4 !important;
+  background-color: #1cc9e4;
 }
 
 .g-bg-lightblue-v3--hover:hover {
-  background-color: #1cc9e4 !important;
+  background-color: #1cc9e4;
 }
 
 .g-bg-lightblue-v3--active.active {
-  background-color: #1cc9e4 !important;
+  background-color: #1cc9e4;
 }
 
 input[type="checkbox"]:checked + .g-bg-lightblue-v3--checked,
 input[type="radio"]:checked + .g-bg-lightblue-v3--checked {
-  background-color: #1cc9e4 !important;
+  background-color: #1cc9e4;
 }
 
 input[type="checkbox"]:checked + .g-bg-lightblue-v3--checked i,
 input[type="radio"]:checked + .g-bg-lightblue-v3--checked i {
-  background-color: #1cc9e4 !important;
+  background-color: #1cc9e4;
 }
 
 input[type="checkbox"]:checked + * .g-bg-lightblue-v3--parent-checked,
 input[type="radio"]:checked + * .g-bg-lightblue-v3--parent-checked {
-  background-color: #1cc9e4 !important;
+  background-color: #1cc9e4;
 }
 
 .g-parent:hover .g-bg-lightblue-v3--parent-hover {
-  background-color: #1cc9e4 !important;
+  background-color: #1cc9e4;
 }
 
 .g-bg-lightblue-v4 {

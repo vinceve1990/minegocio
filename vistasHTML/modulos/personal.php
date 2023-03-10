@@ -1,6 +1,3 @@
-<?php
-
-?>
 <div class="container" id="advanced-search-form" style="max-width: 1000vh !important;">
     <h4>REGISTRO DE PERSONAL / ROLES</h4><br>
     <table id="GridPersonal"></table>

@@ -11,6 +11,7 @@
 ?>
 <link rel="stylesheet" type="text/css"  href="/minegocio/perfil/css/styleImg.css" />
 <link rel="stylesheet" type="text/css"  href="/minegocio/personal/css/stylePersonal.css" />
+<script type="text/javascript" src="/minegocio/modulos/js/modulos.js"></script>
 <script type="text/javascript" src="../../<?php echo $paramRuta; ?>/js/<?php echo $paramRuta; ?>.js"></script>
 
 <main class="container-fluid px-0 g-pt-65">
