@@ -54,7 +54,7 @@
     <script src="/minegocio/panel/js/panel.js"></script>
 
     <!-- Dialog Cargando -->
-    <script type="text/javascript" src="/minegocio/files/view/dialogCargando.js"></script>
+    <script type="text/javascript" src="/minegocio/files/view/dialogGenerales.js"></script>
 
     <!--Dashboard-->
     <link rel="stylesheet" href="/minegocio/admin-template/assets/vendor/hs-admin-icons/hs-admin-icons.css">

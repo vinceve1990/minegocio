@@ -46,6 +46,20 @@
 			$response = $classModulos->verCategorias();
 			break;
 
+		case 'permisos';
+			/*Datos de Ingreso*/
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$response = $classModulos->guardarPermisos($param);
+			} else {
+				$responce->val = $validacionesDatosIngreso->result;
+				$responce->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+			break;
+
 		default:
 			// code...
 			break;

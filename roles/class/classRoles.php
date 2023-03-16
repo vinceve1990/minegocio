@@ -10,6 +10,7 @@
 
 		public function existeRol($param)
 		{
+			$param = parent::escapeQuery($param);
 
 			$sql = <<<EOT
 			SELECT COUNT(nombre_rol) AS existe FROM catalogo_roles WHERE nombre_rol = '$param->nombreRol'
@@ -28,6 +29,8 @@ EOT;
 
 			parent::queryBegin();
 
+			$param = parent::escapeQuery($param);
+
 			$sql = <<<EOT
 			INSERT INTO catalogo_roles (nombre_rol) VALUES ('$param->nombreRol') 
 EOT;
@@ -40,10 +43,74 @@ EOT;
 			}
 
 			if($this->val == 0) {
-				parent::queryCommit($sql);
+				parent::queryCommit();
 				$this->mensaje .= "ROL AGREGADO";
 			} else {
-				parent::queryRollback($sql);
+				parent::queryRollback();
+			}
+
+			$response->val = $this->val;
+			$response->mensaje = $this->mensaje;
+			$response->errorClass = $this->errorClass;
+
+			return $response;
+		}
+
+		public function updateRol($param) {
+			$response = new stdClass();
+
+			parent::queryBegin();
+
+			$param = parent::escapeQuery($param);
+
+			$upR = <<<EOT
+			UPDATE catalogo_roles SET status = $param->status WHERE id_roles_PK = $param->id_roles_PK
+EOT;
+			$query = parent::queryUdate($upR);
+
+			if ($query === "error") {
+				$this->val++;
+				$this->mensaje .= "AL ACTUALIZAR EL ROL <br>";
+				$this->errorClass .= "updateRol() - catalogo_roles";
+			}
+
+			if($this->val == 0) {
+				parent::queryCommit();
+				$this->mensaje .= "ROL ACTUALIZADO";
+			} else {
+				parent::queryRollback();
+			}
+
+			$response->val = $this->val;
+			$response->mensaje = $this->mensaje;
+			$response->errorClass = $this->errorClass;
+
+			return $response;
+		}
+
+		public function updateNomRol($param) {
+			$response = new stdClass();
+
+			parent::queryBegin();
+
+			$param = parent::escapeQuery($param);
+
+			$upR = <<<EOT
+			UPDATE catalogo_roles SET nombre_rol = '$param->nombreRol' WHERE id_roles_PK = $param->id_roles_PK
+EOT;
+			$query = parent::queryUdate($upR);
+
+			if ($query === "error") {
+				$this->val++;
+				$this->mensaje .= "AL ACTUALIZAR EL ROL <br>";
+				$this->errorClass .= "updateNomRol() - catalogo_roles";
+			}
+
+			if($this->val == 0) {
+				parent::queryCommit();
+				$this->mensaje .= "ROL ACTUALIZADO";
+			} else {
+				parent::queryRollback();
 			}
 
 			$response->val = $this->val;
@@ -109,8 +176,18 @@ EOT;
         	$i = 0;
 
 			while ($row = $query->fetch_object()) {
+				$btn = "";
+
+				$btn .= parent::button('Editar', 'editarRol', array('id_roles_PK' => $row->id_roles_PK), 'fa-solid fa-pencil', 'color: #735517 !important; font-size: 14px !important; font-weight:bold !important;', 'btnImpPDFLis', '', '');
+
+				if($row->estatus == 'Activo') {
+					$btn .= parent::button('Dar Baja', 'eliminarRol', array('id_roles_PK' => 'integer:'.$row->id_roles_PK), 'fa-solid fa-trash-can', 'color: #FF0000 !important; font-size: 14px !important; font-weight:bold !important;', 'btnImpPDFLis', '', '');
+				} else {
+					$btn .= parent::button('Dar Alta', 'activarRol', array('id_roles_PK' => 'integer:'.$row->id_roles_PK), 'fa-solid fa-circle-check', 'color: #35a405 !important; font-size: 14px !important; font-weight:bold !important;', 'btnImpPDFLis', '', '');
+				}
+
 				$responce->rows[$i]['id'] = $row->id_roles_PK;
-			    $responce->rows[$i]['cell'] = array($row->id_roles_PK, $row->nombre_rol, $row->estatus);
+			    $responce->rows[$i]['cell'] = array($row->id_roles_PK, $row->nombre_rol, $row->estatus, $btn);
 			    $i++;
 			}
 

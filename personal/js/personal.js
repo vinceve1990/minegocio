@@ -16,46 +16,7 @@ $(document).ready(function() {
 	});*/
 
 	$("#agregaRol").click(function() {
-		$("#dialogRoles").dialog({
-	        title: 'Alta Roles',
-	        autoOpen: false,
-	        modal: true,
-	        width: 320,
-	        closeOnEscape: false,
-	        resizable : false,
-	        zIndex: 1100,
-	        open: function() {
-	        	$("#nombreRol").val('');
-	        },
-	        buttons: [
-	        	{
-	        		id: 'btnGuardaRol',
-	        		text: 'Guardar',
-	        		click: function() {
-	        			DialogProcesando('open');
-						var DatR = new Object();
-
-						DatR.nombreRol = $("#nombreRol").val();
-
-						$.post('/minegocio/roles/catalogoRoles', {accion: 'nuevoRol', DatR : DatR}, function(data) {
-							DialogProcesando('close');
-							Swal.fire(data.mensaje);
-
-							$("#dialogRoles").dialog('close');
-
-							cargarRoles();
-						}, 'json');
-
-	        		}
-	        	},
-	        	{
-	        		id: 'btnCancelaRol',
-	        		text: 'Cancelar',
-	        		click: function() {
-	        			$("#dialogRoles").dialog('close');
-	        		}
-	        	}]
-	    }).dialog('open');
+		dialogRol("open", "personal");
 	});
 
 	cargaGrid();

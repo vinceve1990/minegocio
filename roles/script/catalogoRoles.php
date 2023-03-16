@@ -23,16 +23,23 @@
 
 	switch ($accion) {
 		case 'nuevoRol':
-			$DatR = (object)$DatR;
-			//validacion de roles
-			$existeRol = $classRoles->existeRol($DatR);
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$DatR);
 
-			if($existeRol == 0) {
-				$response = $classRoles->RegistrarRol($DatR);
+			if ($validacionesDatosIngreso->result == 0) {
+				$DatR = $validacionesDatosIngreso->paramValidado;
+
+				//validacion de roles
+				$existeRol = $classRoles->existeRol($DatR);
+
+				if($existeRol == 0) {
+					$response = $classRoles->RegistrarRol($DatR);
+				} else {
+					$response->mensaje = "EXISTE UN ROL CON ESE NOMBRE";
+				}
 			} else {
-				$response->mensaje = "EXISTE UN ROL CON ESE NOMBRE";
+				$responce->val = $validacionesDatosIngreso->result;
+				$responce->mensaje = $validacionesDatosIngreso->mensaje;
 			}
-
 			break;
 		case 'buscarRol':
 			$response = $classRoles->selectRoles();
@@ -42,24 +49,45 @@
 			
 			$response = $classRoles->verRoles($fil);
 			break;
-	}
+		case 'editarRol':
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$DatR);
 
-	/*CREATE TABLE `catalogo_roles_permisos_interfaz` (
-	`id_cat_rol_permiso_PK` BIGINT(20) NOT NULL AUTO_INCREMENT,
-	`id_roles_FK` BIGINT(20) NOT NULL,
-	`id_catalogo_interfaz_FK` BIGINT(20) NOT NULL,
-	`status` BIT(1) NOT NULL DEFAULT b'1' COMMENT '0=inactivo; 1=Activo',
-	PRIMARY KEY (`id_cat_rol_permiso_PK`) USING BTREE,
-	INDEX `FK_roles` (`id_roles_FK`) USING BTREE,
-	INDEX `FK_interfaz` (`id_catalogo_interfaz_FK`) USING BTREE,
-	CONSTRAINT `FK_interfaz` FOREIGN KEY (`id_catalogo_interfaz_FK`) REFERENCES `cervantesvite022123o`.`catalogo_interfaz` (`id_catalogo_interfaz_PK`) ON UPDATE NO ACTION ON DELETE NO ACTION,
-	CONSTRAINT `FK_roles` FOREIGN KEY (`id_roles_FK`) REFERENCES `cervantesvite022123o`.`catalogo_roles` (`id_roles_PK`) ON UPDATE NO ACTION ON DELETE NO ACTION
-)
-COMMENT='Las interfaces que puede utilizar el rol'
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB
-;
-*/
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$response = $classRoles->updateNomRol($param);
+			} else {
+				$responce->val = $validacionesDatosIngreso->result;
+				$responce->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+			break;
+		case 'eliminarRol':
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+				$param->status = 0;
+
+				$response = $classRoles->updateRol($param);
+			} else {
+				$responce->val = $validacionesDatosIngreso->result;
+				$responce->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+			break;
+		case 'activarRol':
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+				$param->status = 1;
+
+				$response = $classRoles->updateRol($param);
+			} else {
+				$responce->val = $validacionesDatosIngreso->result;
+				$responce->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+			break;
+	}
 
 	echo json_encode($response);
 ?>

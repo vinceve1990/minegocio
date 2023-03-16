@@ -8,6 +8,7 @@ function verModulos(id, id_rol) {
 	var Dat = new Object();
 
 	Dat.id_categoria_PK = "integer:"+id;
+	Dat.id_rol_PK = "integer:"+id_rol;
 
 	$.ajax({
         dataType:"json",
@@ -56,17 +57,17 @@ function verModulos(id, id_rol) {
 
 		var Dat = new Object();
 
-		Dat.id_interfaz_PK = datos['id_interfaz'];
-		Dat.id_rol = datos['id_rol'];
+		Dat.id_interfaz_PK = "integer:"+datos['id_interfaz'];
+		Dat.id_rol = "integer:"+datos['id_rol'];
 
 		if($("#inter"+datos['id_interfaz']).prop("checked") == true) {
 			$("#inter"+datos['id_interfaz']).prop("checked", false);
-
+			Dat.status = "integer:"+0;
 			guardarPermiso(Dat);
 		} else {
 			$("#inter"+datos['id_interfaz']).prop("checked", true);
-
-			guardarPermiso(dat);
+			Dat.status = "integer:"+1;
+			guardarPermiso(Dat);
 		}
 	});
 }
@@ -130,8 +131,23 @@ function verCategorias(id_rol) {
 	});
 }
 
-function guardarPermiso(dat) {
+function guardarPermiso(Dat) {
+	DialogProcesando('open');
 	$.ajax({
-
+		dataType:"json",
+        url:"/minegocio/modulos/modulos",
+        type: "POST",
+        data:{accion:'permisos', Dat:Dat},
+        cache:true,
+        async:false,
+        success: function(data){       	
+        	DialogProcesando('close');
+        	if(data.val != 0) {
+	        	Swal.fire({
+					icon: 'error',
+					title: "Error "+data.mensaje
+				});
+        	}
+        }
 	});
 }

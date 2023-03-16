@@ -21,6 +21,7 @@ function cargaGridRoles() {
 	   	rowNum:50,
 	   	sortname: 'id',
 	   	width: $("#advanced-search-form").width(),
+	   	height: ($("#advanced-search-form").width() / 6),
 	    viewrecords: true,
 	    sortorder: "desc",
 	    caption:"Roles / Permisos",
@@ -30,19 +31,30 @@ function cargaGridRoles() {
 	    	jQuery("#GridRoles").setGridWidth($('#advanced-search-form').width());
 	    },
 	    onSelectRow:function(id) {
-	    	DialogProcesando('open');
 
 	    	var nombreRol = $("#GridRoles").getCell(id, "nombre_rol");
 
-	    	$("#rolTitulo").text(nombreRol+" (Permisos)");
+	    	var status = $("#GridRoles").getCell(id, "status");
 
-	    	$("#rowCategorias").html("");
+	    	if(status == "Desactivado") {
+	    		Swal.fire(
+					'ROL DESACTIVADO',
+					'Favor de activar para editar los Permisos',
+					'info'
+				);
+	    	} else {
+	    		DialogProcesando('open');
 
-	    	$("#rowModulos").html("");
+		    	$("#rolTitulo").text(nombreRol+" (Permisos)");
 
-	    	$("#verCategorias").show();
+		    	$("#rowCategorias").html("");
 
-	    	verCategorias(id);
+		    	$("#rowModulos").html("");
+
+		    	$("#verCategorias").show();
+
+		    	verCategorias(id);
+	    	}
 	    }
 	});
 
@@ -63,7 +75,77 @@ function cargaGridRoles() {
 		id:'btn_alta',
 		buttonicon:"ui-icon-plus",
 		onClickButton: function(){
-			DialogAlta('Alta');
+			dialogRol("open", "roles");
         }
     });//termina boton excel
+}
+
+function editarRol(dat) {
+	dialogRol('open', "editRoles");
+
+	var nombreRol = $("#GridRoles").getCell(dat.id_roles_PK, "nombre_rol");
+
+	var dRol = $("#dialogRoles");
+
+	var id_roles_PK = dRol.data("id_roles_PK");
+
+	dRol.data( 'id_roles_PK', dat.id_roles_PK );
+
+	$("#nombreRol").val(nombreRol);
+
+	/*DialogProcesando('open');
+
+ 	$.post('/minegocio/roles/catalogoRoles', {accion: 'editarRol', Dat : dat}, function (res) {
+ 		if(res.val == 0) {
+ 			Swal.fire(
+				'EDITADO CON EXITO',
+				'You clicked the button!',
+				'success'
+			)
+ 		}
+ 		DialogProcesando('close');
+ 	}, 'json');*/
+
+}
+
+function eliminarRol(dat) {
+	DialogProcesando('open');
+
+ 	$.post('/minegocio/roles/catalogoRoles', {accion: 'eliminarRol', Dat : dat}, function (res) {
+ 		if(res.val == 0) {
+ 			Swal.fire(
+				'BAJA EXITOSA',
+				'',
+				'success'
+			);
+ 			DialogProcesando('close');
+
+ 			$("#GridRoles").trigger("reloadGrid");
+ 		} else {
+ 			Swal.fire(
+				'ERROR EN LA BAJA DEL ROL',
+				'',
+				'error'
+			);
+ 		}
+ 	}, 'json');
+
+}
+
+function activarRol(dat) {
+	DialogProcesando('open');
+
+ 	$.post('/minegocio/roles/catalogoRoles', {accion: 'activarRol', Dat : dat}, function (res) {
+ 		if(res.val == 0) {
+ 			Swal.fire(
+				'ACTIVADO CON EXITO',
+				'',
+				'success'
+			);
+ 			DialogProcesando('close');
+
+ 			$("#GridRoles").trigger("reloadGrid");
+ 		}
+ 	}, 'json');
+
 }

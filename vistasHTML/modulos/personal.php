@@ -66,16 +66,3 @@
       </div>
     </form>
 </div>
-
-<div id="dialogRoles" style="display: none">
-    <form>
-        <div class="col-xs-12 col-sm-12 mb-12">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 mb-12">
-                    <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">Nombre Rol:</label>
-                    <input id="nombreRol" class="form-control g-color-black" type="text" placeholder="Nombre Rol">
-                </div>
-            </div>
-        </div>
-    </form>
-</div>

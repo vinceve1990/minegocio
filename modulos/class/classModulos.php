@@ -5,8 +5,8 @@
 		private String $mensaje = "";
 		private String $errorClass = "";
 		private bool $permisos = false;
-		function __construct()
-		{}
+
+		function __construct() {}
 
 		private function informacionModulos($param) {
 			$response = new stdClass();
@@ -34,7 +34,14 @@ EOT;
 				$i = 0;
 				while ($row = $query->fetch_object()) {
 					if($this->permisos == true) {
-						$fil = '<input type="checkbox" id="inter'.$row->id_catalogo_interfaz_PK.'" name="'.$row->nombre_interfaz.'" value="'.$row->id_catalogo_interfaz_PK.'">';
+						/*Checar cual ya tiene permisos*/
+						$dat = $this->verActivosInterfaces($row->id_catalogo_interfaz_PK, $param->id_rol_PK);
+						$check = "";
+						if($dat->status == 1) {
+							$check = "checked";
+						}
+
+						$fil = '<input type="checkbox" id="inter'.$row->id_catalogo_interfaz_PK.'" name="'.$row->nombre_interfaz.'" value="'.$row->id_catalogo_interfaz_PK.'" '.$check.'>';
 					}
 
 					$response->modulo[$i] = array("id_interfaz" => $row->id_catalogo_interfaz_PK, "nombre" => $row->nombre_interfaz, "descripcion" => $row->descripcion_interfaz, "icono" => $row->icono, "color" => $row->color, "checkbox" => $fil);
@@ -49,7 +56,7 @@ EOT;
 			return $response;
 		}
 
-		public function infoCategorias() {
+		private function infoCategorias() {
 			$response = new stdClass();
 
 			$sql = <<<EOT
@@ -80,6 +87,82 @@ EOT;
 			return $response;
 		}
 
+		private function insertPermisos($param)
+		{
+			$response = new stdClass();
+
+			//Saneo de datos para Mysql
+			$param = parent::escapeQuery($param);
+
+			parent::queryBegin();
+
+			/*Checar si existe el registro*/
+			$dat = $this->verActivosInterfaces($param->id_interfaz_PK, $param->id_rol);
+
+			if($dat->id_cat_rol_permiso_PK > 0) {
+				$updPI = <<<EOT
+				UPDATE catalogo_roles_permisos_interfaz SET status = $param->status WHERE id_cat_rol_permiso_PK = $dat->id_cat_rol_permiso_PK
+EOT;
+				$query = parent::queryUdate($updPI);
+
+				if($query === "error") {
+					$this->val++;
+					$this->mensaje .= "AL ACTUALIZAR EL PERMISO <br>";
+					$this->errorClass .= "insertPermisos() - classModulos//";
+				}
+			} else {
+				$insPI = <<<EOT
+				INSERT INTO catalogo_roles_permisos_interfaz(id_roles_FK, id_catalogo_interfaz_FK) VALUES($param->id_rol, $param->id_interfaz_PK)
+EOT;
+				$query = parent::queryInsert($insPI);
+
+				if($query === "error") {
+					$this->val++;
+					$this->mensaje .= "AL INSERTAR EL PERMISO <br>";
+					$this->errorClass .= "insertPermisos() - classModulos//";
+				}
+			}
+
+			if($this->val == 0) {
+				parent::queryCommit();
+			} else {
+				parent::queryRollback();
+			}
+
+			$response->val = $this->val;
+			$response->mensaje = $this->mensaje;
+			$response->errorClass = $this->errorClass;			
+
+			return $response;
+		}
+
+		private function verActivosInterfaces($id_catalogo_interfaz_PK, $id_rol_PK)
+		{
+			$datos = new stdClass();
+
+			$sql = <<<EOT
+			SELECT id_cat_rol_permiso_PK, status FROM catalogo_roles_permisos_interfaz WHERE id_roles_FK = $id_rol_PK AND id_catalogo_interfaz_FK = $id_catalogo_interfaz_PK
+EOT;
+			$res = parent::querySelect($sql);
+
+			if($res === "error") {
+				$this->val++;
+				$this->mensaje .= "AL BUSCAR PERMISO <br>";
+				$this->errorClass .= "insertPermisos() - classModulos//";
+			}else {
+				$datos->id_cat_rol_permiso_PK = 0;
+				$datos->status = 0;
+				$row = $res->fetch_object();
+
+				if(isset($row->id_cat_rol_permiso_PK)) {
+					$datos->id_cat_rol_permiso_PK = $row->id_cat_rol_permiso_PK;
+					$datos->status = $row->status;
+				}
+			}
+
+			return $datos;
+		}
+
 		public function permisosModulos($param) {
 			$this->permisos = true;
 			$res = $this->informacionModulos($param);
@@ -89,6 +172,13 @@ EOT;
 
 		public function verCategorias() {
 			$res = $this->infoCategorias();
+
+			return $res;
+		}
+
+		public function guardarPermisos($param)
+		{
+			$res = $this->insertPermisos($param);
 
 			return $res;
 		}
