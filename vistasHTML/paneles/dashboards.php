@@ -20,8 +20,8 @@
 		<div id="sideNav" class="col-auto u-sidebar-navigation-v1 u-sidebar-navigation--dark">
 			<ul id="sideNavMenu" class="u-sidebar-navigation-v1-menu u-side-nav--top-level-menu g-min-height-90vh mb-0">
 				<!-- Dashboards -->
-				<li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item u-side-nav-opened has-active">
-					<a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="/minegocio/paneles/dashboards">
+				<li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item u-side-nav-opened" id="panelPrincipal">
+					<a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="/minegocio/paneles/dashboards/menuPrincipal">
 						<span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18">
 							<i class="hs-admin-server"></i>
 						</span>
@@ -30,13 +30,24 @@
 				</li>
 				<!-- End Dashboards -->
 
-				<!-- Notifications -->
-				<li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item">
+				<!-- Operaciones -->
+				<li class="u-sidebar-navigation-v1-menu-item u-side-nav--top-level-menu-item" id="panelOperaciones">
+					<a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="/minegocio/paneles/dashboards/operaciones">
+						<span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18">
+							<i class="hs-admin-dashboard"></i>
+						</span>
+						<span class="media-body align-self-center">Operaciones</span>
+					</a>
+				</li>
+				<!-- End Operaciones -->
+
+				<!-- Configuaración -->
+				<li class="u-sidebar-navigation-v1-menu-item u-side-nav--has-sub-menu u-side-nav--top-level-menu-item" id="panelConfiguraciones">
 					<a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12"  data-hssm-target="#subMenu9">
 						<span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18">
 							<i class="hs-admin-layout-list-thumb"></i>
 						</span>
-						<span class="media-body align-self-center">Operaciones</span>
+						<span class="media-body align-self-center">Configuaración</span>
 						<span class="d-flex align-self-center u-side-nav--control-icon">
 							<i class="hs-admin-angle-right"></i>
 						</span>
@@ -66,32 +77,12 @@
 							</a>
 						</li>
 						<!-- End Light Notifications -->
-
-						<!-- Dark Notifications -->
-						<li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
-							<a class="media u-side-nav--second-level-menu-link g-px-15 g-py-12" href="../notifications/notifications-dark.html">
-								<span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
-									<i class="hs-admin-layout-cta-center"></i>
-								</span>
-								<span class="media-body align-self-center">Dark Notifications</span>
-							</a>
-						</li>	
-						<!-- End Dark Notifications -->
-						<!-- Notifications Builder -->
-						<li class="u-sidebar-navigation-v1-menu-item u-side-nav--second-level-menu-item">
-							<a class="media u-side-nav--second-level-menu-link g-px-15 g-py-12" href="../notifications/notifications-builder.html">
-								<span class="d-flex align-self-center g-mr-15 g-mt-minus-1">
-									<i class="hs-admin-infinite"></i>
-								</span>
-								<span class="media-body align-self-center">Notifications Builder</span>
-							</a>
-						</li>
-						<!-- End Notifications Builder -->
 					</ul>
 					<!-- Notifications: Submenu-1 -->
 				</li>
-				<!-- End Notifications -->
-				<!-- Metrics -->
+				<!-- End Configuaración -->
+				
+				<!-- Consultas -->
 				<li class="u-sidebar-navigation-v1-menu-item u-side-nav--top-level-menu-item">
 					<a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="/minegocio/paneles/dashboards">
 						<span class="d-flex align-self-center g-pos-rel g-font-size-18 g-mr-18">
@@ -100,9 +91,9 @@
 						<span class="media-body align-self-center">Consultas</span>
 					</a>
 				</li>
-				<!-- End Metrics -->
+				<!-- End Consultas -->
 
-				<!-- Packages -->
+				<!-- Reportes -->
 				<li class="u-sidebar-navigation-v1-menu-item u-side-nav--top-level-menu-item">
 					<a class="media u-side-nav--top-level-menu-link u-side-nav--hide-on-hidden g-px-15 g-py-12" href="/minegocio/paneles/dashboards">
 						<span class="d-flex align-self-center g-font-size-18 g-mr-18">
@@ -111,7 +102,7 @@
 						<span class="media-body align-self-center">Reportes</span>
 					</a>
 				</li>
-				<!-- End Packages -->
+				<!-- End Reportes -->
 			</ul>
 		</div>
 		

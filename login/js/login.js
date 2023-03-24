@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 			$.post('/minegocio/login/login', {Dat : Dat}, function(data) {
 				if(data.usuario != 0) {
-					window.open("/minegocio/paneles/dashboards","_self");
+					window.open("/minegocio/paneles/dashboards/menuPrincipal","_self");
 				} else {
 					Swal.fire({
 						icon: 'error',

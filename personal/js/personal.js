@@ -15,6 +15,8 @@ $(document).ready(function() {
 		}
 	});*/
 
+	$("#panelConfiguraciones").css("background-color","#29364d");
+
 	$("#agregaRol").click(function() {
 		dialogRol("open", "personal");
 	});
