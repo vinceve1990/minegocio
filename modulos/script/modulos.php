@@ -27,23 +27,41 @@
 					if ($validacionesDatosIngreso->result == 0) {
 						$param = $validacionesDatosIngreso->paramValidado;
 
-						$response = $classModulos->permisosModulos($param);
+						$response = $classModulos->verModulos($param);
 					} else {
 						$responce->val = $validacionesDatosIngreso->result;
 						$responce->mensaje = $validacionesDatosIngreso->mensaje;
 					}
-					
+
 					break;
-				
+				case 'panelTrabajo':
+					/*Datos de Ingreso*/
+					$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+					if ($validacionesDatosIngreso->result == 0) {
+						$param = $validacionesDatosIngreso->paramValidado;
+
+						$response = $classModulos->verModulosPermisos($param);
+					} else {
+						$responce->val = $validacionesDatosIngreso->result;
+						$responce->mensaje = $validacionesDatosIngreso->mensaje;
+					}
+					break;
 				default:
-					// code...
+
 					break;
 			}
 			break;
 
 		case 'categorias':
-			
-			$response = $classModulos->verCategorias();
+			switch ($fil) {
+				case 'panelTrabajo':
+					$response = $classModulos->verCategoriasPermisos();
+					break;
+				default:
+					$response = $classModulos->verCategorias();
+					break;
+			}
 			break;
 
 		case 'permisos';

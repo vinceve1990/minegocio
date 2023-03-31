@@ -2,10 +2,14 @@ $(document).ready(function() {
 	
 });
 
-function verModulos(id, id_rol) {
+function verModulos(id, id_rol, permiso) {
 	$("#rowModulos").html("");
 
 	var Dat = new Object();
+
+	if(permiso == "") {
+		permiso = "permisos";
+	}
 
 	Dat.id_categoria_PK = "integer:"+id;
 	Dat.id_rol_PK = "integer:"+id_rol;
@@ -14,7 +18,7 @@ function verModulos(id, id_rol) {
         dataType:"json",
         url:"/minegocio/modulos/modulos",
         type: "POST",
-        data:{accion:'informacion', fil:'permisos', Dat:Dat},
+        data:{accion:'informacion', fil:permiso, Dat:Dat},
         cache:true,
         async:false,
         success: function(data){
@@ -23,7 +27,7 @@ function verModulos(id, id_rol) {
         	for(x in data.modulo){
         		modulos += `<div class="col-sm-4 col-lg-4 col-xl-3 g-mb-30">
 				<!-- Panel -->
-					<div class="card h-100 g-brd-gray-light-v7 g-rounded-3 moduloClick" data-id_interfaz="${data.modulo[x]['id_interfaz']}" data-id_rol="${id_rol}">
+					<div class="card h-100 g-brd-gray-light-v7 g-rounded-3 moduloClick" data-id_interfaz="${data.modulo[x]['id_interfaz']}" data-id_rol="${id_rol}" data-urlinterfaz="${data.modulo[x]['urlInterfaz']}">
 						<div class="card-block g-font-weight-300 g-pa-20">
 							<div class="media">
 								<div class="d-flex g-mr-15">
@@ -60,14 +64,18 @@ function verModulos(id, id_rol) {
 		Dat.id_interfaz_PK = "integer:"+datos['id_interfaz'];
 		Dat.id_rol = "integer:"+datos['id_rol'];
 
-		if($("#inter"+datos['id_interfaz']).prop("checked") == true) {
-			$("#inter"+datos['id_interfaz']).prop("checked", false);
-			Dat.status = "integer:"+0;
-			guardarPermiso(Dat);
+		if (permiso != "panelTrabajo") {
+			if($("#inter"+datos['id_interfaz']).prop("checked") == true) {
+				$("#inter"+datos['id_interfaz']).prop("checked", false);
+				Dat.status = "integer:"+0;
+				guardarPermiso(Dat);
+			} else {
+				$("#inter"+datos['id_interfaz']).prop("checked", true);
+				Dat.status = "integer:"+1;
+				guardarPermiso(Dat);
+			}
 		} else {
-			$("#inter"+datos['id_interfaz']).prop("checked", true);
-			Dat.status = "integer:"+1;
-			guardarPermiso(Dat);
+			window.open("/minegocio"+datos['urlinterfaz'],"_self");
 		}
 	});
 }
@@ -77,15 +85,21 @@ function verCategorias(id_rol) {
 	
 	DialogProcesando('open');
 	
+	var permiso = "";
+
 	var Dat = new Object();
 
 	Dat.id_rol_PK = "integer:"+id_rol;
+
+	if(id_rol == 0) {
+		var permiso = "panelTrabajo";
+	}
 
 	$.ajax({
         dataType:"json",
         url:"/minegocio/modulos/modulos",
         type: "POST",
-        data:{accion:'categorias', Dat:Dat},
+        data:{accion:'categorias', fil:permiso, Dat:Dat},
         cache:true,
         async:false,
         success: function(data){
@@ -123,7 +137,7 @@ function verCategorias(id_rol) {
 	$(".categoriaClick").click(function () {
 		datos = $(this).data();
 
-		verModulos(datos['id_categorias'], id_rol);
+		verModulos(datos['id_categorias'], id_rol, permiso);
 
 		$(".categoriaClick").css("background-color","#ddfaf8");
 

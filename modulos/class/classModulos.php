@@ -8,7 +8,7 @@
 
 		function __construct() {}
 
-		private function informacionModulos($param) {
+		private function informacionModulos($param, $ids_fil = "") {
 			$response = new stdClass();
 
 			$sql = <<<EOT
@@ -23,6 +23,7 @@
 			AND a.id_catalogo_categoria_FK = c.id_catalogo_categoria_PK 
 			AND a.id_catalogo_interfaz_FK = d.id_catalogo_interfaz_PK
 			AND a.id_catalogo_categoria_FK = $param->id_categoria_PK
+			$ids_fil
 EOT;
 			$query = parent::querySelect($sql);
 
@@ -33,6 +34,7 @@ EOT;
 			} else {
 				$i = 0;
 				while ($row = $query->fetch_object()) {
+					$fil = "";
 					if($this->permisos == true) {
 						/*Checar cual ya tiene permisos*/
 						$dat = $this->verActivosInterfaces($row->id_catalogo_interfaz_PK, $param->id_rol_PK);
@@ -44,7 +46,7 @@ EOT;
 						$fil = '<input type="checkbox" id="inter'.$row->id_catalogo_interfaz_PK.'" name="'.$row->nombre_interfaz.'" value="'.$row->id_catalogo_interfaz_PK.'" '.$check.'>';
 					}
 
-					$response->modulo[$i] = array("id_interfaz" => $row->id_catalogo_interfaz_PK, "nombre" => $row->nombre_interfaz, "descripcion" => $row->descripcion_interfaz, "icono" => $row->icono, "color" => $row->color, "checkbox" => $fil);
+					$response->modulo[$i] = array("id_interfaz" => $row->id_catalogo_interfaz_PK, "nombre" => $row->nombre_interfaz, "descripcion" => $row->descripcion_interfaz, "icono" => $row->icono, "color" => $row->color, "urlInterfaz" => $row->url_interfaz, "checkbox" => $fil);
 					$i++;
 				}
 			}
@@ -56,7 +58,73 @@ EOT;
 			return $response;
 		}
 
-		private function infoCategorias() {
+		private function infoCategoriasPermisos($id_roles) {
+			$response = new stdClass();
+
+			$sql = <<<EOT
+			SELECT 
+				*
+			FROM 
+				categoriasactivos
+			WHERE id_roles_FK = $id_roles
+EOT;
+			$query = parent::querySelect($sql);
+
+			if($query === "error") {
+				$this->val++;
+				$this->mensaje .= "AL BUSCAR CATEGORIAS PERMITIDAS <br>";
+				$this->errorClass .= "infoCategorias() - classModulos//";
+			} else {
+				$i = 0;
+				while ($row = $query->fetch_object()) {
+					$response->categorias[$i] = $row->id_catalogo_categoria_FK;
+					$i++;
+				}
+			}
+
+			$response->val = $this->val;
+			$response->mensaje = $this->mensaje;
+			$response->errorClass = $this->errorClass;
+			$response->count = $i;
+
+			return $response;
+		}
+
+		private function infoModulosPermisos($id_roles, $id_catalogo_categoria_FK) {
+			$response = new stdClass();
+
+			$sql = <<<EOT
+			SELECT 
+				*
+			FROM 
+				interfacesactivos
+			WHERE 
+				id_roles_FK = $id_roles
+			AND id_catalogo_categoria_FK = $id_catalogo_categoria_FK
+EOT;
+			$query = parent::querySelect($sql);
+
+			if($query === "error") {
+				$this->val++;
+				$this->mensaje .= "AL BUSCAR MODULOS PERMITIDAS <br>";
+				$this->errorClass .= "infoCategorias() - classModulos//";
+			} else {
+				$i = 0;
+				while ($row = $query->fetch_object()) {
+					$response->modulos[$i] = $row->id_catalogo_interfaz_PK;
+					$i++;
+				}
+			}
+
+			$response->val = $this->val;
+			$response->mensaje = $this->mensaje;
+			$response->errorClass = $this->errorClass;
+			$response->count = $i;
+
+			return $response;
+		}
+
+		private function infoCategorias($fil = "") {
 			$response = new stdClass();
 
 			$sql = <<<EOT
@@ -64,6 +132,7 @@ EOT;
 				*
 			FROM 
 				catalogo_categorias
+			WHERE 1 $fil
 EOT;
 			$query = parent::querySelect($sql);
 
@@ -163,15 +232,49 @@ EOT;
 			return $datos;
 		}
 
-		public function permisosModulos($param) {
+		public function verModulos($param) {
 			$this->permisos = true;
 			$res = $this->informacionModulos($param);
 
 			return $res;
 		}
 
+		public function verModulosPermisos($param) {
+			$this->permisos = false;
+
+			$ids_fil = "";
+
+			$permiso = $this->infoModulosPermisos($_SESSION['id_roles'], $param->id_categoria_PK);
+
+			$ids = implode(",", $permiso->modulos);
+
+			$ids_fil = " AND id_catalogo_interfaz_PK IN ($ids)";
+
+			$res = $this->informacionModulos($param, $ids_fil);
+
+			return $res;
+		}
+
 		public function verCategorias() {
 			$res = $this->infoCategorias();
+
+			return $res;
+		}
+
+		public function verCategoriasPermisos()
+		{
+			$ids_fil = "";
+
+			$ids = 0;
+
+			$permiso = $this->infoCategoriasPermisos($_SESSION['id_roles']);
+			if(isset($permiso->categorias)) {
+				$ids = implode(",", $permiso->categorias);
+			}
+
+			$ids_fil = " AND id_catalogo_categoria_PK IN ($ids)";
+
+			$res = $this->infoCategorias($ids_fil);
 
 			return $res;
 		}

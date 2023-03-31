@@ -76,10 +76,17 @@ EOT;
 							unset($_SESSION["baseDatos"]);
 							unset($_SESSION["passwordBD"]);
 							unset($_SESSION["tipo_negocio"]);
+							unset($_SESSION["id_roles"]);
 							session_destroy();
 							ini_set("session.cookie_lifetime","0");
 							ini_set("session.gc_maxlifetime","0");
 		        		}
+		        		/*Rol del Usuario*/
+		        		$Srol = <<<EOT
+		        		SELECT id_roles_FK FROM $bdSel.rolesnegocio WHERE id_usuario_negocio_FK = $row->id_usuario_negocio_PK
+EOT;
+						$Rquery = parent::querySelect($Srol);
+						$Srow = $Rquery->fetch_object();
 
 						$response->usuario       = $row->usuario;
 						$response->id_persona_PK = $row->id_persona_negocio_PK;
@@ -100,6 +107,7 @@ EOT;
 						$_SESSION["baseDatos"]			   = $bdSel;
 						$_SESSION["passwordBD"]			   = $passBD;
 						$_SESSION["tipo_negocio"]		   = $tipo_negocio;
+						$_SESSION["id_roles"]		   	   = $Srow->id_roles_FK;
 
 					} else {
 						$response->usuario = 0;
