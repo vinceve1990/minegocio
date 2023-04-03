@@ -11,7 +11,7 @@
  Target Server Version : 101002 (10.10.2-MariaDB)
  File Encoding         : 65001
 
- Date: 23/03/2023 15:03:51
+ Date: 03/04/2023 17:29:04
 */
 
 SET NAMES utf8mb4;
@@ -197,18 +197,19 @@ CREATE TABLE `catalogo_interfaz`  (
   `nombre_interfaz` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT 'nombre completo de la interfaz',
   `descripcion_interfaz` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT 'Descripción de lo que hace la interfaz ',
   `icono` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `url_interfaz` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_catalogo_interfaz_PK`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = 'Catálogo de interfaz creadas para el sistema web' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of catalogo_interfaz
 -- ----------------------------
-INSERT INTO `catalogo_interfaz` VALUES (1, 'PROVEEDORES', 'ALTA, BAJA Y EDICION DE PROVEEDORES', 'fa-truck-field');
-INSERT INTO `catalogo_interfaz` VALUES (2, 'PROVEEDORES', 'REPORTE DE PROVEEDORES', 'fa-truck-fast');
-INSERT INTO `catalogo_interfaz` VALUES (3, 'CLIENTES', 'ALTA, BAJA Y EDICION DE CLIENTES', 'fa-users');
-INSERT INTO `catalogo_interfaz` VALUES (4, 'CLIENTES', 'REPORTE DE CLIENTES', 'fa-clipboard-user');
-INSERT INTO `catalogo_interfaz` VALUES (5, 'INSUMOS', 'ALTA, BAJA Y EDICION DE INSUMOS', NULL);
-INSERT INTO `catalogo_interfaz` VALUES (6, 'INSUMOS', 'REPORTE DE INSUMOS', NULL);
+INSERT INTO `catalogo_interfaz` VALUES (1, 'PROVEEDORES', 'ALTA, BAJA Y EDICION DE PROVEEDORES', 'fa-truck-field', '/paneles/dashboards/proveedores');
+INSERT INTO `catalogo_interfaz` VALUES (2, 'PROVEEDORES', 'REPORTE DE PROVEEDORES', 'fa-truck-fast', NULL);
+INSERT INTO `catalogo_interfaz` VALUES (3, 'CLIENTES', 'ALTA, BAJA Y EDICION DE CLIENTES', 'fa-users', NULL);
+INSERT INTO `catalogo_interfaz` VALUES (4, 'CLIENTES', 'REPORTE DE CLIENTES', 'fa-clipboard-user', NULL);
+INSERT INTO `catalogo_interfaz` VALUES (5, 'INSUMOS', 'ALTA, BAJA Y EDICION DE INSUMOS', NULL, NULL);
+INSERT INTO `catalogo_interfaz` VALUES (6, 'INSUMOS', 'REPORTE DE INSUMOS', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for catalogo_modulos
@@ -364,7 +365,7 @@ CREATE TABLE `catalogo_roles_permisos_interfaz`  (
   INDEX `FK_interfaz`(`id_catalogo_interfaz_FK`) USING BTREE,
   CONSTRAINT `FK_interfaz` FOREIGN KEY (`id_catalogo_interfaz_FK`) REFERENCES `catalogo_interfaz` (`id_catalogo_interfaz_PK`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_roles` FOREIGN KEY (`id_roles_FK`) REFERENCES `catalogo_roles` (`id_roles_PK`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'Las interfaces que puede utilizar el rol' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'Las interfaces que puede utilizar el rol' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of catalogo_roles_permisos_interfaz
@@ -382,6 +383,8 @@ INSERT INTO `catalogo_roles_permisos_interfaz` VALUES (18, 13, 1, b'1');
 INSERT INTO `catalogo_roles_permisos_interfaz` VALUES (19, 13, 5, b'1');
 INSERT INTO `catalogo_roles_permisos_interfaz` VALUES (20, 13, 4, b'1');
 INSERT INTO `catalogo_roles_permisos_interfaz` VALUES (21, 13, 6, b'1');
+INSERT INTO `catalogo_roles_permisos_interfaz` VALUES (22, 3, 1, b'1');
+INSERT INTO `catalogo_roles_permisos_interfaz` VALUES (23, 3, 2, b'1');
 
 -- ----------------------------
 -- Table structure for negocios_tipo
@@ -489,5 +492,17 @@ CREATE TABLE `usuariosnegocio`  (
 INSERT INTO `usuariosnegocio` VALUES (1, 1, 'EFCE7709', 0xA53708D2885B507B6E9AF8C31E8131C0, '/fotos/farmacom2/1.PNG', b'1');
 INSERT INTO `usuariosnegocio` VALUES (2, 2, 'OSCE7709', 0x9C86AF35C0526315FBD4CE499585BA6F, '/fotos/farmacom2/2.JPG', b'1');
 INSERT INTO `usuariosnegocio` VALUES (3, 3, 'URCE7709', 0x00419B92828134110439113104CFBA75, NULL, b'1');
+
+-- ----------------------------
+-- View structure for categoriasactivos
+-- ----------------------------
+DROP VIEW IF EXISTS `categoriasactivos`;
+CREATE ALGORITHM = MERGE SQL SECURITY DEFINER VIEW `categoriasactivos` AS SELECT a.*, b.id_roles_FK FROM catalogo_categoria_grupos a, catalogo_roles_permisos_interfaz b WHERE b.id_catalogo_interfaz_FK = a.id_catalogo_interfaz_FK GROUP BY a.id_catalogo_categoria_FK, b.id_roles_FK ;
+
+-- ----------------------------
+-- View structure for interfacesactivos
+-- ----------------------------
+DROP VIEW IF EXISTS `interfacesactivos`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `interfacesactivos` AS SELECT a.*, b.id_roles_FK, c.id_catalogo_categoria_FK FROM catalogo_interfaz a, catalogo_roles_permisos_interfaz b, catalogo_categoria_grupos c WHERE a.id_catalogo_interfaz_PK = b.id_catalogo_interfaz_FK AND a.id_catalogo_interfaz_PK = c.id_catalogo_interfaz_FK ;
 
 SET FOREIGN_KEY_CHECKS = 1;
