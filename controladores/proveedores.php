@@ -14,9 +14,9 @@
 			$this->Views->getViews($this, "proveedores", $paramRuta);
 		}
 
-		/*public function menuPrincipal()
+		public function server()
 		{
-			$this->ClassPost->getPost('script', "menuPrincipal", 'menuPrincipal');
-		}*/
+			$this->ClassPost->getPost('script', "scriptProveedores", 'proveedores');
+		}
 	}
 ?>
