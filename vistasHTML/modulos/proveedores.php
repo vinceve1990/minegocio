@@ -25,7 +25,7 @@
 	</div>
 </div>
 
-<div id="dialogProveedores">
+<div id="dialogProveedores" style="display: none">
   <form>
     <div class="row" style="width: 99%;">
       <div class="col-xs-12 col-sm-10 mb-4">

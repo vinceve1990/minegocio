@@ -11,7 +11,7 @@
  Target Server Version : 101002 (10.10.2-MariaDB)
  File Encoding         : 65001
 
- Date: 03/04/2023 17:29:04
+ Date: 06/04/2023 13:20:45
 */
 
 SET NAMES utf8mb4;
@@ -94,6 +94,37 @@ CREATE TABLE `catalogo_estados`  (
 -- ----------------------------
 -- Records of catalogo_estados
 -- ----------------------------
+INSERT INTO `catalogo_estados` VALUES (1, 'HIDALGO');
+INSERT INTO `catalogo_estados` VALUES (2, 'AGUASCALIENTES');
+INSERT INTO `catalogo_estados` VALUES (3, 'BAJA CALIFORNIA');
+INSERT INTO `catalogo_estados` VALUES (4, 'BAJA CALIFORNIA SUR');
+INSERT INTO `catalogo_estados` VALUES (5, 'CAMPECHE');
+INSERT INTO `catalogo_estados` VALUES (6, 'COAHUILA DE ZARAGOZA');
+INSERT INTO `catalogo_estados` VALUES (7, 'COLIMA');
+INSERT INTO `catalogo_estados` VALUES (8, 'CHIAPAS');
+INSERT INTO `catalogo_estados` VALUES (9, 'CHIHUAHUA');
+INSERT INTO `catalogo_estados` VALUES (10, 'DISTRITO FEDERAL');
+INSERT INTO `catalogo_estados` VALUES (11, 'DURANGO');
+INSERT INTO `catalogo_estados` VALUES (12, 'GUANAJUATO');
+INSERT INTO `catalogo_estados` VALUES (13, 'GUERRERO');
+INSERT INTO `catalogo_estados` VALUES (14, 'JALISCO');
+INSERT INTO `catalogo_estados` VALUES (15, 'MEXICO');
+INSERT INTO `catalogo_estados` VALUES (16, 'MICHOACAN DE OCAMPO');
+INSERT INTO `catalogo_estados` VALUES (17, 'MORELOS');
+INSERT INTO `catalogo_estados` VALUES (18, 'NAYARIT');
+INSERT INTO `catalogo_estados` VALUES (19, 'NUEVO LEÓN');
+INSERT INTO `catalogo_estados` VALUES (20, 'OAXACA');
+INSERT INTO `catalogo_estados` VALUES (21, 'PUEBLA');
+INSERT INTO `catalogo_estados` VALUES (22, 'QUERÉTARO');
+INSERT INTO `catalogo_estados` VALUES (23, 'QUINTANA ROO');
+INSERT INTO `catalogo_estados` VALUES (24, 'SAN LUIS POTOSI');
+INSERT INTO `catalogo_estados` VALUES (25, 'SINALOA');
+INSERT INTO `catalogo_estados` VALUES (26, 'SONORA');
+INSERT INTO `catalogo_estados` VALUES (27, 'TABASCO');
+INSERT INTO `catalogo_estados` VALUES (28, 'TAMAULIPAS');
+INSERT INTO `catalogo_estados` VALUES (29, 'VERACRUZ DE IGNACIO DE LA LLAVE');
+INSERT INTO `catalogo_estados` VALUES (30, 'YUCATÁN');
+INSERT INTO `catalogo_estados` VALUES (31, 'ZACATECAS');
 
 -- ----------------------------
 -- Table structure for catalogo_familia
@@ -124,6 +155,7 @@ CREATE TABLE `catalogo_giro`  (
 -- ----------------------------
 -- Records of catalogo_giro
 -- ----------------------------
+INSERT INTO `catalogo_giro` VALUES (1, 'BEBIDAS GASEOSAS', 'BEBIDAS GASEOSAS, REFRESCOS');
 
 -- ----------------------------
 -- Table structure for catalogo_insumos
@@ -234,17 +266,185 @@ INSERT INTO `catalogo_modulos` VALUES (3, 'INSUMOS', 'ALTA, BAJA, EDICION Y REPO
 -- ----------------------------
 DROP TABLE IF EXISTS `catalogo_municipios`;
 CREATE TABLE `catalogo_municipios`  (
-  `id_catalogo_municipios_PK` bigint(20) NOT NULL,
+  `id_catalogo_municipios_PK` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_catalogo_estado_FK` bigint(20) NOT NULL,
   `nombre_municipio` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `claveMunicipio` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `cp` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_catalogo_municipios_PK`) USING BTREE,
   INDEX `municipiosEstado`(`id_catalogo_estado_FK`) USING BTREE,
   CONSTRAINT `municipiosEstado` FOREIGN KEY (`id_catalogo_estado_FK`) REFERENCES `catalogo_estados` (`id_catalogo_estado_PK`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 169 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of catalogo_municipios
 -- ----------------------------
+INSERT INTO `catalogo_municipios` VALUES (3, 1, 'Pachuca de Soto', '48', 42001);
+INSERT INTO `catalogo_municipios` VALUES (4, 1, 'Pachuca de Soto', '48', 42091);
+INSERT INTO `catalogo_municipios` VALUES (5, 1, 'Mineral del Chico', '38', 42001);
+INSERT INTO `catalogo_municipios` VALUES (6, 1, 'Mineral del Monte', '39', 42131);
+INSERT INTO `catalogo_municipios` VALUES (7, 1, 'Ajacuba', '5', 42951);
+INSERT INTO `catalogo_municipios` VALUES (8, 1, 'San Agustín Tlaxiaca', '52', 42001);
+INSERT INTO `catalogo_municipios` VALUES (9, 1, 'Mineral de la Reforma', '51', 42001);
+INSERT INTO `catalogo_municipios` VALUES (10, 1, 'Mineral de la Reforma', '51', 42091);
+INSERT INTO `catalogo_municipios` VALUES (11, 1, 'Zapotlán de Juárez', '82', 42091);
+INSERT INTO `catalogo_municipios` VALUES (12, 1, 'Jacala de Ledezma', '31', 42202);
+INSERT INTO `catalogo_municipios` VALUES (13, 1, 'Pisaflores', '49', 42281);
+INSERT INTO `catalogo_municipios` VALUES (14, 1, 'Pacula', '47', 42202);
+INSERT INTO `catalogo_municipios` VALUES (15, 1, 'La Misión', '40', 42202);
+INSERT INTO `catalogo_municipios` VALUES (16, 1, 'Chapulhuacán', '18', 42281);
+INSERT INTO `catalogo_municipios` VALUES (17, 1, 'Ixmiquilpan', '30', 42301);
+INSERT INTO `catalogo_municipios` VALUES (18, 1, 'Zimapán', '84', 42331);
+INSERT INTO `catalogo_municipios` VALUES (19, 1, 'Nicolás Flores', '43', 42301);
+INSERT INTO `catalogo_municipios` VALUES (20, 1, 'Cardonal', '15', 42301);
+INSERT INTO `catalogo_municipios` VALUES (21, 1, 'Tasquillo', '58', 42301);
+INSERT INTO `catalogo_municipios` VALUES (22, 1, 'Alfajayucan', '6', 42301);
+INSERT INTO `catalogo_municipios` VALUES (23, 1, 'Huichapan', '29', 42401);
+INSERT INTO `catalogo_municipios` VALUES (24, 1, 'Tecozautla', '59', 42301);
+INSERT INTO `catalogo_municipios` VALUES (25, 1, 'Nopala de Villagrán', '44', 42401);
+INSERT INTO `catalogo_municipios` VALUES (26, 1, 'Actopan', '3', 42501);
+INSERT INTO `catalogo_municipios` VALUES (27, 1, 'Santiago de Anaya', '55', 42501);
+INSERT INTO `catalogo_municipios` VALUES (28, 1, 'San Salvador', '54', 42501);
+INSERT INTO `catalogo_municipios` VALUES (29, 1, 'Francisco I. Madero', '23', 42731);
+INSERT INTO `catalogo_municipios` VALUES (30, 1, 'El Arenal', '9', 42501);
+INSERT INTO `catalogo_municipios` VALUES (31, 1, 'Mixquiahuala de Juárez', '41', 42701);
+INSERT INTO `catalogo_municipios` VALUES (32, 1, 'Progreso de Obregón', '50', 42731);
+INSERT INTO `catalogo_municipios` VALUES (33, 1, 'Chilcuautla', '19', 42731);
+INSERT INTO `catalogo_municipios` VALUES (34, 1, 'Tezontepec de Aldama', '67', 42701);
+INSERT INTO `catalogo_municipios` VALUES (35, 1, 'Tlahuelilpan', '70', 42781);
+INSERT INTO `catalogo_municipios` VALUES (36, 1, 'Tula de Allende', '76', 42801);
+INSERT INTO `catalogo_municipios` VALUES (37, 1, 'Tula de Allende', '76', 42841);
+INSERT INTO `catalogo_municipios` VALUES (38, 1, 'Tepeji del Río de Ocampo', '63', 42851);
+INSERT INTO `catalogo_municipios` VALUES (39, 1, 'Chapantongo', '17', 42801);
+INSERT INTO `catalogo_municipios` VALUES (40, 1, 'Tepetitlán', '64', 42801);
+INSERT INTO `catalogo_municipios` VALUES (41, 1, 'Tetepango', '65', 42951);
+INSERT INTO `catalogo_municipios` VALUES (42, 1, 'Tlaxcoapan', '74', 42951);
+INSERT INTO `catalogo_municipios` VALUES (43, 1, 'Atitalaquia', '10', 42951);
+INSERT INTO `catalogo_municipios` VALUES (44, 1, 'Atotonilco de Tula', '13', 42951);
+INSERT INTO `catalogo_municipios` VALUES (45, 1, 'Huejutla de Reyes', '28', 43007);
+INSERT INTO `catalogo_municipios` VALUES (46, 1, 'San Felipe Orizatlán', '46', 43007);
+INSERT INTO `catalogo_municipios` VALUES (47, 1, 'Jaltocán', '32', 43007);
+INSERT INTO `catalogo_municipios` VALUES (48, 1, 'Huautla', '25', 43007);
+INSERT INTO `catalogo_municipios` VALUES (49, 1, 'Atlapexco', '11', 43007);
+INSERT INTO `catalogo_municipios` VALUES (50, 1, 'Huazalingo', '26', 43007);
+INSERT INTO `catalogo_municipios` VALUES (51, 1, 'Yahualica', '80', 43007);
+INSERT INTO `catalogo_municipios` VALUES (52, 1, 'Xochiatipan', '78', 43007);
+INSERT INTO `catalogo_municipios` VALUES (53, 1, 'Molango de Escamilla', '42', 43207);
+INSERT INTO `catalogo_municipios` VALUES (54, 1, 'Tepehuacán de Guerrero', '62', 43007);
+INSERT INTO `catalogo_municipios` VALUES (55, 1, 'Lolotla', '34', 43207);
+INSERT INTO `catalogo_municipios` VALUES (56, 1, 'Tlanchinol', '73', 43007);
+INSERT INTO `catalogo_municipios` VALUES (57, 1, 'Tlahuiltepa', '71', 43207);
+INSERT INTO `catalogo_municipios` VALUES (58, 1, 'Juárez Hidalgo', '33', 43207);
+INSERT INTO `catalogo_municipios` VALUES (59, 1, 'Zacualtipán de Ángeles', '81', 43207);
+INSERT INTO `catalogo_municipios` VALUES (60, 1, 'Calnali', '14', 43007);
+INSERT INTO `catalogo_municipios` VALUES (61, 1, 'Xochicoatlán', '79', 43207);
+INSERT INTO `catalogo_municipios` VALUES (62, 1, 'Tianguistengo', '68', 43207);
+INSERT INTO `catalogo_municipios` VALUES (63, 1, 'Atotonilco el Grande', '12', 43303);
+INSERT INTO `catalogo_municipios` VALUES (64, 1, 'Eloxochitlán', '20', 43207);
+INSERT INTO `catalogo_municipios` VALUES (65, 1, 'Metztitlán', '37', 43207);
+INSERT INTO `catalogo_municipios` VALUES (66, 1, 'San Agustín Metzquititlán', '36', 43207);
+INSERT INTO `catalogo_municipios` VALUES (67, 1, 'Metepec', '35', 43601);
+INSERT INTO `catalogo_municipios` VALUES (68, 1, 'Huehuetla', '27', 43601);
+INSERT INTO `catalogo_municipios` VALUES (69, 1, 'San Bartolo Tutotepec', '53', 43601);
+INSERT INTO `catalogo_municipios` VALUES (70, 1, 'Agua Blanca de Iturbide', '4', 43601);
+INSERT INTO `catalogo_municipios` VALUES (71, 1, 'Tenango de Doria', '60', 43601);
+INSERT INTO `catalogo_municipios` VALUES (72, 1, 'Huasca de Ocampo', '24', 42001);
+INSERT INTO `catalogo_municipios` VALUES (73, 1, 'Acatlán', '1', 43601);
+INSERT INTO `catalogo_municipios` VALUES (74, 1, 'Omitlán de Juárez', '45', 42001);
+INSERT INTO `catalogo_municipios` VALUES (75, 1, 'Epazoyucan', '22', 42001);
+INSERT INTO `catalogo_municipios` VALUES (76, 1, 'Tulancingo de Bravo', '77', 43601);
+INSERT INTO `catalogo_municipios` VALUES (77, 1, 'Acaxochitlán', '2', 43601);
+INSERT INTO `catalogo_municipios` VALUES (78, 1, 'Cuautepec de Hinojosa', '16', 43741);
+INSERT INTO `catalogo_municipios` VALUES (79, 1, 'Santiago Tulantepec de Lugo Guerrero', '56', 43601);
+INSERT INTO `catalogo_municipios` VALUES (80, 1, 'Singuilucan', '57', 43601);
+INSERT INTO `catalogo_municipios` VALUES (81, 1, 'Tizayuca', '69', 43801);
+INSERT INTO `catalogo_municipios` VALUES (82, 1, 'Zempoala', '83', 43992);
+INSERT INTO `catalogo_municipios` VALUES (83, 1, 'Zempoala', '83', 42091);
+INSERT INTO `catalogo_municipios` VALUES (84, 1, 'Tolcayuca', '75', 43801);
+INSERT INTO `catalogo_municipios` VALUES (85, 1, 'Villa de Tezontepec', '66', 43801);
+INSERT INTO `catalogo_municipios` VALUES (86, 1, 'Apan', '8', 43901);
+INSERT INTO `catalogo_municipios` VALUES (87, 1, 'Tlanalapa', '72', 43992);
+INSERT INTO `catalogo_municipios` VALUES (88, 1, 'Almoloya', '7', 43901);
+INSERT INTO `catalogo_municipios` VALUES (89, 1, 'Emiliano Zapata', '21', 43992);
+INSERT INTO `catalogo_municipios` VALUES (90, 1, 'Tepeapulco', '61', 43992);
+INSERT INTO `catalogo_municipios` VALUES (91, 2, 'Aguascalientes', '1', 20001);
+INSERT INTO `catalogo_municipios` VALUES (92, 2, 'Aguascalientes', '1', 20293);
+INSERT INTO `catalogo_municipios` VALUES (93, 2, 'San Francisco de los Romo', '11', 20671);
+INSERT INTO `catalogo_municipios` VALUES (94, 2, 'Aguascalientes', '1', 20999);
+INSERT INTO `catalogo_municipios` VALUES (95, 2, 'Aguascalientes', '1', 20921);
+INSERT INTO `catalogo_municipios` VALUES (96, 2, 'El Llano', '10', 20999);
+INSERT INTO `catalogo_municipios` VALUES (97, 2, 'San Francisco de los Romo', '11', 20999);
+INSERT INTO `catalogo_municipios` VALUES (98, 2, 'San Francisco de los Romo', '11', 20001);
+INSERT INTO `catalogo_municipios` VALUES (99, 2, 'Rincón de Romos', '7', 20401);
+INSERT INTO `catalogo_municipios` VALUES (100, 2, 'Rincón de Romos', '7', 20671);
+INSERT INTO `catalogo_municipios` VALUES (101, 2, 'Cosío', '4', 20401);
+INSERT INTO `catalogo_municipios` VALUES (102, 2, 'San José de Gracia', '8', 20671);
+INSERT INTO `catalogo_municipios` VALUES (103, 2, 'Tepezalá', '9', 20401);
+INSERT INTO `catalogo_municipios` VALUES (104, 2, 'Tepezalá', '9', 20671);
+INSERT INTO `catalogo_municipios` VALUES (105, 2, 'Pabellón de Arteaga', '6', 20671);
+INSERT INTO `catalogo_municipios` VALUES (106, 2, 'Asientos', '2', 20999);
+INSERT INTO `catalogo_municipios` VALUES (107, 2, 'Asientos', '2', 20401);
+INSERT INTO `catalogo_municipios` VALUES (108, 2, 'Asientos', '2', 20671);
+INSERT INTO `catalogo_municipios` VALUES (109, 2, 'Calvillo', '3', 20801);
+INSERT INTO `catalogo_municipios` VALUES (110, 2, 'Jesús María', '5', 20921);
+INSERT INTO `catalogo_municipios` VALUES (111, 2, 'Jesús María', '5', 20671);
+INSERT INTO `catalogo_municipios` VALUES (112, 2, 'Jesús María', '5', 20999);
+INSERT INTO `catalogo_municipios` VALUES (113, 3, 'Mexicali', '2', 21101);
+INSERT INTO `catalogo_municipios` VALUES (114, 3, 'Mexicali', '2', 21105);
+INSERT INTO `catalogo_municipios` VALUES (115, 3, 'Mexicali', '2', 21392);
+INSERT INTO `catalogo_municipios` VALUES (116, 3, 'Tecate', '3', 21401);
+INSERT INTO `catalogo_municipios` VALUES (117, 3, 'Mexicali', '2', 21724);
+INSERT INTO `catalogo_municipios` VALUES (118, 3, 'Mexicali', '2', 21901);
+INSERT INTO `catalogo_municipios` VALUES (119, 3, 'San Felipe', '7', 21851);
+INSERT INTO `catalogo_municipios` VALUES (120, 3, 'Tijuana', '4', 22001);
+INSERT INTO `catalogo_municipios` VALUES (121, 3, 'Tijuana', '4', 22101);
+INSERT INTO `catalogo_municipios` VALUES (122, 3, 'Playas de Rosarito', '5', 22701);
+INSERT INTO `catalogo_municipios` VALUES (123, 3, 'Ensenada', '1', 22801);
+INSERT INTO `catalogo_municipios` VALUES (124, 3, 'Ensenada', '1', 22901);
+INSERT INTO `catalogo_municipios` VALUES (125, 3, 'San Quintín', '6', 22901);
+INSERT INTO `catalogo_municipios` VALUES (126, 3, 'San Quintín', '6', 22923);
+INSERT INTO `catalogo_municipios` VALUES (127, 3, 'San Quintín', '6', 22935);
+INSERT INTO `catalogo_municipios` VALUES (128, 3, 'San Quintín', '6', 23941);
+INSERT INTO `catalogo_municipios` VALUES (129, 4, 'La Paz', '3', 23001);
+INSERT INTO `catalogo_municipios` VALUES (130, 4, 'La Paz', '3', 23202);
+INSERT INTO `catalogo_municipios` VALUES (131, 4, 'La Paz', '3', 23601);
+INSERT INTO `catalogo_municipios` VALUES (132, 4, 'La Paz', '3', 23231);
+INSERT INTO `catalogo_municipios` VALUES (133, 4, 'La Paz', '3', 23301);
+INSERT INTO `catalogo_municipios` VALUES (134, 4, 'La Paz', '3', 23331);
+INSERT INTO `catalogo_municipios` VALUES (135, 4, 'La Paz', '3', 23401);
+INSERT INTO `catalogo_municipios` VALUES (136, 4, 'Los Cabos', '8', 23401);
+INSERT INTO `catalogo_municipios` VALUES (137, 4, 'Los Cabos', '8', 23452);
+INSERT INTO `catalogo_municipios` VALUES (138, 4, 'Los Cabos', '8', 23502);
+INSERT INTO `catalogo_municipios` VALUES (139, 4, 'Los Cabos', '8', 23331);
+INSERT INTO `catalogo_municipios` VALUES (140, 4, 'Comondú', '1', 23601);
+INSERT INTO `catalogo_municipios` VALUES (141, 4, 'Comondú', '1', 23702);
+INSERT INTO `catalogo_municipios` VALUES (142, 4, 'Comondú', '1', 23711);
+INSERT INTO `catalogo_municipios` VALUES (143, 4, 'Comondú', '1', 23741);
+INSERT INTO `catalogo_municipios` VALUES (144, 4, 'Loreto', '9', 23881);
+INSERT INTO `catalogo_municipios` VALUES (145, 4, 'Mulegé', '2', 23901);
+INSERT INTO `catalogo_municipios` VALUES (146, 4, 'Mulegé', '2', 23925);
+INSERT INTO `catalogo_municipios` VALUES (147, 4, 'Mulegé', '2', 23932);
+INSERT INTO `catalogo_municipios` VALUES (148, 4, 'Mulegé', '2', 23941);
+INSERT INTO `catalogo_municipios` VALUES (149, 4, 'Mulegé', '2', 23953);
+INSERT INTO `catalogo_municipios` VALUES (150, 5, 'Campeche', '2', 24003);
+INSERT INTO `catalogo_municipios` VALUES (151, 5, 'Carmen', '3', 24101);
+INSERT INTO `catalogo_municipios` VALUES (152, 5, 'Palizada', '7', 86784);
+INSERT INTO `catalogo_municipios` VALUES (153, 5, 'Carmen', '3', 24401);
+INSERT INTO `catalogo_municipios` VALUES (154, 5, 'Carmen', '3', 24351);
+INSERT INTO `catalogo_municipios` VALUES (155, 5, 'Candelaria', '11', 24331);
+INSERT INTO `catalogo_municipios` VALUES (156, 5, 'Escárcega', '9', 24351);
+INSERT INTO `catalogo_municipios` VALUES (157, 5, 'Champotón', '4', 24401);
+INSERT INTO `catalogo_municipios` VALUES (158, 5, 'Champotón', '4', 24351);
+INSERT INTO `catalogo_municipios` VALUES (159, 5, 'Seybaplaya', '12', 24001);
+INSERT INTO `catalogo_municipios` VALUES (160, 5, 'Seybaplaya', '12', 24401);
+INSERT INTO `catalogo_municipios` VALUES (161, 5, 'Campeche', '2', 24001);
+INSERT INTO `catalogo_municipios` VALUES (162, 5, 'Campeche', '2', 24571);
+INSERT INTO `catalogo_municipios` VALUES (163, 5, 'Hopelchén', '6', 24001);
+INSERT INTO `catalogo_municipios` VALUES (164, 5, 'Calakmul', '10', 24351);
+INSERT INTO `catalogo_municipios` VALUES (165, 5, 'Tenabo', '8', 24801);
+INSERT INTO `catalogo_municipios` VALUES (166, 5, 'Hecelchakán', '5', 24801);
+INSERT INTO `catalogo_municipios` VALUES (167, 5, 'Calkiní', '1', 24901);
+INSERT INTO `catalogo_municipios` VALUES (168, 5, 'Dzitbalché', '13', 24901);
 
 -- ----------------------------
 -- Table structure for catalogo_proveedor_contacto
@@ -273,14 +473,15 @@ DROP TABLE IF EXISTS `catalogo_proveedores`;
 CREATE TABLE `catalogo_proveedores`  (
   `id_catalogo_proveedor_PK` bigint(20) NOT NULL,
   `nombre` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `rfc` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `email_principal` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `rfc` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'Sin RFC',
+  `email_principal` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'Sin Email',
   `calle` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `id_catalogo_estado_FK` bigint(20) NOT NULL,
   `id_catalogo_municipios_FK` bigint(20) NOT NULL,
   `cp` int(11) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `id_catalogo_giro_FK` bigint(20) NULL DEFAULT NULL,
+  `telefono` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT '',
+  `id_catalogo_giro_FK` bigint(20) NOT NULL,
+  `status_proveedor` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id_catalogo_proveedor_PK`) USING BTREE,
   INDEX `estado`(`id_catalogo_estado_FK`) USING BTREE,
   INDEX `municipios`(`id_catalogo_municipios_FK`) USING BTREE,
@@ -293,6 +494,8 @@ CREATE TABLE `catalogo_proveedores`  (
 -- ----------------------------
 -- Records of catalogo_proveedores
 -- ----------------------------
+INSERT INTO `catalogo_proveedores` VALUES (1, 'INDUSTRIA MEXICANA DE COCA-COLA', 'IHD050718UN4', 'servicenter@rica.com.mx', 'Camino a Pozos Téllez km 1.5 ', 1, 3, 42186, '7717741373', 1, b'1');
+INSERT INTO `catalogo_proveedores` VALUES (2, 'PEPSI', 'Sin RFC', 'Sin Email', 'Carretera Ciudad Zahui Kilómetro 8.5', 1, 3, 42039, '7717188012', 1, b'0');
 
 -- ----------------------------
 -- Table structure for catalogo_proveedores_banco
