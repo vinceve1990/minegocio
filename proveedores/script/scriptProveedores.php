@@ -21,7 +21,48 @@
 	switch ($accion) {
 		case 'informacion':
 			$fil = "";
+
+			if(!empty($filAdd['id'])) {
+				$fil .= " AND a.id_catalogo_proveedor_PK = '".$filAdd['id']."'";
+			}
+
+			if(!empty($filAdd['nombre_proveedor'])) {
+				$fil .= " AND a.nombre LIKE '%".$filAdd['nombre_proveedor']."%'";
+			}
+
+			if(!empty($filAdd['status'])) {
+				$fil .= " AND IF(a.status_proveedor = 0, 'DESACTIVADO', 'ACTIVO') LIKE '%".$filAdd['status']."%'";
+			}
+
 			$response = $classProveedor->informacionProveedores($fil);
+			break;
+
+		case 'activarProveedor':
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$response = $classProveedor->activarProveedores($param);
+			} else {
+				$response->val = $validacionesDatosIngreso->result;
+				$response->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+			
+			break;
+
+		case 'bajaProveedor':
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$response = $classProveedor->bajaProveedores($param);
+			} else {
+				$response->val = $validacionesDatosIngreso->result;
+				$response->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+			
 			break;
 		
 		default:

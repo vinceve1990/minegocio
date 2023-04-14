@@ -165,8 +165,8 @@ EOT;
 				id_roles_PK, nombre_rol, IF(STATUS = 1, 'Activo', 'Desactivado') AS estatus
 			FROM
 				catalogo_roles
+			WHERE 1 $fil
 			LIMIT $datPag->start , $datPag->limit
-			$fil
 EOT;
         	$query = parent::querySelect($sql);
 

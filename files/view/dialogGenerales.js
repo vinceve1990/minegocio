@@ -130,3 +130,103 @@ function dialogRol(accion = 'close', catalogo = "roles") {
 
     }
 }
+
+function paginacion(datos, pageactivo) {
+
+    var pag = `<li class="list-inline-item">       
+                  <a id="datatablePagination1Prev" class="u-pagination-v1__item u-pagination-v1-2 g-brd-gray-light-v7 g-brd-secondary--hover g-rounded-4 g-py-8 g-px-12" aria-label="Previous"><span class="g-line-height-1 g-valign-middle" aria-hidden="true"><i class="hs-admin-angle-left"></i></span><span class="sr-only">Anterior</span></a>       
+                </li>`;
+
+    for (var i = 1; i <= datos.total; i++) {
+        var act = "";
+
+        if(i == pageactivo) {
+            act = "active";
+        }
+
+        pag += `<li class="list-inline-item g-hidden-sm-down">
+                    <a class="u-pagination-v1__item u-pagination-v1-2 g-bg-secondary--active g-color-white--active g-brd-gray-light-v7 g-brd-secondary--hover g-brd-secondary--active g-rounded-4 g-py-8 g-px-15 datatablePaginationPage ${act}" data-dtpageto="${i}">${i}</a>
+                </li>`;
+    }
+
+    pag += `<li class="list-inline-item">       
+                  <a id="datatablePagination1Next" class="u-pagination-v1__item u-pagination-v1-2 g-brd-gray-light-v7 g-brd-secondary--hover g-rounded-4 g-py-8 g-px-12" data-pageFinal="${datos.total}" aria-label="Next"><span class="g-line-height-1 g-valign-middle" aria-hidden="true"><i class="hs-admin-angle-right"></i></span><span class="sr-only">Siguiente</span></a>        
+                </li>`;
+
+    return pag;
+}
+
+function clickPrev(rows, page) {
+    $("#datatablePagination1Prev").click(function () {
+        page--;
+
+        if(page < 1) {
+            page = 1;
+        }
+        
+        verProveedores(rows, page);
+    });
+}
+
+function clickNext(rows, page) {
+    $("#datatablePagination1Next").click(function () {
+        page++;
+
+        var paginacion = $("#datatablePagination1Next").data();
+
+        if (page > paginacion.pagefinal) {
+            page = paginacion.pagefinal;
+        }
+        
+        verProveedores(rows, page);
+    });
+}
+
+function clickPagina(rows, page) {
+    $(".datatablePaginationPage").click(function () {
+
+        var paginacion = $(this).data();
+
+        page = paginacion.dtpageto;
+        
+        verProveedores(rows, page);
+    });
+}
+
+function filtrosTabla(trNombre, valor) {
+    var filTabla = `<div class="g-pos-rel">
+                        <button class="btn u-input-btn--v1 g-width-20 g-bg-primary g-rounded-right-10 quitarfiltro" data-txtnombre="${trNombre}" type="submit">
+                            <i class="hs-admin-close g-absolute-centered g-font-size-12 g-color-white"></i>
+                        </button>
+                        <input id="txt${trNombre}" class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3 g-rounded-20 g-px-10 g-py-2 txtFiltros" type="text" value="${valor}">
+                    </div>`;
+    return filTabla;
+}
+
+function enterFiltros(rows, page) {
+
+    $(".txtFiltros").on('keyup', function (event) {
+        if (event.keyCode === 13) {
+            verProveedores(rows, page);
+        }
+    });
+}
+
+function clickQuitarFiltro(rows, page) {
+    $(".quitarfiltro").click(function () {
+        var valor = $(this).data();
+
+        $("#txt"+valor.txtnombre).val("");
+
+        verProveedores(rows, page);
+    });
+}
+
+function recuperarFil(filAdd) {
+    for(x in filAdd) {
+        if($("#txt"+x).val() != "" && $("#txt"+x).val() != 'undefined' && $("#txt"+x).val() != undefined) {
+            filAdd[x] = $("#txt"+x).val();
+        }
+    }
+    return filAdd;
+}

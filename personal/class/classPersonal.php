@@ -61,8 +61,8 @@ EOT;
 				personalnegocio.id_persona_negocio_PK = usuariosnegocio.id_persona_negocio_FK
 				AND usuariosnegocio.id_usuario_negocio_PK = negocios_tipo.id_usuario_FK
 				AND usuariosnegocio.id_usuario_negocio_PK = rolesnegocio.id_usuario_negocio_FK
-			LIMIT $datPag->start , $datPag->limit
 			$fil
+			LIMIT $datPag->start , $datPag->limit
 EOT;
         	$query = parent::querySelect($sql);
 

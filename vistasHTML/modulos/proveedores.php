@@ -13,6 +13,7 @@
                     <th>Email</th>
                     <th>Estado</th>
                     <th>C.P.</th>
+                    <th>Status</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -20,7 +21,8 @@
                 <tbody id="bodyProveedores">
                 </tbody>
               </table>
-            </div>
+              <center id="paginacionTablas"></center>              
+      </div>
 		</div>
 	</div>
 </div>

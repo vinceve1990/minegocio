@@ -23,6 +23,8 @@
 
 			$start = $paramPag->limit * $paramPag->page - $paramPag->limit; // do not put $paramPag->limit*($paramPag->page - 1)
 
+			if($start < 1) $start = 0;
+
 			$paramPagAct->page = $paramPag->page;
 			$paramPagAct->total_pages = $total_pages;
 			$paramPagAct->count = $paramPag->count;

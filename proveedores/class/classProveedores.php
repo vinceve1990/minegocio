@@ -1,6 +1,10 @@
 <?php
 	class classProveedor extends ConectarH
 	{
+		private int $val = 0;
+		private String $mensaje = "";
+		private String $errorClass = "";
+
 		function __construct()
 		{}
 
@@ -17,7 +21,7 @@
 			$paramPag->count = 0;
 
 			$sqlcount = <<<EOT
-			SELECT COUNT(id_catalogo_proveedor_PK) AS total FROM catalogo_proveedores
+			SELECT COUNT(a.id_catalogo_proveedor_PK) AS total FROM catalogo_proveedores a WHERE 1 $fil
 EOT;
 			$querycount = parent::querySelect($sqlcount);
 
@@ -29,29 +33,95 @@ EOT;
 
 			$sql = <<<EOT
 			SELECT
-				a.*, b.nombre_estado, c.nombre_municipio, d.nombre_giro 
+				a.*, b.nombre_estado, c.nombre_municipio, d.nombre_giro, IF(a.status_proveedor = 1, 'ACTIVO', 'DESACTIVADO') AS tipoestado
 			FROM 
 				catalogo_proveedores a, catalogo_estados b, catalogo_municipios c, catalogo_giro d
 			WHERE 
 				a.id_catalogo_estado_FK = b.id_catalogo_estado_PK 
 			AND a.id_catalogo_municipios_FK = c.id_catalogo_municipios_PK
 			AND a.id_catalogo_giro_FK = d.id_catalogo_giro_PK
-			LIMIT $datPag->start , $datPag->limit
 			$fil
+			LIMIT $datPag->start , $datPag->limit
 EOT;
         	$query = parent::querySelect($sql);
 
-        	$responce->page = $datPag->page;
-			$responce->total = $datPag->total_pages;
-			$responce->records = $datPag->count;
         	$i = 0;
 
 			while ($row = $query->fetch_object()) {
 				$row->telefono = "(".substr($row->telefono,0,3).")"." ".substr($row->telefono,5,3)."-".substr($row->telefono,6,4);
 				
-			    $responce->rows[$i] = array($row->id_catalogo_proveedor_PK, $row->nombre, $row->rfc, $row->telefono, $row->email_principal, $row->nombre_estado, $row->cp, $row->status_proveedor);
+			    $responce->rows[$i] = array($row->id_catalogo_proveedor_PK, $row->nombre, $row->rfc, $row->telefono, $row->email_principal, $row->nombre_estado, $row->cp, $row->status_proveedor, $row->tipoestado);
 			    $i++;
 			}
+
+			$responce->page = $datPag->page;
+			$responce->total = $datPag->total_pages;
+			$responce->records = $datPag->count;
+			$responce->registros = $i;
+
+			return $responce;
+		}
+
+		public function activarProveedores($param)
+		{
+			$responce = new stdClass();
+
+			parent::queryBegin();
+
+			parent::escapeQuery($param);
+
+			$upP = <<<EOT
+			UPDATE catalogo_proveedores SET status_proveedor = 1 WHERE id_catalogo_proveedor_PK = $param->id_proveedor
+EOT;
+			$resUP = parent::queryUdate($upP);
+
+			if ($resUP === "error") {
+				$this->val++;
+				$this->mensaje .= "AL ACTIVAR PROVEEDOR <br>";
+				$this->errorClass .= "activarProveedores() - classProveedor//";
+			}
+
+			if($this->val == 0) {
+				parent::queryCommit();
+			} else {
+				parent::queryRollback();
+			}
+
+			$responce->val = $this->val;
+			$responce->mensaje = $this->mensaje;
+			$responce->errorClass = $this->errorClass;
+
+			return $responce;
+		}
+
+		public function bajaProveedores($param)
+		{
+			$responce = new stdClass();
+
+			parent::queryBegin();
+
+			parent::escapeQuery($param);
+
+			$upP = <<<EOT
+			UPDATE catalogo_proveedores SET status_proveedor = 0 WHERE id_catalogo_proveedor_PK = $param->id_proveedor
+EOT;
+			$resUP = parent::queryUdate($upP);
+
+			if ($resUP === "error") {
+				$this->val++;
+				$this->mensaje .= "AL DAR DE BAJA PROVEEDOR <br>";
+				$this->errorClass .= "bajaProveedores() - classProveedor//";
+			}
+
+			if($this->val == 0) {
+				parent::queryCommit();
+			} else {
+				parent::queryRollback();
+			}
+
+			$responce->val = $this->val;
+			$responce->mensaje = $this->mensaje;
+			$responce->errorClass = $this->errorClass;
 
 			return $responce;
 		}
