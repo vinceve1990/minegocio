@@ -49,7 +49,7 @@ EOT;
 
 			while ($row = $query->fetch_object()) {
 				$row->telefono = "(".substr($row->telefono,0,3).")"." ".substr($row->telefono,5,3)."-".substr($row->telefono,6,4);
-				
+
 			    $responce->rows[$i] = array($row->id_catalogo_proveedor_PK, $row->nombre, $row->rfc, $row->telefono, $row->email_principal, $row->nombre_estado, $row->cp, $row->status_proveedor, $row->tipoestado);
 			    $i++;
 			}
