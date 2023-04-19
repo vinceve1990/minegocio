@@ -50,3 +50,5 @@
 
 <!-- JS Custom -->
 <script src="/minegocio/assets/js/custom.js"></script>
+<script src="/minegocio/assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/minegocio/assets/js/components/hs.validation.js"></script>

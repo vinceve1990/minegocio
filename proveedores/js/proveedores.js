@@ -6,6 +6,27 @@ $(document).ready(function() {
     })
 
     $("#panelConfiguraciones").css("background-color","#29364d");
+
+    $("#newProveedor").click(function() {
+        DialogProveedor('altaProveedor');
+    });
+
+    $.HSCore.components.HSValidation.init('.js-validate');
+    
+    $('.js-select').selectpicker();
+
+    let formInfoPrincipal = document.getElementById("formInfoPrincipal");
+
+    formInfoPrincipal.addEventListener("submit", (e) => {
+        
+        console.log(e);
+
+        if (e.returnValue == true) {
+            Swal.fire("Pasa POST");
+        } else {
+            Swal.fire({icon:'error', title:"Corrige tus mamadas"});
+        }
+    });
 });
 
 function verProveedores(rows, page) {
@@ -163,4 +184,20 @@ function verProveedores(rows, page) {
 
     //clickQuitarFiltro
     clickQuitarFiltro(rows, 1);
+}
+
+function DialogProveedor(tipo) {
+    $("#dialogProveedores").dialog({
+        title: 'Proveedor',
+        autoOpen: false,
+        modal: true,
+        width: $(".advanced-search-form").width() - 10,
+        height: $(".advanced-search-form").height() - 10,
+        closeOnEscape: false,
+        resizable : false,
+        zIndex: 1100,
+        open: function() {
+            
+        }
+    }).dialog('open');
 }

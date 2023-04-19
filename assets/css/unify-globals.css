@@ -6647,6 +6647,10 @@ svg.g-transition--linear polygon {
   color: #e74b3c !important;
 }
 
+.u-block-hover:hover .g-color-secondary--hover2, .g-color-secondary--hover2:hover {
+  background: #18ba9b !important;
+}
+
 .g-parent:hover .g-color-secondary--parent-hover {
   color: #e74b3c !important;
 }
