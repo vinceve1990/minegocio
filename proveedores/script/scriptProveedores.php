@@ -3,6 +3,7 @@
 	require_once "../minegocio/configConexion/config.php";
 	require_once "../minegocio/proveedores/class/classProveedores.php";
 	require_once "../minegocio/modelos/inicioModel.php";
+	require_once "../minegocio/estados/class/classEstados.php";
 
 	/*Saneo de datos*/
 	require_once "../minegocio/validaciones/class/validacionesDatosIngreso.php";
@@ -65,6 +66,11 @@
 			
 			break;
 		
+		case 'selectEstados';
+			$classEstados = new classEstados();
+			$response = $classEstados->getselectEstados();
+			break;
+
 		default:
 			// code...
 			break;

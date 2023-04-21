@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     $.HSCore.components.HSValidation.init('.js-validate');
     
-    $('.js-select').selectpicker();
+    
 
     let formInfoPrincipal = document.getElementById("formInfoPrincipal");
 
@@ -192,12 +192,47 @@ function DialogProveedor(tipo) {
         autoOpen: false,
         modal: true,
         width: $(".advanced-search-form").width() - 10,
-        height: $(".advanced-search-form").height() - 10,
+        height: $(".advanced-search-form").height(),
         closeOnEscape: false,
         resizable : false,
         zIndex: 1100,
         open: function() {
-            
+            buscarEstados();
         }
     }).dialog('open');
+}
+
+function buscarEstados() {
+    $.post('/minegocio/proveedores/server', {accion: 'selectEstados'}, function(data) {
+        var sel = `<select id="selectEstado" name="selectEstado" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
+                    ${data}
+                </select>
+                `;
+        
+        $(".selectEstadoDiv").html(sel);
+
+        $("#selectEstado").click(function(){
+            var id_estado = $("#selectEstado").val();
+            buscarMunicipios(id_estado);
+        });
+    
+    }, 'json');
+}
+
+function buscarMunicipios(id_estado) {
+    $.post('/minegocio/proveedores/server', {accion: 'selectMinicipio', id_estado : id_estado}, function(data) {
+        var sel = `<select id="selectMunicipio" name="selectMunicipio" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
+                    ${data}
+                </select>
+                `;
+        
+        $(".selectMuniDiv").html(sel);
+
+        $("#selectMunicipio ").click(function(){
+            var id_estado = $("#selectMunicipio ").val();
+
+            console.log(id_estado);
+        });
+    
+    }, 'json');
 }

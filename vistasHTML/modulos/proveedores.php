@@ -44,7 +44,7 @@
         <div class="h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md">
           <!-- User Information -->
           <section class="text-center g-mb-30 g-mb-50--md">
-            <h3 class="g-font-weight-300 g-font-size-20 g-color-black mb-0">Charlie Bailey</h3>
+            <h3 class="g-font-weight-300 g-font-size-20 g-color-black mb-0" id="textNombreProveedor">Charlie Bailey</h3>
           </section>
           <!-- User Information -->
 
@@ -54,7 +54,7 @@
               <li class="g-brd-top g-brd-gray-light-v7 mb-0">
                 <a class="d-flex align-items-center u-link-v5 g-parent g-py-15 active" href="../app-views/app-profile.html">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
-                    <i class="hs-admin-user"></i>
+                    <i class="fa-solid fa-person-breastfeeding"></i>
                   </span>
                   <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">Información General</span>
                 </a>
@@ -62,7 +62,7 @@
               <li class="g-brd-top g-brd-gray-light-v7 mb-0">
                 <a class="d-flex align-items-center u-link-v5 g-parent g-py-15" href="../app-views/app-profile-biography.html">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
-                    <i class="hs-admin-write"></i>
+                    <i class="fa-solid fa-building-columns"></i>
                   </span>
                   <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">Cuentas</span>
                 </a>
@@ -70,7 +70,7 @@
               <li class="g-brd-top g-brd-gray-light-v7 mb-0">
                 <a class="d-flex align-items-center u-link-v5 g-parent g-py-15" href="../app-views/app-profile-interests.html">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
-                    <i class="hs-admin-medall"></i>
+                    <i class="fa-regular fa-address-book"></i>
                   </span>
                   <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">Contactos</span>
                 </a>
@@ -102,7 +102,7 @@
                   <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                   <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                 </span>
-                  <input id="firstName" name="firstName" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="Charlie" required="required" data-msg="This field is mandatory" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                  <input id="firstName" name="firstName" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="Charlie" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
                   <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                   <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                 </span>
-                  <input id="lastName" name="lastName" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="Bailey" required="required" data-msg="This field is mandatory" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                  <input id="lastName" name="lastName" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="Bailey" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
                 </div>
               </div>
             </div>
@@ -132,42 +132,7 @@
                   <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                   <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                 </span>
-                  <input id="email" name="email" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="email" value="example@example.com" required="required" data-msg="This field is mandatory" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
-                </div>
-              </div>
-            </div>
-
-            <div class="row g-mb-20">
-              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0">Estado:</label>
-              </div>
-
-              <div class="col-md-9 align-self-center">
-                <div class="row g-mx-minus-10">
-                  <div class="col-md align-self-center g-px-10 g-mb-20 g-mb-0--md">
-                    <div class="form-group u-select--v2 g-pos-rel g-brd-gray-light-v7 g-rounded-4 mb-0">
-                      <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
-                        <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
-                      </span>
-                      <div class="dropdown bootstrap-select js-select u-select--v2-select dropup">
-                        <select class="js-select u-select--v2-select" required="required" style="display: none;" tabindex="-98" aria-required="true">
-                          <option value="January">January</option>
-                          <option value="February">February</option>
-                          <option value="March">March</option>
-                          <option value="April">April</option>
-                          <option value="May">May</option>
-                          <option value="June">June</option>
-                          <option value="July">July</option>
-                          <option value="August">August</option>
-                          <option value="September">September</option>
-                          <option value="October">October</option>
-                          <option value="November">November</option>
-                          <option value="December">December</option>
-                        </select>
-                      </div>
-                    </div>
-                    <i class="hs-admin-angle-down g-absolute-centered--y g-right-0 g-color-gray-light-v6 ml-auto g-mr-15"></i>
-                  </div>
+                  <input id="email" name="email" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="email" value="example@example.com" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
                 </div>
               </div>
             </div>
@@ -184,7 +149,7 @@
                       <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                       <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                     </span>
-                      <input id="phone" name="phone" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="tel" value="771 111 1234" required="required" data-msg="This field is mandatory" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true">
+                      <input id="phone" name="phone" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="tel" value="771 111 1234" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true">
                     </div>
                   </div>
 
@@ -195,6 +160,107 @@
                     </span>
                     <span class="g-hidden-lg-down g-font-weight-300 g-font-size-default g-color-secondary g-ml-8">Confirmed</span>
                   </em>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0" for="#cp">C.P:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="row g-mx-minus-10">
+                  <div class="col-auto align-self-center g-width-130 g-px-10">
+                    <div class="form-group g-pos-rel mb-0">
+                      <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                      <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                    </span>
+                      <input id="cp" name="cp" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="12345" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Estado:</label>
+              </div>
+
+              <div id="selEst" class="col-md-9 align-self-center">
+                <div class="row g-mx-minus-10">
+                  <div class="col-md align-self-center g-px-10 g-mb-20 g-mb-0--md">
+                    <div class="form-group u-select--v2 g-pos-rel g-brd-gray-light-v7 g-rounded-4 mb-0">
+                      
+                      <div class="selectEstadoDiv">
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0" for="#email">Municipio:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="row g-mx-minus-10">
+                  <div class="col-md align-self-center g-px-10 g-mb-20 g-mb-0--md">
+                    <div class="form-group u-select--v2 g-pos-rel g-brd-gray-light-v7 g-rounded-4 mb-0">
+                      <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                        <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                      </span>
+                      <div class="dropdown bootstrap-select js-select u-select--v2-select dropup">
+                        <select class="js-select u-select--v2-select" required="required" style="display: none;" tabindex="-98" aria-required="true">
+
+                        </select>
+                      </div>
+                    </div>
+                    <i class="hs-admin-angle-down g-absolute-centered--y g-right-0 g-color-gray-light-v6 ml-auto g-mr-15"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0" for="#calle">Calle:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="form-group g-pos-rel mb-0 has-success">
+                  <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                  <input id="calle" name="calle" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="Calle" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0" for="#giro">Giro Principal:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="row g-mx-minus-10">
+                  <div class="col-md align-self-center g-px-10 g-mb-20 g-mb-0--md">
+                    <div class="form-group u-select--v2 g-pos-rel g-brd-gray-light-v7 g-rounded-4 mb-0">
+                      <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                        <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                      </span>
+                      <div class="dropdown bootstrap-select js-select u-select--v2-select dropup">
+                        <select class="js-select u-select--v2-select" required="required" style="display: none;" tabindex="-98" aria-required="true">
+
+                        </select>
+                      </div>
+                    </div>
+                    <i class="hs-admin-angle-down g-absolute-centered--y g-right-0 g-color-gray-light-v6 ml-auto g-mr-15"></i>
                   </div>
                 </div>
               </div>
