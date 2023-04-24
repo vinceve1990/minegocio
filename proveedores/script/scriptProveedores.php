@@ -4,6 +4,7 @@
 	require_once "../minegocio/proveedores/class/classProveedores.php";
 	require_once "../minegocio/modelos/inicioModel.php";
 	require_once "../minegocio/estados/class/classEstados.php";
+	require_once "../minegocio/municipios/class/classMunicipios.php";
 
 	/*Saneo de datos*/
 	require_once "../minegocio/validaciones/class/validacionesDatosIngreso.php";
@@ -49,7 +50,7 @@
 				$response->val = $validacionesDatosIngreso->result;
 				$response->mensaje = $validacionesDatosIngreso->mensaje;
 			}
-			
+
 			break;
 
 		case 'bajaProveedor':
@@ -63,16 +64,38 @@
 				$response->val = $validacionesDatosIngreso->result;
 				$response->mensaje = $validacionesDatosIngreso->mensaje;
 			}
-			
+
 			break;
-		
+
 		case 'selectEstados';
-			$classEstados = new classEstados();
-			$response = $classEstados->getselectEstados();
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$classEstados = new classEstados();
+				$response = $classEstados->getselectEstados($param);
+			} else {
+				$response->val = $validacionesDatosIngreso->result;
+				$response->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+			break;
+
+		case 'selectMinicipio';
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$classMunicipios = new classMunicipios();
+				$response = $classMunicipios->getselectMunicipios($param);
+			} else {
+				$response->val = $validacionesDatosIngreso->result;
+				$response->mensaje = $validacionesDatosIngreso->mensaje;
+			}
 			break;
 
 		default:
-			// code...
 			break;
 	}
 

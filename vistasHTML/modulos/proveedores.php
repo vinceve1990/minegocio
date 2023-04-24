@@ -177,7 +177,7 @@
                       <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                       <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                     </span>
-                      <input id="cp" name="cp" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="12345" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true">
+                      <input id="cp" name="cp" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" onblur="buscarEstados()">
                     </div>
                   </div>
                 </div>
@@ -193,9 +193,9 @@
                 <div class="row g-mx-minus-10">
                   <div class="col-md align-self-center g-px-10 g-mb-20 g-mb-0--md">
                     <div class="form-group u-select--v2 g-pos-rel g-brd-gray-light-v7 g-rounded-4 mb-0">
-                      
+
                       <div class="selectEstadoDiv">
-                        
+
                       </div>
                     </div>
                   </div>
@@ -212,13 +212,11 @@
                 <div class="row g-mx-minus-10">
                   <div class="col-md align-self-center g-px-10 g-mb-20 g-mb-0--md">
                     <div class="form-group u-select--v2 g-pos-rel g-brd-gray-light-v7 g-rounded-4 mb-0">
-                      <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
-                        <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
-                      </span>
-                      <div class="dropdown bootstrap-select js-select u-select--v2-select dropup">
-                        <select class="js-select u-select--v2-select" required="required" style="display: none;" tabindex="-98" aria-required="true">
 
-                        </select>
+                      <div class="dropdown bootstrap-select js-select u-select--v2-select dropup">
+                        <div class="selectMunicipioDiv">
+
+                        </div>
                       </div>
                     </div>
                     <i class="hs-admin-angle-down g-absolute-centered--y g-right-0 g-color-gray-light-v6 ml-auto g-mr-15"></i>

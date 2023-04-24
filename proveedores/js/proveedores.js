@@ -11,14 +11,13 @@ $(document).ready(function() {
         DialogProveedor('altaProveedor');
     });
 
+    //Enter C.P.
+
     $.HSCore.components.HSValidation.init('.js-validate');
-    
-    
 
     let formInfoPrincipal = document.getElementById("formInfoPrincipal");
 
     formInfoPrincipal.addEventListener("submit", (e) => {
-        
         console.log(e);
 
         if (e.returnValue == true) {
@@ -203,36 +202,45 @@ function DialogProveedor(tipo) {
 }
 
 function buscarEstados() {
-    $.post('/minegocio/proveedores/server', {accion: 'selectEstados'}, function(data) {
+    var cp = $("#cp").val();
+
+    var Dat = new Object();
+    if(cp > 0) {
+        Dat.cp = 'integer:'+cp;
+    } else {
+        Dat.cp = 'integer:'+0;
+    }
+
+    $.post('/minegocio/proveedores/server', {accion: 'selectEstados', Dat : Dat}, function(data) {
         var sel = `<select id="selectEstado" name="selectEstado" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
                     ${data}
-                </select>
-                `;
-        
+                </select>`;
+
         $(".selectEstadoDiv").html(sel);
 
         $("#selectEstado").click(function(){
-            var id_estado = $("#selectEstado").val();
+            var id_estado = 'integer:'+$("#selectEstado").val();
             buscarMunicipios(id_estado);
         });
-    
+
     }, 'json');
 }
 
 function buscarMunicipios(id_estado) {
-    $.post('/minegocio/proveedores/server', {accion: 'selectMinicipio', id_estado : id_estado}, function(data) {
+    var Dat = new Object();
+    Dat.id_estado = id_estado;
+    $.post('/minegocio/proveedores/server', {accion: 'selectMinicipio', Dat : Dat}, function(data) {
         var sel = `<select id="selectMunicipio" name="selectMunicipio" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
                     ${data}
-                </select>
-                `;
-        
-        $(".selectMuniDiv").html(sel);
+                </select>`;
 
-        $("#selectMunicipio ").click(function(){
-            var id_estado = $("#selectMunicipio ").val();
+        $(".selectMunicipioDiv").html(sel);
+
+        $("#selectMunicipio").click(function(){
+            var id_estado = $("#selectMunicipio").val();
 
             console.log(id_estado);
         });
-    
+
     }, 'json');
 }

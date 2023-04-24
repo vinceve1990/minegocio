@@ -4,14 +4,24 @@
 		private int $val = 0;
 		private String $mensaje = "";
 		private String $errorClass = "";
-		
+
 		function __construct()
 		{}
 
-		private function selectEstados()
+		private function selectEstados($param)
 		{
+			$fil = "";
+			if($param->cp > 0) {
+				$classMunicipios = new classMunicipios();
+				$id_estado = $classMunicipios->getbuscaEstado($param);
+
+				if($id_estado > 0) {
+					$fil = " AND id_catalogo_estado_PK = ".$id_estado;
+				}
+			}
+
 			$sql = <<<EOT
-			SELECT id_catalogo_estado_PK, nombre_estado FROM catalogo_estados
+			SELECT id_catalogo_estado_PK, nombre_estado FROM catalogo_estados WHERE 1 $fil
 EOT;
 			$query = parent::querySelect($sql);
 
@@ -24,9 +34,9 @@ EOT;
 	        return $opt;
 		}
 
-		public function getselectEstados()
+		public function getselectEstados($param)
 		{
-			$sel = $this->selectEstados();
+			$sel = $this->selectEstados($param);
 
 			return $sel;
 		}
