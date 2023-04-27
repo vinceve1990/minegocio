@@ -11,7 +11,7 @@
  Target Server Version : 101002 (10.10.2-MariaDB)
  File Encoding         : 65001
 
- Date: 06/04/2023 13:20:45
+ Date: 27/04/2023 12:48:07
 */
 
 SET NAMES utf8mb4;
@@ -495,7 +495,8 @@ CREATE TABLE `catalogo_proveedores`  (
 -- Records of catalogo_proveedores
 -- ----------------------------
 INSERT INTO `catalogo_proveedores` VALUES (1, 'INDUSTRIA MEXICANA DE COCA-COLA', 'IHD050718UN4', 'servicenter@rica.com.mx', 'Camino a Pozos Téllez km 1.5 ', 1, 3, 42186, '7717741373', 1, b'1');
-INSERT INTO `catalogo_proveedores` VALUES (2, 'PEPSI', 'Sin RFC', 'Sin Email', 'Carretera Ciudad Zahui Kilómetro 8.5', 1, 3, 42039, '7717188012', 1, b'0');
+INSERT INTO `catalogo_proveedores` VALUES (2, 'PEPSI', 'Sin RFC', 'Sin Email', 'Carretera Ciudad Zahui Kilómetro 8.5', 1, 3, 42039, '7717188012', 1, b'1');
+INSERT INTO `catalogo_proveedores` VALUES (3, 'SERVICIOS HOME DEPOT, S.A. DE C.V.', 'SHD940509I58', 'Sin Email', 'Ricardo Margain Zozaya', 1, 26, 66267, '', 1, b'0');
 
 -- ----------------------------
 -- Table structure for catalogo_proveedores_banco
