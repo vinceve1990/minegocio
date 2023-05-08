@@ -1,3 +1,7 @@
+<script type="text/javascript">
+  var Token = "<?php echo $_SESSION['tokenVal']; ?>";
+</script>
+
 <div class="col g-ml-45 g-ml-0--lg g-pb-65--md advanced-search-form">
 
   <div class="media">
@@ -44,7 +48,7 @@
         <div class="h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md">
           <!-- User Information -->
           <section class="text-center g-mb-30 g-mb-50--md">
-            <h3 class="g-font-weight-300 g-font-size-20 g-color-black mb-0" id="textNombreProveedor">Charlie Bailey</h3>
+            <h3 class="g-font-weight-300 g-font-size-20 g-color-black mb-0" id="textNombreProveedor"></h3>
           </section>
           <!-- User Information -->
 
@@ -77,7 +81,6 @@
               </li>
             </ul>
           </section>
-          
         </div>
       </div>
 
@@ -85,7 +88,7 @@
       <!-- Información General -->
       <div class="col-md-9">
         <div class="h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md">
-          <form class="js-validate" novalidate="novalidate" id="formInfoPrincipal">
+          <form class="js-validate" novalidate="novalidate" id="formInfoPrincipal" method="post">
             <header>
               <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0">Información General</h2>
             </header>
@@ -94,7 +97,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#firstName">Nombre Proveedor:</label>
+                <label class="mb-0" for="#nombreProveedor">Nombre Proveedor:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -102,14 +105,14 @@
                   <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                   <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                 </span>
-                  <input id="firstName" name="firstName" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="Charlie" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                  <input id="nombreProveedor" name="nombreProveedor" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
                 </div>
               </div>
             </div>
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#lastName">RFC:</label>
+                <label class="mb-0" for="#rfc">RFC:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -117,7 +120,7 @@
                   <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                   <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                 </span>
-                  <input id="lastName" name="lastName" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="Bailey" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                  <input id="rfc" name="rfc" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="false" aria-invalid="false">
                 </div>
               </div>
             </div>
@@ -132,14 +135,14 @@
                   <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                   <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                 </span>
-                  <input id="email" name="email" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="email" value="example@example.com" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                  <input id="email" name="email" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="email" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="false" aria-invalid="false">
                 </div>
               </div>
             </div>
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#phone">Telefono:</label>
+                <label class="mb-0" for="#telefonoProveedor">Telefono:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -149,7 +152,7 @@
                       <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                       <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                     </span>
-                      <input id="phone" name="phone" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="tel" value="771 111 1234" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true">
+                      <input id="telefonoProveedor" name="telefonoProveedor" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="tel"  data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="false">
                     </div>
                   </div>
 
@@ -235,7 +238,7 @@
                   <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
                   <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                 </span>
-                  <input id="calle" name="calle" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" value="Calle" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                  <input id="calle" name="calle" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
                 </div>
               </div>
             </div>
@@ -253,9 +256,9 @@
                         <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
                       </span>
                       <div class="dropdown bootstrap-select js-select u-select--v2-select dropup">
-                        <select class="js-select u-select--v2-select" required="required" style="display: none;" tabindex="-98" aria-required="true">
+                        <div class="selectGiroDiv">
 
-                        </select>
+                        </div>
                       </div>
                     </div>
                     <i class="hs-admin-angle-down g-absolute-centered--y g-right-0 g-color-gray-light-v6 ml-auto g-mr-15"></i>

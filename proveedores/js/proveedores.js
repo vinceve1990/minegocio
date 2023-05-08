@@ -17,13 +17,31 @@ $(document).ready(function() {
 
     let formInfoPrincipal = document.getElementById("formInfoPrincipal");
 
-    formInfoPrincipal.addEventListener("submit", (e) => {
-        console.log(e);
+    $("#formInfoPrincipal").submit(function(event) {
+        DialogProcesando('open');
 
+        var Dat = new Object();
+
+        Dat.nombreProveedor   = 'string:'+$("#nombreProveedor").val();
+        Dat.rfc               = 'string:'+$("#rfc").val();
+        Dat.email             = 'string:'+$("#email").val();
+        Dat.telefonoProveedor = 'integer:'+$("#telefonoProveedor").val();
+        Dat.cp                = 'integer:'+$("#cp").val();
+        Dat.selectEstado      = 'integer:'+$("#selectEstado").val();
+        Dat.selectMunicipio   = 'integer:'+$("#selectMunicipio").val();
+        Dat.calle             = 'string:'+$("#calle").val();
+        Dat.selectGiro        = 'integer:'+$("#selectGiro").val();
+
+        $.post('/minegocio/proveedores/server', {accion: 'altaProveedor', Dat : Dat, token : Token}, function(data) {
+            DialogProcesando('close');
+        }, 'json');
+
+        return false;
+    });
+
+    formInfoPrincipal.addEventListener("reset", (e) => {
         if (e.returnValue == true) {
-            Swal.fire("Pasa POST");
-        } else {
-            Swal.fire({icon:'error', title:"Corrige tus mamadas"});
+            $("#dialogProveedores").dialog("close");
         }
     });
 });
@@ -197,11 +215,13 @@ function DialogProveedor(tipo) {
         zIndex: 1100,
         open: function() {
             buscarEstados();
+            buscarGiros();
         }
     }).dialog('open');
 }
 
 function buscarEstados() {
+    DialogProcesando('open');
     var cp = $("#cp").val();
     var id_estado = 0;
 
@@ -227,18 +247,25 @@ function buscarEstados() {
 
         if($("#selectEstado").val() > 0) {
             var id_estado = 'integer:'+$("#selectEstado").val();
-            
+
             buscarMunicipios(id_estado);
         }
-
+        DialogProcesando('close');
     }, 'json');
 }
 
 function buscarMunicipios(id_estado) {
-
+    DialogProcesando('open');
     var Dat = new Object();
 
+    if($("#cp").val() != "") {
+        var cp = 'integer:'+$("#cp").val();
+    } else {
+        var cp = 'integer:0';
+    }
+
     Dat.id_estado = id_estado;
+    Dat.cp = cp;
 
     $.post('/minegocio/proveedores/server', {accion: 'selectMinicipio', Dat : Dat}, function(data) {
         var sel = `<select id="selectMunicipio" name="selectMunicipio" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
@@ -252,6 +279,16 @@ function buscarMunicipios(id_estado) {
 
             console.log(id_estado);
         });
+        DialogProcesando('close');
+    }, 'json');
+}
 
+function buscarGiros() {
+    $.post('/minegocio/proveedores/server', {accion: 'selectGiros'}, function(data) {
+        var sel = `<select id="selectGiro" name="selectMunicipio" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
+                    ${data}
+                </select>`;
+
+        $(".selectGiroDiv").html(sel);
     }, 'json');
 }

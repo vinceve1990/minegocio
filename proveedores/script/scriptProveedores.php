@@ -5,6 +5,7 @@
 	require_once "../minegocio/modelos/inicioModel.php";
 	require_once "../minegocio/estados/class/classEstados.php";
 	require_once "../minegocio/municipios/class/classMunicipios.php";
+	require_once "../minegocio/giros/class/classGiros.php";
 
 	/*Saneo de datos*/
 	require_once "../minegocio/validaciones/class/validacionesDatosIngreso.php";
@@ -95,6 +96,27 @@
 			}
 			break;
 
+		case 'selectGiros';
+			$classGiros = new classGiros();
+			$response = $classGiros->buscarGiros();
+			break;
+
+		case 'altaProveedor':
+			echo $token.' - '.$_SESSION['tokenVal'];
+			if($token == $_SESSION['tokenVal']) {
+				$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+				if ($validacionesDatosIngreso->result == 0) {
+					$param = $validacionesDatosIngreso->paramValidado;
+
+					//$response = $classMunicipios->getselectMunicipios($param);
+					$response->val = 0;
+				} else {
+					$response->val = $validacionesDatosIngreso->result;
+					$response->mensaje = $validacionesDatosIngreso->mensaje;
+				}
+			}
+			break;
 		default:
 			break;
 	}

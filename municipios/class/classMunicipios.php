@@ -10,8 +10,14 @@
 
 		private function selectMunicipios($param)
 		{
+			$filCp = "";
+
+			if ($param->cp > 0) {
+				$filCp = " OR cp = $param->cp";
+			}
+
 			$sql = <<<EOT
-			SELECT id_catalogo_municipios_PK, nombre_municipio FROM catalogo_municipios WHERE id_catalogo_estado_FK = $param->id_estado
+			SELECT id_catalogo_municipios_PK, nombre_municipio FROM catalogo_municipios WHERE id_catalogo_estado_FK = $param->id_estado $filCp
 EOT;
 			$query = parent::querySelect($sql);
 
