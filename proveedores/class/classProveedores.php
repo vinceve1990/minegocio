@@ -125,5 +125,23 @@ EOT;
 
 			return $responce;
 		}
+
+		public function altaProveedor($param) {
+			$responce = new stdClass();
+
+			parent::queryBegin();
+
+			parent::escapeQuery($param);
+
+			$sql = <<<EOT
+			INSERT INTO catalogo_proveedores(nombre, rfc, email_principal, calle, id_catalogo_estado_FK, id_catalogo_municipios_FK, cp, telefono, id_catalogo_giro_FK) VALUES(nombre, rfc, email_principal, calle, id_catalogo_estado_FK, id_catalogo_municipios_FK, cp, telefono, id_catalogo_giro_FK)
+EOT;
+
+			if($this->val == 0) {
+				parent::queryCommit();
+			} else {
+				parent::queryRollback();
+			}
+		}
 	}
 ?>

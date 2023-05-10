@@ -1,8 +1,6 @@
-<script type="text/javascript">
-  var Token = "<?php echo $_SESSION['tokenVal']; ?>";
-</script>
-
 <div class="col g-ml-45 g-ml-0--lg g-pb-65--md advanced-search-form">
+
+  <div id="tokenActivo"></div>
 
   <div class="media">
     <div class="media-body align-self-center text-center">
