@@ -1,7 +1,5 @@
 <div class="col g-ml-45 g-ml-0--lg g-pb-65--md advanced-search-form">
 
-  <div id="tokenActivo"></div>
-
   <div class="media">
     <div class="media-body align-self-center text-center">
       <h1 class="g-font-weight-350 g-font-size-28 g-color-black mb-0">Proveedores</h1>
@@ -33,7 +31,7 @@
                 <tbody id="bodyProveedores">
                 </tbody>
               </table>
-              <center id="paginacionTablas"></center>              
+              <center id="paginacionTablas"></center>
       </div>
 		</div>
 	</div>
@@ -53,7 +51,7 @@
           <!-- Profile Sidebar -->
           <section>
             <ul class="list-unstyled mb-0">
-              <li class="g-brd-top g-brd-gray-light-v7 mb-0">
+              <li class="g-brd-top g-brd-gray-light-v7 mb-0" id="infoPrincipal">
                 <a class="d-flex align-items-center u-link-v5 g-parent g-py-15 active" href="../app-views/app-profile.html">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
                     <i class="fa-solid fa-person-breastfeeding"></i>
@@ -61,7 +59,7 @@
                   <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">Información General</span>
                 </a>
               </li>
-              <li class="g-brd-top g-brd-gray-light-v7 mb-0">
+              <li class="g-brd-top g-brd-gray-light-v7 mb-0" id="infoCuentas">
                 <a class="d-flex align-items-center u-link-v5 g-parent g-py-15" href="../app-views/app-profile-biography.html">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
                     <i class="fa-solid fa-building-columns"></i>
@@ -69,7 +67,7 @@
                   <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">Cuentas</span>
                 </a>
               </li>
-              <li class="g-brd-top g-brd-gray-light-v7 mb-0">
+              <li class="g-brd-top g-brd-gray-light-v7 mb-0" id="infoContactos">
                 <a class="d-flex align-items-center u-link-v5 g-parent g-py-15" href="../app-views/app-profile-interests.html">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
                     <i class="fa-regular fa-address-book"></i>
@@ -86,7 +84,7 @@
       <!-- Información General -->
       <div class="col-md-9">
         <div class="h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md">
-          <form class="js-validate" novalidate="novalidate" id="formInfoPrincipal" method="post">
+          <form class="js-validate" novalidate="novalidate" id="formInfoPrincipal" name="formInfoPrincipal" method="post">
             <header>
               <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0">Información General</h2>
             </header>

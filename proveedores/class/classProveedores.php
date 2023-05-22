@@ -134,14 +134,26 @@ EOT;
 			parent::escapeQuery($param);
 
 			$sql = <<<EOT
-			INSERT INTO catalogo_proveedores(nombre, rfc, email_principal, calle, id_catalogo_estado_FK, id_catalogo_municipios_FK, cp, telefono, id_catalogo_giro_FK) VALUES(nombre, rfc, email_principal, calle, id_catalogo_estado_FK, id_catalogo_municipios_FK, cp, telefono, id_catalogo_giro_FK)
+			INSERT INTO catalogo_proveedores(nombre, rfc, email_principal, calle, id_catalogo_estado_FK, id_catalogo_municipios_FK, cp, telefono, id_catalogo_giro_FK) VALUES('$param->nombreProveedor', '$param->rfc', '$param->email', '$param->calle', $param->selectEstado, $param->selectMunicipio, $param->cp, $param->telefonoProveedor, $param->selectGiro)
 EOT;
+			$resIn = parent::queryInsert($sql);
+
+			if ($resIn === "error") {
+				$this->val++;
+				$this->mensaje .= "AL DAR DE ALTA AL PROVEEDOR <br>";
+				$this->errorClass .= "altaProveedor() - classProveedor//";
+			}
 
 			if($this->val == 0) {
 				parent::queryCommit();
 			} else {
 				parent::queryRollback();
 			}
+
+			$responce->val = $this->val;
+			$responce->mensaje = $this->mensaje;
+			$responce->errorClass = $this->errorClass;
+			return $responce;
 		}
 	}
 ?>

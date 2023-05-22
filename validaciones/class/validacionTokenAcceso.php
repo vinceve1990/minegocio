@@ -3,30 +3,35 @@
     class validacionTokenAcceso
     {
         private $controlador;
-        private $metodo;
         public $token;
+        public $tokenKey;
 
-        function __construct($controlador, $metodo)
+        function __construct($controlador)
         {
             $this->controlador = $controlador;
-            $this->metodo = $metodo;
 
             $this->creacionToken();
+
+            $this->creacionTokenKey();
         }
 
         public function creacionToken() {
             $controlador = str_split($this->controlador);
-            $metodo = str_split($this->metodo);
 
             foreach ($controlador as $key => $val) {
                 $this->token .= $controlador[$key];
-
-                if(isset($metodo[$key])) {
-                    $this->token .= $metodo[$key];
-                }
             }
 
             $this->token .= md5(uniqid(mt_rand(), true));
+        }
+
+        public function creacionTokenKey() {
+            $key = openssl_random_pseudo_bytes(32); // Generar una clave aleatoria de 32 bytes
+
+            // Convertir la clave a una representación legible (opcional)
+            $key = bin2hex($key);
+
+            $this->tokenKey = $key;
         }
     }
 ?>

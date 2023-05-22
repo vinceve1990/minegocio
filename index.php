@@ -26,12 +26,4 @@
 	require_once "librerias/autoLoad.php";
 
 	require_once "librerias/load.php";
-
-	require_once "validaciones/class/validacionTokenAcceso.php";
-
-	$validacionTokenAcceso = new validacionTokenAcceso($controlador, $metodo);
-    //if(!empty($_SESSION['id_persona_PK'])) {
-    	$_SESSION['tokenVal'] = $validacionTokenAcceso->token;
-    //}
-	//var_dump($_SESSION['tokenVal']);
 ?>

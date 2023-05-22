@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $("#inttokenActivo").val(Token);
 
 	verProveedores(2,1);
 
@@ -10,6 +11,9 @@ $(document).ready(function() {
 
     $("#newProveedor").click(function() {
         DialogProveedor('altaProveedor');
+
+        $("#infoCuentas").hide();
+        $("#infoContactos").hide();
     });
 
     //Enter C.P.
@@ -32,9 +36,23 @@ $(document).ready(function() {
         Dat.selectMunicipio   = 'integer:'+$("#selectMunicipio").val();
         Dat.calle             = 'string:'+$("#calle").val();
         Dat.selectGiro        = 'integer:'+$("#selectGiro").val();
+        var TokenEncryp = encrypt(Token);
 
-        $.post('/minegocio/proveedores/server', {accion: 'altaProveedor', Dat : Dat, token : Token}, function(data) {
+        $.post('/minegocio/proveedores/server', {accion: 'altaProveedor', Dat : Dat, token : TokenEncryp}, function(data) {
             DialogProcesando('close');
+            if(data.val == 0) {
+                limpiarFormulario();
+                $("#dialogProveedores").dialog('close');
+                verProveedores(rows, page);
+                Swal.fire("ALTA DE PROVEEDOR CON EXITO");
+            } else {
+                Swal.fire(
+                  data.mensaje,
+                  '',
+                  'warning'
+                )
+            }
+            return false;
         }, 'json');
 
         return false;
@@ -292,4 +310,8 @@ function buscarGiros() {
 
         $(".selectGiroDiv").html(sel);
     }, 'json');
+}
+
+function limpiarFormulario() {
+    document.getElementById("formInfoPrincipal").reset();
 }

@@ -33,5 +33,11 @@
 
 			return $paramPagAct;
 		}
+
+		public function descriptToken($token) {
+			$descript = base64_decode($token);
+
+			return $descript;
+		}
 	}
 ?>

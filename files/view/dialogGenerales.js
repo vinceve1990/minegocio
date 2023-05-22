@@ -163,7 +163,7 @@ function clickPrev(rows, page) {
         if(page < 1) {
             page = 1;
         }
-        
+
         verProveedores(rows, page);
     });
 }
@@ -177,7 +177,7 @@ function clickNext(rows, page) {
         if (page > paginacion.pagefinal) {
             page = paginacion.pagefinal;
         }
-        
+
         verProveedores(rows, page);
     });
 }
@@ -188,7 +188,7 @@ function clickPagina(rows, page) {
         var paginacion = $(this).data();
 
         page = paginacion.dtpageto;
-        
+
         verProveedores(rows, page);
     });
 }
@@ -229,4 +229,14 @@ function recuperarFil(filAdd) {
         }
     }
     return filAdd;
+}
+
+function encrypt(token) {
+    // Define the string
+    var decodedStringBtoA = token;
+
+    // Encode the String
+    var encodedStringBtoA = btoa(decodedStringBtoA);
+
+    return encodedStringBtoA;
 }

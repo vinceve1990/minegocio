@@ -102,8 +102,11 @@
 			break;
 
 		case 'altaProveedor':
-			//echo $token.' - '.$_SESSION['tokenVal'];
-			//if($token == $_SESSION['tokenVal']) {
+			$inicioModel = new inicioModel();
+
+			$descToken = $inicioModel->descriptToken($token);
+
+			if($descToken === $_SESSION['tokenVal']) {
 				$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
 
 				if ($validacionesDatosIngreso->result == 0) {
@@ -114,7 +117,7 @@
 					$response->val = $validacionesDatosIngreso->result;
 					$response->mensaje = $validacionesDatosIngreso->mensaje;
 				}
-			//}
+			}
 			break;
 		default:
 			break;
