@@ -11,12 +11,12 @@
 
 		public function proveedores($paramRuta)
 		{
-			$this->Views->getViews($this, "proveedores", $paramRuta);
+			$this->views->getViews($this, "proveedores", $paramRuta);
 		}
 
 		public function server()
 		{
-			$this->ClassPost->getPost('script', "scriptProveedores", 'proveedores');
+			$this->classPost->getPost('script', "scriptProveedores", 'proveedores');
 		}
 	}
 ?>

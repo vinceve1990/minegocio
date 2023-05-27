@@ -12,7 +12,7 @@
 
 		public function server()
 		{
-			$this->ClassPost->getPost('script', "serverPersonal", 'personal');
+			$this->classPost->getPost('script', "serverPersonal", 'personal');
 		}
 	}
 ?>

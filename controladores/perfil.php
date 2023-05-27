@@ -11,12 +11,12 @@
 
 		public function inforPerfil()
 		{
-			$this->ClassPost->getPost('script', "inforPerfil", 'perfil');
+			$this->classPost->getPost('script', "inforPerfil", 'perfil');
 		}
 
 		public function subirFoto()
 		{
-			$this->ClassPost->getPost('script', "subirFoto", 'perfil');
+			$this->classPost->getPost('script', "subirFoto", 'perfil');
 		}
 	}
 ?>

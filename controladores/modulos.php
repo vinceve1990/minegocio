@@ -11,7 +11,7 @@
 
 		public function modulos()
 		{
-			$this->ClassPost->getPost('script', "modulos", 'modulos');
+			$this->classPost->getPost('script', "modulos", 'modulos');
 		}
 	}
 ?>

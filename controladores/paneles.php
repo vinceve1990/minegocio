@@ -13,13 +13,13 @@
 		public function dashboards($paramRuta)
 		{
 
-			$this->Views->getViews($this, "dashboards", $paramRuta);
+			$this->views->getViews($this, "dashboards", $paramRuta);
 		}
 
 		public function consultas($paramRuta)
 		{
 
-			$this->Views->getViews($this, "consultas", $paramRuta);
+			$this->views->getViews($this, "consultas", $paramRuta);
 		}
 	}
 ?>

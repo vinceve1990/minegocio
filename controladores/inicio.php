@@ -12,12 +12,12 @@
 
 		public function inicio()
 		{
-			$this->Views->getViews($this, "inicio");
+			$this->views->getViews($this, "inicio");
 		}
 
 		public function registroUsuarios()
 		{
-			$this->Views->getViews($this, "registroUsuarios");
+			$this->views->getViews($this, "registroUsuarios");
 		}
 	}
 ?>

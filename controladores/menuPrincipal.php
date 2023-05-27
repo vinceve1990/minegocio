@@ -11,7 +11,7 @@
 
 		public function menuPrincipal($paramRuta)
 		{
-			$this->Views->getViews($this, "menuPrincipal", $paramRuta);
+			$this->views->getViews($this, "menuPrincipal", $paramRuta);
 		}
 
 		/*public function menuPrincipal()

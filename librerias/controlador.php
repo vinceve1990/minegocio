@@ -1,21 +1,17 @@
-<?php  
-	/**
-	 * 
-	 */
+<?php
 	class controlador
 	{
-		
 		public function __construct()
 		{
-			$this->Views = new Views();
-			$this->ClassPost = new ClassPost();
+			$this->views = new views();
+			$this->classPost = new classPost();
 			$this->loadModel();
 		}
 
 		public function loadModel()
 		{
 			$model = get_class($this)."Model";
-			$rutaClass = "Modelos/".$model.".php";
+			$rutaClass = "modelos/".$model.".php";
 
 			if(file_exists($rutaClass)) {
 				require_once($rutaClass);

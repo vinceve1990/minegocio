@@ -12,7 +12,7 @@
 
 		public function notFount()
 		{
-			$this->Views->getViews($this, "errores");
+			$this->views->getViews($this, "errores");
 		}
 	}
 
