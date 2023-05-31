@@ -1,16 +1,14 @@
 $(document).ready(function() {
-    $("#inttokenActivo").val(Token);
-
-	verProveedores(2,1);
+	verProveedores(5,1);
 
     $("#datatablePagination1Prev").click(function() {
         $("#datatablePaginationPage1").css("class","#29364d");
     })
 
-    $("#panelConfiguraciones").css("background-color","#29364d");
+    $("#panelOperaciones").css("background-color","#29364d");
 
     $("#newProveedor").click(function() {
-        DialogProveedor('altaProveedor');
+        DialogProveedor('altaProveedor', "");
 
         $("#infoCuentas").hide();
         $("#infoContactos").hide();
@@ -38,22 +36,32 @@ $(document).ready(function() {
         Dat.selectGiro        = 'integer:'+$("#selectGiro").val();
         var TokenEncryp = encrypt(Token);
 
-        $.post('/minegocio/proveedores/server', {accion: 'altaProveedor', Dat : Dat, token : TokenEncryp}, function(data) {
+        if($("#selectEstado").val() > 0 && $("#selectMunicipio").val() > 0 && $("#selectGiro").val() > 0) {
+            $.post('/minegocio/proveedores/server', {accion: 'altaProveedor', Dat : Dat, token : TokenEncryp}, function(data) {
+                DialogProcesando('close');
+                if(data.val == 0) {
+                    limpiarFormulario();
+                    $("#dialogProveedores").dialog('close');
+                    verProveedores(rows, page);
+                    Swal.fire("ALTA DE PROVEEDOR CON EXITO");
+                } else {
+                    Swal.fire(
+                      data.mensaje,
+                      '',
+                      'warning'
+                    )
+                }
+                return false;
+            }, 'json');
+        } else {
+            var mensaje = $("#selectEstado").val() == 0 ? "Seleccione un Estado" : $("#selectMunicipio").val() == 0 ? "Seleccione un Municipio" : "Seleccione un Giro";
+            Swal.fire(
+              mensaje,
+              '',
+              'warning'
+            );
             DialogProcesando('close');
-            if(data.val == 0) {
-                limpiarFormulario();
-                $("#dialogProveedores").dialog('close');
-                verProveedores(rows, page);
-                Swal.fire("ALTA DE PROVEEDOR CON EXITO");
-            } else {
-                Swal.fire(
-                  data.mensaje,
-                  '',
-                  'warning'
-                )
-            }
-            return false;
-        }, 'json');
+        }
 
         return false;
     });
@@ -72,7 +80,7 @@ function verProveedores(rows, page) {
     filAdd.rfc = "";
     filAdd.telefono = "";
     filAdd.email = "";
-    filAdd.estado = "";
+    filAdd.estado = 0;
     filAdd.cp = "";
     filAdd.status = "";
 
@@ -91,28 +99,28 @@ function verProveedores(rows, page) {
         	var proveedores = `<tr>
                                     <form name="filForm" id="filForm">
                                         <td>
-                                            ${filtrosTabla('id', filAdd.id)}
+                                            ${filtrosTablaText('id', filAdd.id)}
                                         </td>
                                         <td>
-                                            ${filtrosTabla('nombre_proveedor', filAdd.nombre_proveedor)}
+                                            ${filtrosTablaText('nombre_proveedor', filAdd.nombre_proveedor)}
                                         </td>
                                         <td>
-                                            ${filtrosTabla('rfc', filAdd.rfc)}
+                                            ${filtrosTablaText('rfc', filAdd.rfc)}
                                         </td>
                                         <td>
-                                            ${filtrosTabla('telefono', filAdd.telefono)}
+                                            ${filtrosTablaText('telefono', filAdd.telefono)}
                                         </td>
                                         <td>
-                                            ${filtrosTabla('email', filAdd.email)}
+                                            ${filtrosTablaText('email', filAdd.email)}
                                         </td>
                                         <td>
-                                            ${filtrosTabla('estado', filAdd.estado)}
+                                            ${filtrosTablaSelect('estado', filAdd.estado, 1)}
                                         </td>
                                         <td>
-                                            ${filtrosTabla('cp', filAdd.cp)}
+                                            ${filtrosTablaText('cp', filAdd.cp)}
                                         </td>
                                         <td>
-                                            ${filtrosTabla('status', filAdd.status)}
+                                            ${filtrosTablaText('status', filAdd.status)}
                                         </td>
                                         <td>
                                         </td>
@@ -145,7 +153,7 @@ function verProveedores(rows, page) {
                                         <td>${data.rows[x][6]}</td>
                                         <td>${data.rows[x][8]}</td>
                                         <td>
-                                            <a class="js-edit u-link-v5 g-color-gray-light-v6 g-color-secondary--hover editarProveedor" data-id_proveedor=${data.rows[x][0]}>
+                                            <a class="js-edit u-link-v5 g-color-gray-light-v6 g-color-secondary--hover editarProveedor" data-id_proveedor=${data.rows[x][0]} data-nom_proveedor="${data.rows[x][1]}">
                                                 <i class="hs-admin-pencil g-font-size-18 g-mr-10 g-mr-15--md g-color-secondary--hover" style="color: blue;"></i>
                                             </a>
                                             ${verElimina}${verActiva}
@@ -169,7 +177,10 @@ function verProveedores(rows, page) {
     $(".editarProveedor").click(function () {
         datos = $(this).data();
 
-        console.log(datos);
+        DialogProveedor('editaProveedor', datos);
+
+        $("#infoCuentas").show();
+        $("#infoContactos").show();
     });
 
     //Click Eliminar
@@ -218,11 +229,14 @@ function verProveedores(rows, page) {
     //EnterFiltros
     enterFiltros(rows, 1);
 
+    //ClickFiltros
+    clickFiltros(rows, 1);
+
     //clickQuitarFiltro
     clickQuitarFiltro(rows, 1);
 }
 
-function DialogProveedor(tipo) {
+function DialogProveedor(tipo, datos) {
     $("#dialogProveedores").dialog({
         title: 'Proveedor',
         autoOpen: false,
@@ -233,6 +247,7 @@ function DialogProveedor(tipo) {
         resizable : false,
         zIndex: 1100,
         open: function() {
+            $("#textNombreProveedor").text(datos['nom_proveedor']);
             buscarEstados();
             buscarGiros();
         }
@@ -245,6 +260,7 @@ function buscarEstados() {
     var id_estado = 0;
 
     var Dat = new Object();
+    Dat.selected = 'integer:'+0;
     if(cp > 0) {
         Dat.cp = 'integer:'+cp;
     } else {

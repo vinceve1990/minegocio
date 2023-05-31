@@ -3,7 +3,7 @@
 <?php require '../minegocio/files/view/menu.php';?>
 
     <!-- Login -->
-    <section class="container g-py-150">
+    <section class="container g-py-10">
       <div class="row justify-content-center">
         <div class="col-sm-8 col-lg-6">
           <div class="g-brd-around g-brd-gray-light-v4 rounded g-py-40 g-px-30">

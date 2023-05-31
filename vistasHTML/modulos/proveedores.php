@@ -93,7 +93,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#nombreProveedor">Nombre Proveedor:</label>
+                <label class="mb-0">Nombre Proveedor:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -108,7 +108,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#rfc">RFC:</label>
+                <label class="mb-0">RFC:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -123,7 +123,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#email">Email</label>
+                <label class="mb-0">Email</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -138,7 +138,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#telefonoProveedor">Telefono:</label>
+                <label class="mb-0">Telefono:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -166,7 +166,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#cp">C.P:</label>
+                <label class="mb-0">C.P:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -204,7 +204,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#email">Municipio:</label>
+                <label class="mb-0">Municipio:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -226,7 +226,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#calle">Calle:</label>
+                <label class="mb-0">Calle:</label>
               </div>
 
               <div class="col-md-9 align-self-center">
@@ -241,7 +241,7 @@
 
             <div class="row g-mb-20">
               <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
-                <label class="mb-0" for="#giro">Giro Principal:</label>
+                <label class="mb-0">Giro Principal:</label>
               </div>
 
               <div class="col-md-9 align-self-center">

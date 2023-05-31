@@ -29,7 +29,11 @@ EOT;
 			$query = parent::querySelect($sql);
 
 			while ($row = $query->fetch_object()) {
-				$opt .= "<option value='".$row->id_catalogo_estado_PK."'>".$row->nombre_estado."</option>";
+				$sel = "";
+				if($param->selected == $row->id_catalogo_estado_PK) {
+					$sel = "selected";
+				}
+				$opt .= "<option value='".$row->id_catalogo_estado_PK."' $sel>".$row->nombre_estado."</option>";
 			}
 
 	        return $opt;

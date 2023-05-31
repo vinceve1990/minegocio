@@ -133,8 +133,8 @@ function dialogRol(accion = 'close', catalogo = "roles") {
 
 function paginacion(datos, pageactivo) {
 
-    var pag = `<li class="list-inline-item">       
-                  <a id="datatablePagination1Prev" class="u-pagination-v1__item u-pagination-v1-2 g-brd-gray-light-v7 g-brd-secondary--hover g-rounded-4 g-py-8 g-px-12" aria-label="Previous"><span class="g-line-height-1 g-valign-middle" aria-hidden="true"><i class="hs-admin-angle-left"></i></span><span class="sr-only">Anterior</span></a>       
+    var pag = `<li class="list-inline-item">
+                  <a id="datatablePagination1Prev" class="u-pagination-v1__item u-pagination-v1-2 g-brd-gray-light-v7 g-brd-secondary--hover g-rounded-4 g-py-8 g-px-12" aria-label="Previous"><span class="g-line-height-1 g-valign-middle" aria-hidden="true"><i class="hs-admin-angle-left"></i></span><span class="sr-only">Anterior</span></a>
                 </li>`;
 
     for (var i = 1; i <= datos.total; i++) {
@@ -193,7 +193,7 @@ function clickPagina(rows, page) {
     });
 }
 
-function filtrosTabla(trNombre, valor) {
+function filtrosTablaText(trNombre, valor) {
     var filTabla = `<div class="g-pos-rel">
                         <button class="btn u-input-btn--v1 g-width-20 g-bg-primary g-rounded-right-10 quitarfiltro" data-txtnombre="${trNombre}" type="submit">
                             <i class="hs-admin-close g-absolute-centered g-font-size-12 g-color-white"></i>
@@ -203,12 +203,63 @@ function filtrosTabla(trNombre, valor) {
     return filTabla;
 }
 
+function filtrosTablaSelect(trNombre, valor, tipo) {/*tipo : 1 Se crea de Base de datos, 0 valores estaticos*/
+    console.log("val=> "+valor);
+    var option = datosSelect(trNombre, valor, tipo);
+
+    var filTabla = `<div class="g-pos-rel">
+                        <button class="btn u-input-btn--v1 g-width-20 g-bg-primary g-rounded-right-10 quitarfiltro" data-txtnombre="${trNombre}" type="submit">
+                            <i class="hs-admin-close g-absolute-centered g-font-size-12 g-color-white"></i>
+                        </button>
+                        <select id="txt${trNombre}" name="txt${trNombre}" class="form-control form-control-md g-brd-gray-light-v7 g-brd-gray-light-v3 g-rounded-20 g-px-10 g-py-2 clksFiltros">
+                            ${option}
+                        </select>
+                    </div>`;
+                    //${data}
+    return filTabla;
+}
+
+function datosSelect(trNombre, valor, tipo) {
+    /*
+    trNombre = tipo de select para saber a que tabla apunta
+    valor = valor actual seleccionado
+    tipo = si son valor estaticos (0) o de BD (1)
+    */
+    var datos = "";
+    var Dat = new Object();
+    Dat.cp = 'integer:'+0;
+    Dat.selected = 'integer:'+valor;
+
+    if(tipo == 1) {
+        $.ajax({
+            dataType:"json",
+            url:"/minegocio/proveedores/server",
+            type: "POST",
+            data:{accion: 'selectEstados', Dat : Dat},
+            cache:true,
+            async:false,
+            success: function(data){
+                datos = data;
+            }
+        });
+    } else {
+    }
+
+    return datos;
+}
+
 function enterFiltros(rows, page) {
 
     $(".txtFiltros").on('keyup', function (event) {
         if (event.keyCode === 13) {
             verProveedores(rows, page);
         }
+    });
+}
+
+function clickFiltros(rows, page) {
+    $(".clksFiltros").on('change', function (event) {
+        verProveedores(rows, page);
     });
 }
 

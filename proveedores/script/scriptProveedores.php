@@ -6,6 +6,7 @@
 	require_once "../minegocio/estados/class/classEstados.php";
 	require_once "../minegocio/municipios/class/classMunicipios.php";
 	require_once "../minegocio/giros/class/classGiros.php";
+	require_once "../minegocio/validaciones/class/classValidacionesProveedores.php";
 
 	/*Saneo de datos*/
 	require_once "../minegocio/validaciones/class/validacionesDatosIngreso.php";
@@ -35,6 +36,26 @@
 
 			if(!empty($filAdd['status'])) {
 				$fil .= " AND IF(a.status_proveedor = 0, 'DESACTIVADO', 'ACTIVO') LIKE '%".$filAdd['status']."%'";
+			}
+
+			if(!empty($filAdd['rfc'])) {
+				$fil .= " AND a.rfc LIKE '%".$filAdd['rfc']."%'";
+			}
+
+			if(!empty($filAdd['telefono'])) {
+				$fil .= " AND a.telefono LIKE '%".$filAdd['telefono']."%'";
+			}
+
+			if(!empty($filAdd['email'])) {
+				$fil .= " AND a.email_principal LIKE '%".$filAdd['email']."%'";
+			}
+
+			if($filAdd['estado'] > 0) {
+				$fil .= " AND a.id_catalogo_estado_FK = ".$filAdd['estado'];
+			}
+
+			if(!empty($filAdd['cp'])) {
+				$fil .= " AND a.cp = ".$filAdd['cp'];
 			}
 
 			$response = $classProveedor->informacionProveedores($fil);
@@ -112,7 +133,16 @@
 				if ($validacionesDatosIngreso->result == 0) {
 					$param = $validacionesDatosIngreso->paramValidado;
 
-					$response = $classProveedor->altaProveedor($param);
+					/*Validacion de RFC*/
+					$classValidacionesProveedores = new classValidacionesProveedores($param);
+					$valProveedor = $classValidacionesProveedores->validaRFC();
+					/*#################*/
+					if($valProveedor == 0) {
+						$response = $classProveedor->altaProveedor($param);
+					} else {
+						$response->val = 1;
+						$response->mensaje = "RFC YA EXISTE REGISTRADO";
+					}
 				} else {
 					$response->val = $validacionesDatosIngreso->result;
 					$response->mensaje = $validacionesDatosIngreso->mensaje;

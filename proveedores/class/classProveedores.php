@@ -34,13 +34,14 @@ EOT;
 			$sql = <<<EOT
 			SELECT
 				a.*, b.nombre_estado, c.nombre_municipio, d.nombre_giro, IF(a.status_proveedor = 1, 'ACTIVO', 'DESACTIVADO') AS tipoestado
-			FROM 
+			FROM
 				catalogo_proveedores a, catalogo_estados b, catalogo_municipios c, catalogo_giro d
-			WHERE 
-				a.id_catalogo_estado_FK = b.id_catalogo_estado_PK 
+			WHERE
+				a.id_catalogo_estado_FK = b.id_catalogo_estado_PK
 			AND a.id_catalogo_municipios_FK = c.id_catalogo_municipios_PK
 			AND a.id_catalogo_giro_FK = d.id_catalogo_giro_PK
 			$fil
+			ORDER BY a.id_catalogo_proveedor_PK ASC
 			LIMIT $datPag->start , $datPag->limit
 EOT;
         	$query = parent::querySelect($sql);
