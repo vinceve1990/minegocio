@@ -1,3 +1,4 @@
+var activeClass = "InfoPrincipal";
 $(document).ready(function() {
 	verProveedores(5,1);
 
@@ -10,8 +11,10 @@ $(document).ready(function() {
     $("#newProveedor").click(function() {
         DialogProveedor('altaProveedor', "");
 
-        $("#infoCuentas").hide();
-        $("#infoContactos").hide();
+        $("#InfoCuentas").hide();
+        $("#InfoContactos").hide();
+
+        $("#InfoPrincipal").click();
     });
 
     //Enter C.P.
@@ -40,9 +43,9 @@ $(document).ready(function() {
             $.post('/minegocio/proveedores/server', {accion: 'altaProveedor', Dat : Dat, token : TokenEncryp}, function(data) {
                 DialogProcesando('close');
                 if(data.val == 0) {
+                    verProveedores(5, 1);
                     limpiarFormulario();
                     $("#dialogProveedores").dialog('close');
-                    verProveedores(rows, page);
                     Swal.fire("ALTA DE PROVEEDOR CON EXITO");
                 } else {
                     Swal.fire(
@@ -179,8 +182,9 @@ function verProveedores(rows, page) {
 
         DialogProveedor('editaProveedor', datos);
 
-        $("#infoCuentas").show();
-        $("#infoContactos").show();
+        $("#InfoCuentas").show();
+        $("#InfoContactos").show();
+        $("#InfoPrincipal").click();
     });
 
     //Click Eliminar
@@ -250,6 +254,11 @@ function DialogProveedor(tipo, datos) {
             $("#textNombreProveedor").text(datos['nom_proveedor']);
             buscarEstados();
             buscarGiros();
+
+            /*Clicks para la informcaion*/
+            clickClassMenu();
+
+            $(".classocultar").hide();
         }
     }).dialog('open');
 }

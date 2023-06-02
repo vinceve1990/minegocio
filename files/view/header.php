@@ -1,3 +1,13 @@
+<?php
+    //error_reporting(0);
+    require_once "configConexion/conexion.php";
+    require_once "validaciones/class/validacionTokenAcceso.php";
+
+    $ConectarH = new ConectarH();
+
+    $ConectarH->Autenticar();
+    $validacionTokenAcceso = new validacionTokenAcceso($controlador);
+?>
 <!DOCTYPE HTML>
 <head>
     <title><?php echo $title ?></title>

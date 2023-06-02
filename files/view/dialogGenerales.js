@@ -273,6 +273,27 @@ function clickQuitarFiltro(rows, page) {
     });
 }
 
+function clickClassMenu() {
+    $(".classClickMenu").click(function () {
+        var valor = $(this).data();
+        
+        $(".classocultar").hide();
+
+        $("#form"+valor.datosver).show();
+
+        /*Remover class*/
+        var elementRem = document.getElementById(activeClass);
+        elementRem.classList.remove('active');
+
+        /*Activar class*/
+        var element = document.getElementById(valor.datosver);
+        element.classList.add('active');
+
+        activeClass = valor.datosver;
+        console.log(activeClass);
+    });
+}
+
 function recuperarFil(filAdd) {
     for(x in filAdd) {
         if($("#txt"+x).val() != "" && $("#txt"+x).val() != 'undefined' && $("#txt"+x).val() != undefined) {

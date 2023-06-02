@@ -51,24 +51,24 @@
           <!-- Profile Sidebar -->
           <section>
             <ul class="list-unstyled mb-0">
-              <li class="g-brd-top g-brd-gray-light-v7 mb-0" id="infoPrincipal">
-                <a class="d-flex align-items-center u-link-v5 g-parent g-py-15 active" href="../app-views/app-profile.html">
+              <li class="g-brd-top g-brd-gray-light-v7 mb-0 classClickMenu" data-datosver="InfoPrincipal" id="InfoPrincipal">
+                <a class="d-flex align-items-center u-link-v5 g-parent g-py-15">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
                     <i class="fa-solid fa-person-breastfeeding"></i>
                   </span>
                   <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">Información General</span>
                 </a>
               </li>
-              <li class="g-brd-top g-brd-gray-light-v7 mb-0" id="infoCuentas">
-                <a class="d-flex align-items-center u-link-v5 g-parent g-py-15" href="../app-views/app-profile-biography.html">
+              <li class="g-brd-top g-brd-gray-light-v7 mb-0 classClickMenu" data-datosver="InfoCuentas" id="InfoCuentas">
+                <a class="d-flex align-items-center u-link-v5 g-parent g-py-15">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
                     <i class="fa-solid fa-building-columns"></i>
                   </span>
                   <span class="g-color-gray-dark-v6 g-color-primary--parent-hover g-color-primary--parent-active">Cuentas</span>
                 </a>
               </li>
-              <li class="g-brd-top g-brd-gray-light-v7 mb-0" id="infoContactos">
-                <a class="d-flex align-items-center u-link-v5 g-parent g-py-15" href="../app-views/app-profile-interests.html">
+              <li class="g-brd-top g-brd-gray-light-v7 mb-0 classClickMenu" data-datosver="InfoContactos" id="InfoContactos">
+                <a class="d-flex align-items-center u-link-v5 g-parent g-py-15">
                   <span class="g-font-size-18 g-color-gray-light-v6 g-color-primary--parent-hover g-color-primary--parent-active g-mr-15">
                     <i class="fa-regular fa-address-book"></i>
                   </span>
@@ -81,10 +81,10 @@
       </div>
 
 
-      <!-- Información General -->
       <div class="col-md-9">
         <div class="h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md">
-          <form class="js-validate" novalidate="novalidate" id="formInfoPrincipal" name="formInfoPrincipal" method="post">
+          <!-- Información General -->
+          <form class="js-validate classocultar" novalidate="novalidate" id="formInfoPrincipal" name="formInfoPrincipal" method="post">
             <header>
               <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0">Información General</h2>
             </header>
@@ -270,9 +270,187 @@
               <button class="btn btn-md btn-xl--md u-btn-outline-gray-dark-v6 g-font-size-12 g-font-size-default--md g-mr-10 g-mb-10" type="reset">Cancelar</button>
             </div>
           </form>
+          <!-- End Información General -->
+          <!-- Información Cuentas -->
+          <form class="js-validate classocultar" novalidate="novalidate" id="formInfoCuentas" name="formInfoCuentas" method="post">
+            <header>
+              <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0">Cuentas</h2>
+            </header>
+
+            <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-my-30--md">
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Nombre:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="form-group g-pos-rel mb-0 has-success">
+                  <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                  <input id="nombreProveedor" name="nombreProveedor" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Email</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="form-group g-pos-rel mb-0 has-success">
+                  <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                  <input id="email" name="email" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="email" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="false" aria-invalid="false">
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Telefono:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="row g-mx-minus-10">
+                  <div class="col-auto align-self-center g-width-270 g-px-10">
+                    <div class="form-group g-pos-rel mb-0">
+                      <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                      <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                    </span>
+                      <input id="telefonoProveedor" name="telefonoProveedor" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="tel"  data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="false">
+                    </div>
+                  </div>
+
+                  <div class="col align-self-center g-hidden-md-down g-px-10">
+                    <em class="d-flex align-self-center align-items-center g-font-style-normal g-color-gray-dark-v6">
+                    <span class="g-pos-rel g-width-18 g-height-18 g-bg-secondary g-brd-around g-brd-secondary rounded-circle">
+                      <i class="hs-admin-check g-absolute-centered g-font-weight-800 g-font-size-8 g-color-white" title="Confirmed"></i>
+                    </span>
+                    <span class="g-hidden-lg-down g-font-weight-300 g-font-size-default g-color-secondary g-ml-8">Confirmed</span>
+                  </em>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Calle:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="form-group g-pos-rel mb-0 has-success">
+                  <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                  <input id="calle" name="calle" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                </div>
+              </div>
+            </div>
+
+            <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-my-30--md">
+
+            <div>
+              <button class="btn btn-md btn-xl--md u-btn-secondary g-width-160--md g-font-size-12 g-font-size-default--md g-mb-10" type="submit">Guardar</button>
+              <button class="btn btn-md btn-xl--md u-btn-outline-gray-dark-v6 g-font-size-12 g-font-size-default--md g-mr-10 g-mb-10" type="reset">Cancelar</button>
+            </div>
+          </form>
+          <!-- End Información Cuentas -->
+          <!-- Información Contactos -->
+          <form class="js-validate classocultar" novalidate="novalidate" id="formInfoContactos" name="formInfoContactos" method="post">
+            <header>
+              <h2 class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0">Contactos</h2>
+            </header>
+
+            <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-my-30--md">
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Nombre:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="form-group g-pos-rel mb-0 has-success">
+                  <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                  <input id="nombreProveedor" name="nombreProveedor" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Email</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="form-group g-pos-rel mb-0 has-success">
+                  <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                  <input id="email" name="email" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="email" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="false" aria-invalid="false">
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Telefono:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="row g-mx-minus-10">
+                  <div class="col-auto align-self-center g-width-270 g-px-10">
+                    <div class="form-group g-pos-rel mb-0">
+                      <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                      <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                    </span>
+                      <input id="telefonoProveedor" name="telefonoProveedor" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="tel"  data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="false">
+                    </div>
+                  </div>
+
+                  <div class="col align-self-center g-hidden-md-down g-px-10">
+                    <em class="d-flex align-self-center align-items-center g-font-style-normal g-color-gray-dark-v6">
+                    <span class="g-pos-rel g-width-18 g-height-18 g-bg-secondary g-brd-around g-brd-secondary rounded-circle">
+                      <i class="hs-admin-check g-absolute-centered g-font-weight-800 g-font-size-8 g-color-white" title="Confirmed"></i>
+                    </span>
+                    <span class="g-hidden-lg-down g-font-weight-300 g-font-size-default g-color-secondary g-ml-8">Confirmed</span>
+                  </em>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-mb-20">
+              <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                <label class="mb-0">Calle:</label>
+              </div>
+
+              <div class="col-md-9 align-self-center">
+                <div class="form-group g-pos-rel mb-0 has-success">
+                  <span class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success">
+                  <i class="hs-admin-check g-absolute-centered g-font-size-default g-color-secondary"></i>
+                </span>
+                  <input id="calle" name="calle" class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12" type="text" required="required" data-error-class="u-has-error-v3" data-success-class="has-success" aria-required="true" aria-invalid="false">
+                </div>
+              </div>
+            </div>
+
+            <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-my-30--md">
+
+            <div>
+              <button class="btn btn-md btn-xl--md u-btn-secondary g-width-160--md g-font-size-12 g-font-size-default--md g-mb-10" type="submit">Guardar</button>
+              <button class="btn btn-md btn-xl--md u-btn-outline-gray-dark-v6 g-font-size-12 g-font-size-default--md g-mr-10 g-mb-10" type="reset">Cancelar</button>
+            </div>
+          </form>
+          <!-- End Información Contactos -->
         </div>
       </div>
-      <!-- End Información General -->
     </div>
   </div>
 </div>

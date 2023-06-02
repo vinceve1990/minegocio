@@ -1,17 +1,3 @@
-<?php
-	//error_reporting(0);
-	require_once "../minegocio/configConexion/conexion.php";
-	require_once "validaciones/class/validacionTokenAcceso.php";
-
-	$ConectarH = new ConectarH();
-
-	$ConectarH->Autenticar();
-	$validacionTokenAcceso = new validacionTokenAcceso($controlador);
-
-	if(empty($_SESSION['id_persona_PK'])) {
-		header("Location: /minegocio/");
-	}
-?>
 
 <!-- Header -->
 <header id="js-header" class="u-header u-header--sticky-top">
