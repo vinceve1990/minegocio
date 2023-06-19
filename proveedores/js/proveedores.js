@@ -17,8 +17,7 @@ $(document).ready(function() {
         $("#InfoPrincipal").click();
     });
 
-    //Enter C.P.
-
+    /*Click de formInfoPrincipal*/
     $.HSCore.components.HSValidation.init('.js-validate');
 
     let formInfoPrincipal = document.getElementById("formInfoPrincipal");
@@ -74,6 +73,19 @@ $(document).ready(function() {
             $("#dialogProveedores").dialog("close");
         }
     });
+    /*Fin Click de formInfoPrincipal*/
+
+    /*Click de formInfoCuentas*/
+    $.HSCore.components.HSValidation.init('.js-validate');
+
+    let formInfoCuentas = document.getElementById("formInfoCuentas");
+
+    formInfoCuentas.addEventListener("reset", (e) => {
+        if (e.returnValue == true) {
+            $("#dialogProveedores").dialog("close");
+        }
+    });
+    /*Fin Click de formInfoCuentas*/
 });
 
 function verProveedores(rows, page) {
