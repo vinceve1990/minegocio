@@ -156,7 +156,7 @@ function paginacion(datos, pageactivo) {
     return pag;
 }
 
-function clickPrev(rows, page) {
+function clickPrev(rows, page, funct) {
     $("#datatablePagination1Prev").click(function () {
         page--;
 
@@ -164,11 +164,12 @@ function clickPrev(rows, page) {
             page = 1;
         }
 
-        verProveedores(rows, page);
+        eval(funct);
+        //verProveedores(rows, page);
     });
 }
 
-function clickNext(rows, page) {
+function clickNext(rows, page, funct) {
     $("#datatablePagination1Next").click(function () {
         page++;
 
@@ -178,18 +179,20 @@ function clickNext(rows, page) {
             page = paginacion.pagefinal;
         }
 
-        verProveedores(rows, page);
+        eval(funct);
+        //verProveedores(rows, page);
     });
 }
 
-function clickPagina(rows, page) {
+function clickPagina(rows, page, funct) {
     $(".datatablePaginationPage").click(function () {
 
         var paginacion = $(this).data();
 
         page = paginacion.dtpageto;
 
-        verProveedores(rows, page);
+        eval(funct);
+        //verProveedores(rows, page);
     });
 }
 
