@@ -222,22 +222,22 @@ function verProveedores(rows, page) {
     });
 
     //Click Ant
-    clickPrev(rows, page);
+    clickPrev(rows, page, "verProveedores(rows, page)");
 
     //Click Next
-    clickNext(rows, page);
+    clickNext(rows, page, "verProveedores(rows, page)");
 
     //Click NumeroPag
-    clickPagina(rows, page);
+    clickPagina(rows, page, "verProveedores(rows, page)");
 
     //EnterFiltros
-    enterFiltros(rows, 1);
+    enterFiltros(rows, 1, "verProveedores(rows, page)");
 
     //ClickFiltros
-    clickFiltros(rows, 1);
+    clickFiltros(rows, 1, "verProveedores(rows, page)");
 
     //clickQuitarFiltro
-    clickQuitarFiltro(rows, 1);
+    clickQuitarFiltro(rows, 1, "verProveedores(rows, page)");
 }
 
 function DialogProveedor(tipo, datos) {
