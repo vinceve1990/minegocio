@@ -46,9 +46,11 @@ EOT;
 				}
 
 				$rowBD = $queryBD->fetch_object();
-
+				
 				if(isset($rowBD->nombrebd)) {
 					$bdSel = $rowBD->nombrebd;
+					/*Eliminar despues*/
+					parent::setBD($bdSel);
 					$passBD = $rowBD->passwordBD;
 					$nombre_negocio = $rowBD->nombre_negocio;
 					$tipo_negocio = $rowBD->tipo_negocio;
