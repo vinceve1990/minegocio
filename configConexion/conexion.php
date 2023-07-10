@@ -10,10 +10,14 @@ class ConectarH {
 	public function Connect($Superusuario = ""){
 
 		if($Superusuario == "") {
-			$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
+			/*$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
 			$servidor = "localhost";
 			$user = "userNormal";//usuario sin privilegios
-	    	$pwd = "msE0jvNc0L31F9UO";
+	    	$pwd = "msE0jvNc0L31F9UO";*/
+	    	$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
+			$servidor = (!empty($_SESSION["baseDatos"])) ? "sql9.freesqldatabase.com" : ((!empty($this->BD)) ? "sql9.freesqldatabase.com" : "localhost");
+			$user = (!empty($_SESSION["baseDatos"])) ? "sql9631468" : ((!empty($this->BD)) ? "sql9631468" : "userNormal");//usuario sin privilegios
+	    	$pwd = (!empty($_SESSION["baseDatos"])) ? "zyUYA9dI83" : ((!empty($this->BD)) ? "zyUYA9dI83" : "msE0jvNc0L31F9UO");
 		} else {
 			$bd = 'minegocio_config';
 			$servidor = "localhost";
@@ -22,7 +26,6 @@ class ConectarH {
 		}
 
 		$this->sqlConnect = new mysqli($servidor,$user,$pwd,$bd);
-
 		// Verificar la conexión
 		if (mysqli_connect_errno()) {
 			printf("Falló la conexión: %s\n", mysqli_connect_error());
@@ -47,6 +50,10 @@ class ConectarH {
 		$conexion = ($sqlConexion == "") ? $this->Connect($Superusuario) : $sqlConexion;
 
     	return $conexion;
+	}
+
+	public function setBD($BD) {
+		$this->BD = $BD;
 	}
 
 	public function querySelect($sql, $sqlConnect = "", $Superusuario = "") {

@@ -13,7 +13,6 @@ function verInsumos(rows, page) {
     filAdd.id = "";
     filAdd.codigoI = "";
     filAdd.codigoB = "";
-    filAdd.categoria = "";
     filAdd.descripcion = "";
     filAdd.umed = "";
     filAdd.status = "";
@@ -40,9 +39,6 @@ function verInsumos(rows, page) {
                                         </td>
                                         <td>
                                             ${filtrosTablaText('codigo_barras', filAdd.codigoB)}
-                                        </td>
-                                        <td>
-                                            ${filtrosTablaText('categoria', filAdd.categoria)}
                                         </td>
                                         <td>
                                             ${filtrosTablaText('descripcion_insumo', filAdd.descripcion)}
@@ -87,7 +83,6 @@ function verInsumos(rows, page) {
                                         <td>${data.rows[x][5]}</td>
                                         <td>${data.rows[x][6]}</td>
                                         <td>${data.rows[x][8]}</td>
-                                        <td>${data.rows[x][9]}</td>
                                         <td>
                                             <a class="js-edit u-link-v5 g-color-gray-light-v6 g-color-secondary--hover editarInsumo" data-id_insumo=${data.rows[x][0]} data-nom_proveedor="${data.rows[x][1]}">
                                                 <i class="hs-admin-pencil g-font-size-18 g-mr-10 g-mr-15--md g-color-secondary--hover" style="color: blue;"></i>

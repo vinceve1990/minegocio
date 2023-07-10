@@ -165,6 +165,7 @@ function clickPrev(rows, page, funct) {
         }
 
         eval(funct);
+        //verProveedores(rows, page);
     });
 }
 
@@ -179,6 +180,7 @@ function clickNext(rows, page, funct) {
         }
 
         eval(funct);
+        //verProveedores(rows, page);
     });
 }
 
@@ -190,6 +192,7 @@ function clickPagina(rows, page, funct) {
         page = paginacion.dtpageto;
 
         eval(funct);
+        //verProveedores(rows, page);
     });
 }
 
@@ -248,28 +251,28 @@ function datosSelect(trNombre, valor, tipo) {
     return datos;
 }
 
-function enterFiltros(rows, page, funct) {
+function enterFiltros(rows, page) {
 
     $(".txtFiltros").on('keyup', function (event) {
         if (event.keyCode === 13) {
-            eval(funct);
+            verProveedores(rows, page);
         }
     });
 }
 
-function clickFiltros(rows, page, funct) {
+function clickFiltros(rows, page) {
     $(".clksFiltros").on('change', function (event) {
-        eval(funct);
+        verProveedores(rows, page);
     });
 }
 
-function clickQuitarFiltro(rows, page, funct) {
+function clickQuitarFiltro(rows, page) {
     $(".quitarfiltro").click(function () {
         var valor = $(this).data();
 
         $("#txt"+valor.txtnombre).val("");
 
-        eval(funct);
+        verProveedores(rows, page);
     });
 }
 

@@ -19,7 +19,6 @@
                     <th>#</th>
                     <th>Codigo I</th>
                     <th>Codigo B</th>
-                    <th>Categoria</th>
                     <th>Descripcióin</th>
                     <th>Unidad Medida</th>
                     <th>P. Compra</th>

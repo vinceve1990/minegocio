@@ -35,7 +35,7 @@ EOT;
 			}
 
 			$sql = <<<EOT
-			SELECT TABLE_NAME FROM information_schema.`TABLES` WHERE TABLE_SCHEMA = 'minegocio_basedatos';
+			SELECT TABLE_NAME FROM information_schema.`TABLES` WHERE TABLE_SCHEMA = 'minegocio_basedatos' AND TABLE_TYPE = 'BASE TABLE'
 EOT;
 			$query = parent::querySelect($sql, "", "SuperUser");//$this->sqlConnect->query($sql);
 

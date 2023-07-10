@@ -17,8 +17,7 @@ $(document).ready(function() {
         $("#InfoPrincipal").click();
     });
 
-    //Enter C.P.
-
+    /*Click de formInfoPrincipal*/
     $.HSCore.components.HSValidation.init('.js-validate');
 
     let formInfoPrincipal = document.getElementById("formInfoPrincipal");
@@ -74,6 +73,19 @@ $(document).ready(function() {
             $("#dialogProveedores").dialog("close");
         }
     });
+    /*Fin Click de formInfoPrincipal*/
+
+    /*Click de formInfoCuentas*/
+    $.HSCore.components.HSValidation.init('.js-validate');
+
+    let formInfoCuentas = document.getElementById("formInfoCuentas");
+
+    formInfoCuentas.addEventListener("reset", (e) => {
+        if (e.returnValue == true) {
+            $("#dialogProveedores").dialog("close");
+        }
+    });
+    /*Fin Click de formInfoCuentas*/
 });
 
 function verProveedores(rows, page) {
@@ -222,22 +234,22 @@ function verProveedores(rows, page) {
     });
 
     //Click Ant
-    clickPrev(rows, page, "verProveedores(rows, page)");
+    clickPrev(rows, page);
 
     //Click Next
-    clickNext(rows, page, "verProveedores(rows, page)");
+    clickNext(rows, page);
 
     //Click NumeroPag
-    clickPagina(rows, page, "verProveedores(rows, page)");
+    clickPagina(rows, page);
 
     //EnterFiltros
-    enterFiltros(rows, 1, "verProveedores(rows, page)");
+    enterFiltros(rows, 1);
 
     //ClickFiltros
-    clickFiltros(rows, 1, "verProveedores(rows, page)");
+    clickFiltros(rows, 1);
 
     //clickQuitarFiltro
-    clickQuitarFiltro(rows, 1, "verProveedores(rows, page)");
+    clickQuitarFiltro(rows, 1);
 }
 
 function DialogProveedor(tipo, datos) {

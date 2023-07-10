@@ -68,7 +68,9 @@
 						}
 					}
 				} else {
+					$response->val = 1;
 					$response->mensaje = "EXISTE UNA CUENTA CON EL CORREO O TELEFONO INGRESADOS";
+					$response->errorClass = "";
 				}
 
 				break;
