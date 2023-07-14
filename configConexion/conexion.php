@@ -15,9 +15,9 @@ class ConectarH {
 			$user = "userNormal";//usuario sin privilegios
 	    	$pwd = "msE0jvNc0L31F9UO";*/
 	    	$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
-			$servidor = (!empty($_SESSION["baseDatos"])) ? "sql9.freesqldatabase.com" : ((!empty($this->BD)) ? "sql9.freesqldatabase.com" : "localhost");
-			$user = (!empty($_SESSION["baseDatos"])) ? "sql9631468" : ((!empty($this->BD)) ? "sql9631468" : "userNormal");//usuario sin privilegios
-	    	$pwd = (!empty($_SESSION["baseDatos"])) ? "zyUYA9dI83" : ((!empty($this->BD)) ? "zyUYA9dI83" : "msE0jvNc0L31F9UO");
+			$servidor = (!empty($_SESSION["baseDatos"])) ? "bbnoibydfqpo4fjy0h3n-mysql.services.clever-cloud.com" : ((!empty($this->BD)) ? "bbnoibydfqpo4fjy0h3n-mysql.services.clever-cloud.com" : "localhost");
+			$user = (!empty($_SESSION["baseDatos"])) ? "unrtlkmlpwthqfay" : ((!empty($this->BD)) ? "unrtlkmlpwthqfay" : "userNormal");//usuario sin privilegios
+	    	$pwd = (!empty($_SESSION["baseDatos"])) ? "4na5O8iVB1P2Mf3Yb8AM" : ((!empty($this->BD)) ? "4na5O8iVB1P2Mf3Yb8AM" : "msE0jvNc0L31F9UO");
 		} else {
 			$bd = 'minegocio_config';
 			$servidor = "localhost";
