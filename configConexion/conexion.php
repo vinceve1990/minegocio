@@ -10,14 +10,14 @@ class ConectarH {
 	public function Connect($Superusuario = ""){
 
 		if($Superusuario == "") {
-			/*$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
+			$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
 			$servidor = "localhost";
 			$user = "userNormal";//usuario sin privilegios
-	    	$pwd = "msE0jvNc0L31F9UO";*/
-	    	$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
-			$servidor = (!empty($_SESSION["baseDatos"])) ? "sql9.freesqldatabase.com" : ((!empty($this->BD)) ? "sql9.freesqldatabase.com" : "localhost");
-			$user = (!empty($_SESSION["baseDatos"])) ? "sql9631468" : ((!empty($this->BD)) ? "sql9631468" : "userNormal");//usuario sin privilegios
-	    	$pwd = (!empty($_SESSION["baseDatos"])) ? "zyUYA9dI83" : ((!empty($this->BD)) ? "zyUYA9dI83" : "msE0jvNc0L31F9UO");
+	    	$pwd = "msE0jvNc0L31F9UO";
+	    	/*$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
+			$servidor = (!empty($_SESSION["baseDatos"])) ? "gcp.connect.psdb.cloud" : ((!empty($this->BD)) ? "gcp.connect.psdb.cloud" : "localhost");
+			$user = (!empty($_SESSION["baseDatos"])) ? "iovs3x7ojf6jgzyjv7xp" : ((!empty($this->BD)) ? "iovs3x7ojf6jgzyjv7xp" : "userNormal");//usuario sin privilegios
+	    	$pwd = (!empty($_SESSION["baseDatos"])) ? "pscale_pw_qo1hsympZ8KsIHmhRn75Fx8HCR0F3gEs6GXCN3sZfGf" : ((!empty($this->BD)) ? "pscale_pw_qo1hsympZ8KsIHmhRn75Fx8HCR0F3gEs6GXCN3sZfGf" : "msE0jvNc0L31F9UO");*/
 		} else {
 			$bd = 'minegocio_config';
 			$servidor = "localhost";
@@ -25,7 +25,15 @@ class ConectarH {
 	    	$pwd = "S9rQrSDpdKmR6pJ";
 		}
 
-		$this->sqlConnect = new mysqli($servidor,$user,$pwd,$bd);
+		/*if($bd != "minegocio_config") {
+			$this->sqlConnect = mysqli_init();
+			$this->sqlConnect->ssl_set(NULL, NULL, "/etc/ssl/certs/ca-certificates.crt", NULL, NULL);
+			$this->sqlConnect->real_connect($servidor,$user,$pwd,$bd);
+		} else {*/
+			$this->sqlConnect = new mysqli($servidor,$user,$pwd,$bd);
+		//}
+		
+		
 		// Verificar la conexión
 		if (mysqli_connect_errno()) {
 			printf("Falló la conexión: %s\n", mysqli_connect_error());
