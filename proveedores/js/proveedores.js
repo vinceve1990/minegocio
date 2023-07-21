@@ -271,8 +271,19 @@ function DialogProveedor(tipo, datos) {
             clickClassMenu();
 
             $(".classocultar").hide();
+
+            /*Llenar informacion del proveedor*/
+            informacion_proveedor(datos['id_proveedor']);
         }
     }).dialog('open');
+}
+
+function informacion_proveedor(id_proveedor) {
+    DialogProcesando('open');
+    $.post('/minegocio/proveedores/server', {accion: 'informacion', id : id_proveedor, rows:rows, page:page, sidx:'id_catalogo_proveedor_PK', sord:'desc', filAdd:filAdd}, function(data) {
+        console.log(data);
+        DialogProcesando('close');
+    }, 'json');
 }
 
 function buscarEstados() {

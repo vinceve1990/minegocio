@@ -10,14 +10,10 @@ class ConectarH {
 	public function Connect($Superusuario = ""){
 
 		if($Superusuario == "") {
-			/*$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
+			$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
 			$servidor = "localhost";
 			$user = "userNormal";//usuario sin privilegios
-	    	$pwd = "msE0jvNc0L31F9UO";*/
-	    	$bd = (!empty($_SESSION["baseDatos"])) ? $_SESSION["baseDatos"] : ((!empty($this->BD)) ? $this->BD : 'minegocio_config');
-			$servidor = (!empty($_SESSION["baseDatos"])) ? "bbnoibydfqpo4fjy0h3n-mysql.services.clever-cloud.com" : ((!empty($this->BD)) ? "bbnoibydfqpo4fjy0h3n-mysql.services.clever-cloud.com" : "localhost");
-			$user = (!empty($_SESSION["baseDatos"])) ? "unrtlkmlpwthqfay" : ((!empty($this->BD)) ? "unrtlkmlpwthqfay" : "userNormal");//usuario sin privilegios
-	    	$pwd = (!empty($_SESSION["baseDatos"])) ? "4na5O8iVB1P2Mf3Yb8AM" : ((!empty($this->BD)) ? "4na5O8iVB1P2Mf3Yb8AM" : "msE0jvNc0L31F9UO");
+	    	$pwd = "msE0jvNc0L31F9UO";
 		} else {
 			$bd = 'minegocio_config';
 			$servidor = "localhost";
