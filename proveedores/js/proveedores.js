@@ -192,7 +192,7 @@ function verProveedores(rows, page) {
     $(".editarProveedor").click(function () {
         datos = $(this).data();
 
-        DialogProveedor('editaProveedor', datos);
+        DialogProveedor('editaProveedor', datos, filAdd);
 
         $("#InfoCuentas").show();
         $("#InfoContactos").show();
@@ -234,25 +234,25 @@ function verProveedores(rows, page) {
     });
 
     //Click Ant
-    clickPrev(rows, page);
+    clickPrev(rows, page, "verProveedores(rows, page)");
 
     //Click Next
-    clickNext(rows, page);
+    clickNext(rows, page, "verProveedores(rows, page)");
 
     //Click NumeroPag
-    clickPagina(rows, page);
+    clickPagina(rows, page, "verProveedores(rows, page)");
 
     //EnterFiltros
-    enterFiltros(rows, 1);
+    enterFiltros(rows, 1, "verProveedores(rows, page)");
 
     //ClickFiltros
-    clickFiltros(rows, 1);
+    clickFiltros(rows, 1, "verProveedores(rows, page)");
 
     //clickQuitarFiltro
-    clickQuitarFiltro(rows, 1);
+    clickQuitarFiltro(rows, 1, "verProveedores(rows, page)");
 }
 
-function DialogProveedor(tipo, datos) {
+function DialogProveedor(tipo, datos, filAdd = '') {
     $("#dialogProveedores").dialog({
         title: 'Proveedor',
         autoOpen: false,
@@ -273,14 +273,14 @@ function DialogProveedor(tipo, datos) {
             $(".classocultar").hide();
 
             /*Llenar informacion del proveedor*/
-            informacion_proveedor(datos['id_proveedor']);
+            informacion_proveedor(datos['id_proveedor'], filAdd);
         }
     }).dialog('open');
 }
 
-function informacion_proveedor(id_proveedor) {
+function informacion_proveedor(id_proveedor, filAdd) {
     DialogProcesando('open');
-    $.post('/minegocio/proveedores/server', {accion: 'informacion', id : id_proveedor, rows:rows, page:page, sidx:'id_catalogo_proveedor_PK', sord:'desc', filAdd:filAdd}, function(data) {
+    $.post('/minegocio/proveedores/server', {accion: 'informacion', id : id_proveedor, rows:10, page:1, sidx:'id_catalogo_proveedor_PK', sord:'desc', filAdd:filAdd}, function(data) {
         console.log(data);
         DialogProcesando('close');
     }, 'json');

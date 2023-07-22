@@ -114,11 +114,11 @@ function verInsumos(rows, page) {
     clickPagina(rows, page, "verInsumos(rows, page)");
 
     //EnterFiltros
-    enterFiltros(rows, 1);
+    enterFiltros(rows, 1, "verInsumos(rows, page)");
 
     //ClickFiltros
-    clickFiltros(rows, 1);
+    clickFiltros(rows, 1, "verInsumos(rows, page)");
 
     //clickQuitarFiltro
-    clickQuitarFiltro(rows, 1);
+    clickQuitarFiltro(rows, 1, "verInsumos(rows, page)");
 }
