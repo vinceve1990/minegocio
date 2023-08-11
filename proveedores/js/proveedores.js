@@ -273,15 +273,25 @@ function DialogProveedor(tipo, datos, filAdd = '') {
             $(".classocultar").hide();
 
             /*Llenar informacion del proveedor*/
-            informacion_proveedor(datos['id_proveedor'], filAdd);
+            filAdd.id = datos['id_proveedor'];
+            informacion_proveedor(filAdd);
         }
     }).dialog('open');
 }
 
-function informacion_proveedor(id_proveedor, filAdd) {
+function informacion_proveedor(filAdd) {
     DialogProcesando('open');
-    $.post('/minegocio/proveedores/server', {accion: 'informacion', id : id_proveedor, rows:10, page:1, sidx:'id_catalogo_proveedor_PK', sord:'desc', filAdd:filAdd}, function(data) {
-        console.log(data);
+    $.post('/minegocio/proveedores/server', {accion: 'informacion', rows:10, page:1, sidx:'id_catalogo_proveedor_PK', sord:'desc', filAdd:filAdd}, function(data) {
+        console.log(data.rows[0]);
+        $("#nombreProveedor").val(data.rows[0][1]);
+        $("#rfc").val(data.rows[0][2]);
+        $("#email").val(data.rows[0][4]);
+        $("#telefonoProveedor").val(data.rows[0][3]);
+        $("#cp").val(data.rows[0][6]);
+        $("#selectEstadoDiv").val(data.rows[0][5]);
+        $("#selectMunicipioDiv").val(data.rows[0][9]);
+        $("#calle").val(data.rows[0][10]);
+        $("#selectGiroDiv").val(data.rows[0][11]);
         DialogProcesando('close');
     }, 'json');
 }
