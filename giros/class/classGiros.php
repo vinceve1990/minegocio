@@ -7,21 +7,28 @@
 
 		function __construct() {}
 
-		private function selectGiros() {
+		private function selectGiros($param) {
 			$sql = <<<EOT
 			SELECT * FROM catalogo_giro
 EOT;
 			$query = parent::querySelect($sql);
 			$opt = "<option value='0'>SELECCIONE UN GIRO</option>";
+			
 			while ($row = $query->fetch_object()) {
-				$opt .= "<option value='".$row->id_catalogo_giro_PK."'>".$row->nombre_giro."</option>";
+				$sel = "";
+				
+				if($param->id_giroEdicion == $row->id_catalogo_giro_PK) {
+					$sel = "selected";
+				}
+
+				$opt .= "<option value='".$row->id_catalogo_giro_PK."' $sel>".$row->nombre_giro."</option>";
 			}
 
 	        return $opt;
 		}
 
-		public function buscarGiros() {
-			$bus = $this->selectGiros();
+		public function buscarGiros($param) {
+			$bus = $this->selectGiros($param);
 
 			return $bus;
 		}

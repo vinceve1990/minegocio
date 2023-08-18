@@ -33,7 +33,7 @@ EOT;
 
 			$sql = <<<EOT
 			SELECT
-				a.*, b.nombre_estado, c.nombre_municipio, d.nombre_giro, IF(a.status_proveedor = 1, 'ACTIVO', 'DESACTIVADO') AS tipoestado
+				a.*, b.nombre_estado, c.nombre_municipio, d.nombre_giro, IF(a.status_proveedor = 1, 'ACTIVO', 'DESACTIVADO') AS tipoestado, b.id_catalogo_estado_PK, c.id_catalogo_municipios_PK, d.id_catalogo_giro_PK
 			FROM
 				catalogo_proveedores a, catalogo_estados b, catalogo_municipios c, catalogo_giro d
 			WHERE
@@ -49,9 +49,9 @@ EOT;
         	$i = 0;
 
 			while ($row = $query->fetch_object()) {
-				$row->telefono = "(".substr($row->telefono,0,3).")"." ".substr($row->telefono,5,3)."-".substr($row->telefono,6,4);
+				$telefono = "(".substr($row->telefono,0,3).")"." ".substr($row->telefono,5,3)."-".substr($row->telefono,6,4);
 
-			    $responce->rows[$i] = array($row->id_catalogo_proveedor_PK, $row->nombre, $row->rfc, $row->telefono, $row->email_principal, $row->nombre_estado, $row->cp, $row->status_proveedor, $row->tipoestado, $row->nombre_municipio, $row->calle, $row->nombre_giro);
+			    $responce->rows[$i] = array($row->id_catalogo_proveedor_PK, $row->nombre, $row->rfc, $telefono, $row->email_principal, $row->nombre_estado, $row->cp, $row->status_proveedor, $row->tipoestado, $row->nombre_municipio, $row->calle, $row->nombre_giro, $row->id_catalogo_estado_PK, $row->id_catalogo_municipios_PK, $row->id_catalogo_giro_PK, $row->telefono);
 			    $i++;
 			}
 

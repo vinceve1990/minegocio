@@ -118,15 +118,23 @@
 			break;
 
 		case 'selectGiros';
-			$classGiros = new classGiros();
-			$response = $classGiros->buscarGiros();
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$classGiros = new classGiros();
+				$response = $classGiros->buscarGiros($param);
+			} else {
+				$response->val = $validacionesDatosIngreso->result;
+				$response->mensaje = $validacionesDatosIngreso->mensaje;
+			}
 			break;
 
 		case 'altaProveedor':
 			$inicioModel = new inicioModel();
 
 			$descToken = $inicioModel->descriptToken($token);
-
 			if($descToken === $_SESSION['tokenVal']) {
 				$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
 

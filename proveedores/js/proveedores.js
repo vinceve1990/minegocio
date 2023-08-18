@@ -1,4 +1,7 @@
 var activeClass = "InfoPrincipal";
+var id_estadoEdicion = 0;
+var id_municipioEdicion = 0;
+var id_giroEdicion = 0;
 $(document).ready(function() {
 	verProveedores(5,1);
 
@@ -282,16 +285,28 @@ function DialogProveedor(tipo, datos, filAdd = '') {
 function informacion_proveedor(filAdd) {
     DialogProcesando('open');
     $.post('/minegocio/proveedores/server', {accion: 'informacion', rows:10, page:1, sidx:'id_catalogo_proveedor_PK', sord:'desc', filAdd:filAdd}, function(data) {
-        console.log(data.rows[0]);
+
+        id_estadoEdicion = data.rows[0][12];
+        id_municipioEdicion = data.rows[0][13];
+        id_giroEdicion = data.rows[0][14];
+
         $("#nombreProveedor").val(data.rows[0][1]);
         $("#rfc").val(data.rows[0][2]);
         $("#email").val(data.rows[0][4]);
-        $("#telefonoProveedor").val(data.rows[0][3]);
+        $("#telefonoProveedor").val(data.rows[0][15]);
         $("#cp").val(data.rows[0][6]);
-        $("#selectEstadoDiv").val(data.rows[0][5]);
-        $("#selectMunicipioDiv").val(data.rows[0][9]);
+
+        //Seleccionar Estado
+        buscarEstados();
+
+        //Seleccionar Municipio
+        buscarMunicipios();
+
         $("#calle").val(data.rows[0][10]);
-        $("#selectGiroDiv").val(data.rows[0][11]);
+
+        //Seleccionar Giro
+        buscarGiros();
+
         DialogProcesando('close');
     }, 'json');
 }
@@ -302,7 +317,7 @@ function buscarEstados() {
     var id_estado = 0;
 
     var Dat = new Object();
-    Dat.selected = 'integer:'+0;
+    Dat.selected = 'integer:'+id_estadoEdicion;
     if(cp > 0) {
         Dat.cp = 'integer:'+cp;
     } else {
@@ -343,6 +358,7 @@ function buscarMunicipios(id_estado) {
 
     Dat.id_estado = id_estado;
     Dat.cp = cp;
+    Dat.id_municipioEdicion = 'integer:'+id_municipioEdicion;
 
     $.post('/minegocio/proveedores/server', {accion: 'selectMinicipio', Dat : Dat}, function(data) {
         var sel = `<select id="selectMunicipio" name="selectMunicipio" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
@@ -361,7 +377,11 @@ function buscarMunicipios(id_estado) {
 }
 
 function buscarGiros() {
-    $.post('/minegocio/proveedores/server', {accion: 'selectGiros'}, function(data) {
+    var Dat = new Object();
+    
+    Dat.id_giroEdicion = 'integer:'+id_giroEdicion;
+    
+    $.post('/minegocio/proveedores/server', {accion: 'selectGiros', Dat : Dat}, function(data) {
         var sel = `<select id="selectGiro" name="selectMunicipio" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
                     ${data}
                 </select>`;
