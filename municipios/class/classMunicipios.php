@@ -24,7 +24,13 @@ EOT;
 			$opt = "<option value='0'>SELECCIONE UN MUNICIPIO</option>";
 
 			while ($row = $query->fetch_object()) {
-				$opt .= "<option value='".$row->id_catalogo_municipios_PK."'>".$row->nombre_municipio."</option>";
+				$sel = "";
+				
+				if($param->id_municipioEdicion == $row->id_catalogo_municipios_PK) {
+					$sel = "selected";
+				}
+				
+				$opt .= "<option value='".$row->id_catalogo_municipios_PK."' $sel>".$row->nombre_municipio."</option>";
 			}
 
 	        return $opt;

@@ -6,6 +6,7 @@
 	require_once "../minegocio/estados/class/classEstados.php";
 	require_once "../minegocio/municipios/class/classMunicipios.php";
 	require_once "../minegocio/giros/class/classGiros.php";
+	require_once "../minegocio/bancos/class/classBancos.php";
 	require_once "../minegocio/validaciones/class/classValidacionesProveedores.php";
 
 	/*Saneo de datos*/
@@ -50,8 +51,10 @@
 				$fil .= " AND a.email_principal LIKE '%".$filAdd['email']."%'";
 			}
 
-			if($filAdd['estado'] > 0) {
-				$fil .= " AND a.id_catalogo_estado_FK = ".$filAdd['estado'];
+			if (!empty($filAdd['estado'])) {
+				if($filAdd['estado'] > 0) {
+					$fil .= " AND a.id_catalogo_estado_FK = ".$filAdd['estado'];
+				}
 			}
 
 			if(!empty($filAdd['cp'])) {
@@ -103,7 +106,7 @@
 			}
 			break;
 
-		case 'selectMinicipio';
+		case 'selectMunicipio';
 			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
 
 			if ($validacionesDatosIngreso->result == 0) {
@@ -118,15 +121,28 @@
 			break;
 
 		case 'selectGiros';
-			$classGiros = new classGiros();
-			$response = $classGiros->buscarGiros();
+			$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+			if ($validacionesDatosIngreso->result == 0) {
+				$param = $validacionesDatosIngreso->paramValidado;
+
+				$classGiros = new classGiros();
+				$response = $classGiros->buscarGiros($param);
+			} else {
+				$response->val = $validacionesDatosIngreso->result;
+				$response->mensaje = $validacionesDatosIngreso->mensaje;
+			}
+			break;
+
+		case 'selectBancos';
+			$classBancos = new classBancos();
+			$response = $classBancos->getselectBancos();
 			break;
 
 		case 'altaProveedor':
 			$inicioModel = new inicioModel();
 
 			$descToken = $inicioModel->descriptToken($token);
-
 			if($descToken === $_SESSION['tokenVal']) {
 				$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
 
@@ -143,6 +159,24 @@
 						$response->val = 1;
 						$response->mensaje = "RFC YA EXISTE REGISTRADO";
 					}
+				} else {
+					$response->val = $validacionesDatosIngreso->result;
+					$response->mensaje = $validacionesDatosIngreso->mensaje;
+				}
+			}
+			break;
+
+		case 'editaProveedor':
+			$inicioModel = new inicioModel();
+
+			$descToken = $inicioModel->descriptToken($token);
+			if($descToken === $_SESSION['tokenVal']) {
+				$validacionesDatosIngreso = new validacionesDatosIngreso((object)$Dat);
+
+				if ($validacionesDatosIngreso->result == 0) {
+					$param = $validacionesDatosIngreso->paramValidado;
+
+					$response = $classProveedor->editarProveedor($param);
 				} else {
 					$response->val = $validacionesDatosIngreso->result;
 					$response->mensaje = $validacionesDatosIngreso->mensaje;
