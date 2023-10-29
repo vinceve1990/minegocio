@@ -12,12 +12,14 @@ $(document).ready(function() {
     $("#panelOperaciones").css("background-color","#29364d");
 
     $("#newProveedor").click(function() {
+
         DialogProveedor('altaProveedor', "");
 
         $("#InfoCuentas").hide();
         $("#InfoContactos").hide();
 
         $("#InfoPrincipal").click();
+
     });
 
     /*Click de formInfoPrincipal*/
@@ -28,7 +30,15 @@ $(document).ready(function() {
     $("#formInfoPrincipal").submit(function(event) {
         DialogProcesando('open');
 
+        datos = $("#formInfoPrincipal").data();
+        console.log("datos>>>");
+        console.log(datos);
+
         var Dat = new Object();
+
+        if(datos.tipoInfo == "editaProveedor") {
+            Dat.id_proveedor   = 'integer:'+datos.id_proveedorEdit;
+        }
 
         Dat.nombreProveedor   = 'string:'+$("#nombreProveedor").val();
         Dat.rfc               = 'string:'+$("#rfc").val();
@@ -42,13 +52,17 @@ $(document).ready(function() {
         var TokenEncryp = encrypt(Token);
 
         if($("#selectEstado").val() > 0 && $("#selectMunicipio").val() > 0 && $("#selectGiro").val() > 0) {
-            $.post('/minegocio/proveedores/server', {accion: 'altaProveedor', Dat : Dat, token : TokenEncryp}, function(data) {
+            $.post('/minegocio/proveedores/server', {accion: datos.tipoInfo, Dat : Dat, token : TokenEncryp}, function(data) {
                 DialogProcesando('close');
                 if(data.val == 0) {
                     verProveedores(5, 1);
                     limpiarFormulario();
                     $("#dialogProveedores").dialog('close');
-                    Swal.fire("ALTA DE PROVEEDOR CON EXITO");
+                    if(datos.tipoInfo == "editaProveedor") {
+                        Swal.fire("EDICION DEL PROVEEDOR CON EXITO");
+                    } else {
+                        Swal.fire("ALTA DE PROVEEDOR CON EXITO");
+                    }
                 } else {
                     Swal.fire(
                       data.mensaje,
@@ -73,6 +87,7 @@ $(document).ready(function() {
 
     formInfoPrincipal.addEventListener("reset", (e) => {
         if (e.returnValue == true) {
+            limpiarFormulario();
             $("#dialogProveedores").dialog("close");
         }
     });
@@ -83,8 +98,19 @@ $(document).ready(function() {
 
     let formInfoCuentas = document.getElementById("formInfoCuentas");
 
+    $("#formInfoCuentas").submit(function(event) {
+        Swal.fire(
+          "ALTA DE PROVEEDOR CON EXITO",
+          '',
+          'warning'
+        );
+
+        return false;
+    });
+
     formInfoCuentas.addEventListener("reset", (e) => {
         if (e.returnValue == true) {
+            limpiarFormulario();
             $("#dialogProveedores").dialog("close");
         }
     });
@@ -267,6 +293,10 @@ function DialogProveedor(tipo, datos, filAdd = '') {
         zIndex: 1100,
         open: function() {
             $("#textNombreProveedor").text(datos['nom_proveedor']);
+
+            $("#formInfoPrincipal").data("id_proveedorEdit", datos['id_proveedor']);
+            $("#formInfoPrincipal").data("tipoInfo", tipo);
+
             buscarEstados();
             buscarGiros();
 
@@ -277,7 +307,9 @@ function DialogProveedor(tipo, datos, filAdd = '') {
 
             /*Llenar informacion del proveedor*/
             filAdd.id = datos['id_proveedor'];
-            informacion_proveedor(filAdd);
+            if(tipo == "editaProveedor") {
+                informacion_proveedor(filAdd);
+            }
         }
     }).dialog('open');
 }
@@ -300,7 +332,7 @@ function informacion_proveedor(filAdd) {
         buscarEstados();
 
         //Seleccionar Municipio
-        buscarMunicipios();
+        buscarMunicipios(id_estadoEdicion);
 
         $("#calle").val(data.rows[0][10]);
 
@@ -332,13 +364,13 @@ function buscarEstados() {
         $(".selectEstadoDiv").html(sel);
 
         $("#selectEstado").click(function(){
-            var id_estado = 'integer:'+$("#selectEstado").val();
+            var id_estado = $("#selectEstado").val();
             buscarMunicipios(id_estado);
         });
 
 
-        if($("#selectEstado").val() > 0) {
-            var id_estado = 'integer:'+$("#selectEstado").val();
+        if($("#selectEstado").val() > 0 && id_estadoEdicion == 0) {
+            var id_estado = $("#selectEstado").val();
 
             buscarMunicipios(id_estado);
         }
@@ -356,11 +388,12 @@ function buscarMunicipios(id_estado) {
         var cp = 'integer:0';
     }
 
-    Dat.id_estado = id_estado;
+    Dat.id_estado = 'integer:'+id_estado;
+    
     Dat.cp = cp;
     Dat.id_municipioEdicion = 'integer:'+id_municipioEdicion;
 
-    $.post('/minegocio/proveedores/server', {accion: 'selectMinicipio', Dat : Dat}, function(data) {
+    $.post('/minegocio/proveedores/server', {accion: 'selectMunicipio', Dat : Dat}, function(data) {
         var sel = `<select id="selectMunicipio" name="selectMunicipio" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
                     ${data}
                 </select>`;
@@ -390,6 +423,21 @@ function buscarGiros() {
     }, 'json');
 }
 
+function selectBancos() {
+    $.post('/minegocio/proveedores/server', {accion: 'selectBancos'}, function(data) {
+        var sel = `<select id="selectBanco" name="selectBanco" style="position: inherit;top: 0;left: 0px;padding-top: revert-layer;padding-right: inherit;padding-bottom: inherit;padding-left: inherit;height: 38px;width: 100%;text-align: center;background-color: transparent;border-color: #b94a48 !important;display: ruby-base-container;">
+                    ${data}
+                </select>`;
+
+        $(".selectBancoDiv").html(sel);
+    }, 'json');
+}
+
 function limpiarFormulario() {
     document.getElementById("formInfoPrincipal").reset();
+    document.getElementById("formInfoCuentas").reset();
+    document.getElementById("formInfoContactos").reset();
+    id_estadoEdicion = 0;
+    id_giroEdicion = 0;
+    id_municipioEdicion = 0;
 }

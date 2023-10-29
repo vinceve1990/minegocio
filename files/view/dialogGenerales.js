@@ -294,6 +294,12 @@ function clickClassMenu() {
 
         activeClass = valor.datosver;
         console.log(activeClass);
+        //Cargar Informacion
+        if(activeClass == "InfoCuentas") {
+            selectBancos();
+        } else if(activeClass == "InfoContactos") {
+
+        }
     });
 }
 

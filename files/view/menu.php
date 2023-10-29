@@ -51,7 +51,7 @@
         </div>
         <!-- End Navigation -->
 
-        <div class="d-inline-block g-hidden-md-down g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
+        <div class="d-inline-block g-pos-rel g-valign-middle g-pl-30 g-pl-0--lg">
           <a class="btn u-btn-outline-primary g-font-size-13 text-uppercase g-py-10 g-px-15" href="/minegocio/login/users" target="_self">Login</a>
           <a class="btn u-btn-outline-success g-font-size-13 text-uppercase g-py-10 g-px-15" href="/minegocio/registroUsuarios/registro" target="_self">Registro</a>
         </div>

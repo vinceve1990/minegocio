@@ -156,5 +156,35 @@ EOT;
 			$responce->errorClass = $this->errorClass;
 			return $responce;
 		}
+
+		public function editarProveedor($param) {
+			$responce = new stdClass();
+
+			parent::queryBegin();
+
+			parent::escapeQuery($param);
+
+			$sql = <<<EOT
+			UPDATE catalogo_proveedores SET nombre = '$param->nombreProveedor', rfc = '$param->rfc', email_principal = '$param->email', calle = '$param->calle', id_catalogo_estado_FK = $param->selectEstado, id_catalogo_municipios_FK = $param->selectMunicipio, cp = $param->cp, telefono = $param->telefonoProveedor, id_catalogo_giro_FK = $param->selectGiro WHERE id_catalogo_proveedor_PK = $param->id_proveedor
+EOT;
+			$resIn = parent::queryUdate($sql);
+
+			if ($resIn === "error") {
+				$this->val++;
+				$this->mensaje .= "AL EDITAR EL PROVEEDOR <br>";
+				$this->errorClass .= "editarProveedor() - classProveedor//";
+			}
+
+			if($this->val == 0) {
+				parent::queryCommit();
+			} else {
+				parent::queryRollback();
+			}
+
+			$responce->val = $this->val;
+			$responce->mensaje = $this->mensaje;
+			$responce->errorClass = $this->errorClass;
+			return $responce;
+		}
 	}
 ?>
